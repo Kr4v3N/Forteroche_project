@@ -1,0 +1,34 @@
+{% extends "layout.html.twig" %}
+
+{% block content %}
+
+    <div class="container">
+        <h1>Billet simple pour l'Alaska -- show all Articles-USER</h1>
+
+        <ul>
+            {% for article in articles %}
+                <div class="card article">
+                    <div class="card-header bg-warning articleTitre">
+                        {{ article.title }}
+                    </div>
+                    <div class="row">
+                        <div class="col-5">
+                            <img src="/assets/images/alaska1.jpg" alt="Alaska">
+                        </div>
+                        <div class="col-6 card-body">
+                            <p class="card-text articleContenuList">{{ article.content }}</p>
+                            <p class="card-title articleDate">{{ article.date }}</p>
+                            <a href="/article/{{ article.id }}" target="">
+                                <button type="submit" class="btn btn-warning">Lire la suite</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+        </ul>
+
+
+    </div>
+
+{% endblock content %}

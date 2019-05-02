@@ -1,0 +1,26 @@
+{% extends "layout.html.twig" %}
+
+{% block content %}
+
+    {# afficher l article #}
+    {#<p>{{ article.id }}</p>
+    <p> {{ article.dateDeCreation }}</p>
+    <p> {{ article.titre }}</p>
+    <p> {{ article.article }}</p>
+    <p> {{ article.image }}</p>#}
+    <div class="container">
+        <h1>Billet simple pour l'Alaska - showArticle-</h1>
+        <div class="card article">
+            <div class="card-header bg-warning articleTitre">
+                {{ article.title }}
+
+            </div>
+            <div class="card-body">
+                <p class="card-title articleDate">{{ article.date }}</p>
+                <p class="card-text articleContenu">{{ article.content }}</p>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
