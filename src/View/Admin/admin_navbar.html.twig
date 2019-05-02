@@ -1,0 +1,31 @@
+
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <div class="col-9">
+        <a class="navbar-brand text-white" href="#">Billet simple pour l'Alaska</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav nav-pills">
+            <li class="nav-item {{ active == "home" ? "active" }}">
+                <a class="nav-link text-white" href="/admin/dashboard">Home<span class="sr-only"></span></a>
+            </li>
+            <div class="">
+                <li class="nav-item dropdown">
+                    <a class="nav-link  text-white dropdown-toggle {{ active == "articles" ? "active" }}" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Article
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item {{ active == "articles" ? "active" }}" href="/admin/articles">Tous les articles</a>
+                        <a class="dropdown-item {{ active == "add" ? "active" }}" href="/admin/createArticle">Créer un article</a>
+                    </div>
+                </li>
+            </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="#">Déconnexion</a>
+            </li>
+        </ul>
+    </div>
+</nav>
