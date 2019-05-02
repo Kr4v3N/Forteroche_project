@@ -171,7 +171,7 @@
         },
         {
             "name": "twig/twig",
-            "version": "v2.4.0",
+            "version": "v2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
