@@ -1,0 +1,45 @@
+.article {
+    margin-top: 4em;
+}
+
+h1{
+    text-align: center;
+}
+.articleContenu{
+    font-size: 1.2em;
+    height: 6em;
+}
+
+.articleContenuList{
+    height: 12em;
+    overflow: hidden;
+
+}
+
+.articleDate{
+    color: lightslategray;
+}
+
+.articleTitre{
+    color: #546e7a;
+    font-size: 2em;
+    text-align: center;
+
+}
+
+.orange {
+    color: orange;
+}
+
+.bg-orange {
+    background-color: orange;
+    color: #FFF;
+}
+
+.article {
+    margin-top: 200px;
+}
+
+.img-border {
+    border: 10px solid orange;
+}
