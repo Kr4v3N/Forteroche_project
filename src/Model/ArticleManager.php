@@ -32,4 +32,23 @@ class ArticleManager extends AbstractManager
     {
         return $this->pdo->query('SELECT * FROM article ORDER BY date DESC', \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
+
+    public function delete(int $id): int
+    {
+        $statement = $this->pdo->prepare("DELETE FROM article WHERE id=:id");
+        $statement->bindValue('id', $id, \PDO::PARAM_INT);
+        $statement->execute();
+        return header('Location: ' . $_SERVER['HTTP_REFERER']);
+    }
+
+    public function update(Article $article): int
+    {
+        $statement = $this->pdo->prepare("UPDATE $this->table SET title = :title, content = :content WHERE id=:id");
+        $statement->bindValue('title', $article->getTitle(), \PDO::PARAM_STR);
+        $statement->bindValue('content', $article->getContent(), \PDO::PARAM_STR);
+        $statement->bindValue('id', $article->getId(), \PDO::PARAM_INT);
+
+        return $statement->execute();
+
+    }
 }
