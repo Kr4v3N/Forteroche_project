@@ -19,7 +19,10 @@ $routes = [
         ['edit', '/admin/article/edit/{id:\d+}', ['GET', 'POST']], //modify an article admin
         ['delete', '/admin/article/delete/{id:\d+}', 'GET'], // delete an article admin
         ['indexAdmin', '/admin/articles', 'GET'], //show index for admin
-        ['logAdmin', '/admin/logAdmin', ['GET', 'POST']]
+        ['logAdmin', '/admin/logAdmin', ['GET', 'POST']], //login
+        ['logout', '/admin/logout', 'GET'],//logout
+        ['userShow', '/admin/user/{id:\d+}', 'GET'],//show user for admin
+        ['usersIndex', '/admin/users', 'GET'],//show index users for admin
     ]
 
 ];
