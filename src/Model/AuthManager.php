@@ -20,8 +20,8 @@ class AuthManager extends AbstractManager
         // Hachage du mot de passe
         $pass_hash = sha1($password);
 
-        // request cherche l user en particuler
-        // select where name = $username and password = $password and droit =
+        // request cherche l user en particulier
+        // select where name = $username and password = $password and droit = admin
         $statement = $this->pdo->prepare("SELECT * FROM $this->table WHERE lastname=:username AND pass=:password AND status='admin'");
         $statement->bindValue(':username', $username, \PDO::PARAM_STR);
         $statement->bindValue(':password', $pass_hash, \PDO::PARAM_STR);
