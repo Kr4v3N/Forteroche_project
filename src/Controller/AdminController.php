@@ -87,5 +87,19 @@ class AdminController extends AbstractController
         }
         return $this->twig->render('Admin/AdminArticle/edit.html.twig', ["article" => $article]);
     }
+
+    public function logout()
+    {
+        session_start();
+        session_destroy();
+        header('Location: /admin/logAdmin');
+    }
+
+    public function delete(int $id)
+    {
+        $articleManager = new ArticleManager($this->getPdo());
+        $articleManager->delete($id);
+
+    }
 }
 
