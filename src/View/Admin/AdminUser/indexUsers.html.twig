@@ -1,0 +1,44 @@
+{% extends "admin_layout.html.twig" %}
+
+{% block content %}
+
+<div class="container">
+        <h1>Tous les utilisateurs</h1>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Nom</th>
+                <th scope="col">Prénom</th>
+                <th scope="col">Email</th>
+                <th scope="col">Date de création</th>
+                <th scope="col">Statut</th>
+                <th scope="col">Voir</th>
+                <th scope="col">Supprimer</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+
+                <tr>
+                    <td>{{ user.firstname }}</td>
+                    <td>{{ user.lastname }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.registered }}</td>
+                    <td>{{ user.status }}</td>
+                    <td>
+                        <a href="/admin/user/{{ user.id }}" target="">
+                            <button type="submit" class="btn btn-warning">Voir</button></a>
+                    </td>
+                    <td>
+                        <a href="/admin/user/delete/{{ user.id }}" target="">
+                            <button type="submit" class="btn btn-warning">Supprimer</button></a>
+                    </td>
+                </tr>
+
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock content %}
