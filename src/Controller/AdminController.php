@@ -56,7 +56,7 @@ class AdminController extends AbstractController
 
     public function logAdmin() {
 
-        $errorLogin= "";
+        $errorLogin= '';
 
         if (!empty($_POST))
         {
@@ -69,10 +69,23 @@ class AdminController extends AbstractController
                 header('Location: /admin/dashboard');
             } else {
                 // message d'erreur
-                $errorLogin = "Identifiant ou mot de passe incorrect";
+                $errorLogin = 'Identifiant ou mot de passe incorrect';
             }
         }
-        return $this->twig->render('Admin/logAdmin.html.twig', ["errorLogin" => $errorLogin]);
+        return $this->twig->render('Admin/logAdmin.html.twig', ['errorLogin' => $errorLogin]);
+    }
+
+    public function edit(int $id)
+    {
+        $articleManager = new ArticleManager($this->getPdo());
+        $article = $articleManager->selectOneById($id);
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $article->setTitle($_POST['title']);
+            $article->setContent($_POST['content']);
+            $articleManager->update($article);
+            header('Location: /admin/articles');
+        }
+        return $this->twig->render('Admin/AdminArticle/edit.html.twig', ["article" => $article]);
     }
 }
 
