@@ -4,6 +4,7 @@ namespace Controller;
 
 use Model\Article;
 use Model\ArticleManager;
+use Model\UserManager;
 
 /**
  * Class AdminController
@@ -32,6 +33,14 @@ class AdminController extends AbstractController
         $articles = $articlesManager->selectAllArticles();
         $active = "articles";
         return $this->twig->render('Admin/AdminArticle/indexAdmin.html.twig', ['articles' => $articles, "active" => $active]);
+    }
+
+    public function usersIndex()
+    {
+        $usersManager = new UserManager($this->getPdo());
+        $users = $usersManager->selectAllUsers();
+        $active = "utilisateurs";
+        return $this->twig->render('Admin/AdminUser/indexUsers.html.twig', ['users' => $users, "active" => $active]);
     }
 
     public function add()
