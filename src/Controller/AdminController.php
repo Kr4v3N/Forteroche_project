@@ -13,6 +13,14 @@ use Model\UserManager;
  */
 class AdminController extends AbstractController
 {
+//    public function __construct()
+//    {
+//        parent:: __construct();
+//        if ($_SERVER['REQUEST_URI'] != '/admin/logAdmin'){
+//            $this->verifyAdmin();
+//        }
+//    }
+
     public function showDashboard() {
         $article = "home";
         return $this->twig->render('Admin/admin_dashboard.html.twig', ["active" => $article]);
@@ -43,58 +51,80 @@ class AdminController extends AbstractController
         return $this->twig->render('Admin/AdminUser/indexUsers.html.twig', ['users' => $users, "active" => $active]);
     }
 
+    public function userShow(int $id)
+    {
+        $userManager = new UserManager($this->getPdo());
+        $user = $userManager->selectOneById($id);
+
+        return $this->twig->render('Admin/AdminUser/adminShow.html.twig', ['user' => $user]);
+    }
+
     public function add()
     {
+        $titleErr = $contentErr = "";
+        $title = $content = "";
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') // affiche si
+        {   if (empty($_POST["title"])) {
+            $titleErr = "Le titre est requis !";
+        } elseif (empty($_POST["content"])) {
+            $contentErr = "Le contenu est requis !";
+        }
+        else
         {
             $articleManager = new ArticleManager($this->getPdo());
             $article = new Article();
-            $article->setTitle($_POST['titre']);
-            $article->setContent($_POST['contenu']);
+            $article->setTitle($_POST['title']);
+            $article->setContent($_POST['content']);
+            $article->setCategoryId($_POST['category']);
             $id = $articleManager->insert($article);
             header('Location:/admin/article/' . $id);
         }
+        }
         $active = "add";
-        return $this->twig->render('Admin/AdminArticle/add.html.twig', ["active" => $active]); // traitement
+        return $this->twig->render('Admin/AdminArticle/add.html.twig', ["active" => $active, 'titleErr'=> $titleErr, 'contentErr' => $contentErr ]); // traitement
 
-        // si admin en session
-        return $this->twig->render('Admin/admin_dashboard.html.twig');
-
-        // sinon redirect vers login
     }
 
-    public function logAdmin() {
+    public function logAdmin()
+    {
 
-        $errorLogin= '';
+        // Si admin connecter
+        if (isset($_SESSION['admin'])) {
+            header('Location: /admin/dashboard');
+            exit();
+        }
 
-        if (!empty($_POST))
-        {
+        $errorLogin = "";
+
+        if (!empty($_POST)) {
             // Verifier si les données sont postées puis initialise le composant d'authentification.
             $auth = new \Model\AuthManager($this->getPdo());
-            $admin = $auth->login($_POST['username'], $_POST['password']);
+            $admin = $auth->login($_POST['email']);
+
+
             if ($admin) {
 
-                // enregistre $admin dans la session
-                header('Location: /admin/dashboard');
-            } else {
-                // message d'erreur
-                $errorLogin = 'Identifiant ou mot de passe incorrect';
-            }
-        }
-        return $this->twig->render('Admin/logAdmin.html.twig', ['errorLogin' => $errorLogin]);
-    }
+                if (password_verify($_POST['password'], $admin->getPass())) {
+                    //Si password ok, creation session admin avec lastname, firstname, et email.
+                    $_SESSION['admin'] = [
+                        "lastname" => $admin->getlastname(),
+                        "firstname" => $admin->getFirstname(),
+                        "email" => $admin->getEmail(),
+                    ];
 
-    public function edit(int $id)
-    {
-        $articleManager = new ArticleManager($this->getPdo());
-        $article = $articleManager->selectOneById($id);
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $article->setTitle($_POST['title']);
-            $article->setContent($_POST['content']);
-            $articleManager->update($article);
-            header('Location: /admin/articles');
+                    header('Location: /admin/dashboard');
+                }
+            }
+            else {
+                $errorLogin = 'Identifiant incorrect';
+            }
+
+
         }
-        return $this->twig->render('Admin/AdminArticle/edit.html.twig', ["article" => $article]);
+        return $this->twig->render('Admin/logAdmin.html.twig', ["errorLogin" => $errorLogin]);
+
+
     }
 
     public function logout()
@@ -109,6 +139,19 @@ class AdminController extends AbstractController
         $articleManager = new ArticleManager($this->getPdo());
         $articleManager->delete($id);
 
+    }
+
+    public function edit(int $id)
+    {
+        $articleManager = new ArticleManager($this->getPdo());
+        $article = $articleManager->selectOneById($id);
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $article->setTitle($_POST['title']);
+            $article->setContent($_POST['content']);
+            $articleManager->update($article);
+            header('Location: /admin/articles');
+        }
+        return $this->twig->render('Admin/AdminArticle/edit.html.twig', ["article" => $article]);
     }
 }
 
