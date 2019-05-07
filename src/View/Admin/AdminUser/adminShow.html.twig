@@ -1,0 +1,23 @@
+{% extends "admin_layout.html.twig" %}
+
+{% block content %}
+
+    <div class="container">
+        <h1>Info utilisateur</h1>
+        <div class="card user">
+            <div class="card-header bg-warning userFirstname">
+                {{ user.firstname }}
+
+            </div>
+            <div class="card-body">
+                <p class="card-title userFirstname">Nom :  {{ user.firstname}}</p>
+                <p class="card-text userLastname">Prénom :  {{ user.lastname }}</p>
+                <p class="card-text userEmail">Email :  {{ user.email }}</p>
+                <p class="card-text userRegistered">Date d'inscription :  {{ user.registered }}</p>
+                <p class="card-text userStatus">Status :  {{ user.status }}</p>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
