@@ -1,65 +1,56 @@
-.article {
-    margin-top: 4em;
-}
-
 h1{
     text-align: center;
 }
-.articleContenu{
-    font-size: 1.2em;
-    height: 6em;
-}
 
-.articleContenuList{
-    height: 12em;
-    overflow: hidden;
 
-}
-
+/*color for article date*/
 .articleDate{
     color: lightslategray;
 }
 
+/*modify title article size font-color */
 .articleTitre{
-    color: #546e7a;
+    color: black;
     font-size: 2em;
     text-align: center;
 
 }
 
-.orange {
-    color: orange;
-}
-
-.bg-orange {
-    background-color: orange;
-    color: #FFF;
-}
-
+/*margin above articles*/
 .article {
-    margin-top: 200px;
+    margin-top: 20px;
 }
 
-.img-border {
-    border: 10px solid orange;
+/*image in article responsive*/
+.imgArticle{
+    max-width: 100%;
 }
 
-/* FOOTER */
+/*background color connexion admin*/
+.bgAdminConnexion{
+    background-color: #FFC107;
+}
+
+/* border around picture in admin log*/
+.rounded-circle{
+    border: 2px solid #FFC107;
+}
+/* DEBUT CSS FOOTER */
 
 footer {
-    background: orange;
+    background: #FFC107;
     font-family: sans-serif;
     width: 100%;
-    height: 100px;
+    height: 70px;
     margin: 0;
 }
 
 .footer-icons {
     text-align: center;
-    font-size: 25px;
+    font-size: 20px;
     width: 100%;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 2px;
     margin-bottom: 0;
 }
 .footer-bottom {
@@ -67,7 +58,7 @@ footer {
     color: black;
     width: 100%;
     align-items: center;
-    padding:0.25em;
+    padding:0em;
 }
 
 .fa-facebook{
@@ -109,4 +100,4 @@ a
     text-decoration: none;
 }
 
-/* END FOOTER */
+/* FIN CSS FOOTER */
