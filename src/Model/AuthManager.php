@@ -15,20 +15,14 @@ class AuthManager extends AbstractManager
         parent::__construct(self::TABLE, $pdo);
     }
 
-    public function login($username, $password)
+    public function login($email)
     {
-        // Hachage du mot de passe
-        $pass_hash = sha1($password);
-
-        // request cherche l user en particulier
-        // select where name = $username and password = $password and droit = admin
-        $statement = $this->pdo->prepare("SELECT * FROM $this->table WHERE lastname=:username AND pass=:password AND status='admin'");
-        $statement->bindValue(':username', $username, \PDO::PARAM_STR);
-        $statement->bindValue(':password', $pass_hash, \PDO::PARAM_STR);
+        // select where name = $username and password = $password and droit =
+        $statement = $this->pdo->prepare("SELECT * FROM $this->table WHERE email=:email  AND status='admin'");
+        $statement->bindValue(':email', $email, \PDO::PARAM_STR);
         $statement->execute();
         // fetch
         $statement->setFetchMode(\PDO::FETCH_CLASS, 'Model\User');
         return $statement->fetch();
-
     }
 }
