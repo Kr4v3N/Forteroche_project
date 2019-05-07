@@ -46,4 +46,11 @@ abstract class AbstractController
     {
         return $this->pdo;
     }
+
+    public function verifyAdmin() {
+        if(!isset($_SESSION['admin'])){
+            header('Location: /admin/logAdmin');
+            exit();
+        }
+    }
 }
