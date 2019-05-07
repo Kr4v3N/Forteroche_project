@@ -23,6 +23,11 @@ $routes = [
         ['logout', '/admin/logout', 'GET'],//logout
         ['userShow', '/admin/user/{id:\d+}', 'GET'],//show user for admin
         ['usersIndex', '/admin/users', 'GET'],//show index users for admin
+    ],
+
+    'User' => [
+        ['userDelete', '/admin/user/delete/{id:\d+}', 'GET'] // delete user admin
+
     ]
 
 ];
