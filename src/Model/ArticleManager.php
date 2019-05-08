@@ -17,11 +17,15 @@ class ArticleManager extends AbstractManager
 
     public function insert(Article $article): int
     {
-        $statement = $this->pdo->prepare("INSERT INTO $this->table (date, title, content, picture)
-        VALUES (DATE(NOW()), :titre, :article, :image)");
-        $statement->bindValue(':titre', $article->getTitle(), \PDO::PARAM_STR);
-        $statement->bindValue(':article', $article->getContent(),\PDO::PARAM_STR);
-        $statement->bindValue(':image', $article->getPicture(), \PDO::PARAM_STR);
+        $statement = $this->pdo->prepare("INSERT INTO $this->table (date, title, content, picture, user_id, category_id)
+
+        VALUES (DATE(NOW()), :title, :content, :picture, :user_id, :category)");
+        $statement->bindValue(':title', $article->getTitle(), \PDO::PARAM_STR);
+        $statement->bindValue(':content', $article->getContent(),\PDO::PARAM_STR);
+        $statement->bindValue(':picture', $article->getPicture(), \PDO::PARAM_STR);
+        $statement->bindValue(':user_id', 1, \PDO::PARAM_STR);
+        $statement->bindValue(':category', $article->getCategoryId(), \PDO::PARAM_STR);
+
 
         if ($statement->execute()) {
             return $this->pdo->lastInsertId();
@@ -51,4 +55,8 @@ class ArticleManager extends AbstractManager
         return $statement->execute();
 
     }
+
+    public function selectAllArticlesAndCategory(): array
+    {
+        return $this->pdo->query('SELECT article.id, article.title, category.name, article.content FROM article INNER JOIN category ON category.id = article.user_id;;', \PDO::FETCH_CLASS, $this->className)->fetchAll();}
 }

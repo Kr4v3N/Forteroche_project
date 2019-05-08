@@ -14,7 +14,6 @@
         "nikic/fast-route": "^1.2",
         "twig/twig": "^2.4",
         "twig/extensions": "^1.5"
-
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "*"
