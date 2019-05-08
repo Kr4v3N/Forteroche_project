@@ -11,17 +11,17 @@
 <body>
 
 <header class="">
-    <h1 class="bg-orange mx-auto text-center py-3">Connexion administrateur</h1>
+    <h1 class="bgAdminConnexion mx-auto text-center py-3">Connexion administrateur</h1>
 </header>
 
 <div class="text-center container">
     <div class="mx-auto" style="max-width:600px">
 
 
-        {% if errorLogin %}
+         {% if errorLogin %}
 
-            <div class="alert alert-danger" role="alert">
-                {{ errorLogin }}</div>
+             <div class="alert alert-danger" role="alert">
+                 {{ errorLogin }}</div>
 
         {% endif %}
 
@@ -30,19 +30,22 @@
         <form class="" method="POST" action="">
 
             <p>
-                <input class="form-control text-center" type="text" name="username" style="width:100%" placeholder="Votre email" required>
-            </p>
 
+                <input class="form-control text-center" type="email" name="email" style="width:100%" placeholder="Votre email" required>
+
+            </p>
             <p>
                 <input class="form-control text-center" type="password" name="password" style="width:100%" placeholder="Votre mot de passe" required>
             </p>
-
             <p>
-                <button class="btn btn-outline-Login bg-orange" type="submit" > Envoyer </button>
+
+                <button class="btn btn-outline-Login bg-warning" type="submit" > Envoyer </button>
+
+
+
             </p>
         </form>
     </div>
 </div>
 </body>
 </html>
-

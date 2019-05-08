@@ -10,7 +10,7 @@
     <div class="col-lg-4 text-white text-center">
 
         <!-- Appel du nom utilisateur et capitalize pour avoir la première lettre en capitale-->
-        {{ user.firstname | capitalize  }}
+        Bonjour {{ user.firstname | capitalize  }}
     </div>
 
     <!-- Navbar sur le côté droit-->
@@ -21,8 +21,9 @@
             </li>
             <div class="">
                 <li class="nav-item dropdown">
-                    <a class="nav-link  text-white dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Utilisateurs</a>
+                    <a class="nav-link  text-white dropdown-toggle href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Utilisateurs
+                    </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item {{ active == "articles" ? "active" }}" href="/admin/users">Tous les utilisateurs</a>
                     </div>
