@@ -29,6 +29,7 @@ $routes = [
         ['userShow', '/admin/user/{id:\d+}', 'GET'], //show user for admin
         ['usersIndex', '/admin/users', 'GET'], //show index users for admin
         ['userDelete', '/admin/user/delete/{id:\d+}', 'GET'], // delete user admin
+        ['suscribeUser', '/login', ['GET','POST']] // Register page
     ],
 
     'AdminComment' => [
