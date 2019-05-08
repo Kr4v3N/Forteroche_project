@@ -7,7 +7,6 @@ namespace Model;
  *
  * @package \Model
  */
-
 class UserManager extends AbstractManager
 {
     const TABLE = 'user';
