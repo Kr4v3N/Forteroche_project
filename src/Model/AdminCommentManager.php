@@ -14,6 +14,7 @@ class AdminCommentManager extends AbstractManager
     {
         parent::__construct(self::TABLE, $pdo);
     }
+
     //insert a comment while not logged in user
     public function insert(Comment $comment): int
     {
@@ -24,5 +25,10 @@ class AdminCommentManager extends AbstractManager
         if ($statement->execute()) {
             return $this->pdo->lastInsertId();
         }
+    }
+
+    public function selectAllComments(): array
+    {
+        return $this->pdo->query('SELECT comment.content, article.title FROM comment INNER JOIN article ON article_id = comment.article_id;', \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
 }

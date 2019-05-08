@@ -23,4 +23,12 @@ class AdminCommentController extends AbstractController
         $id = $CommentManager->insert($comment);
         header('Location:/article/' . $articleId);
     }
+
+    public function indexAdminComments()
+    {
+        $commentsManager = new AdminCommentManager($this->getPdo());
+        $comments = $commentsManager->selectAllComments();
+        $active = "comments";
+        return $this->twig->render('Admin/AdminComment/indexAdminComment.html.twig', ['comments' => $comments, 'active' => $active ]);
+    }
 }

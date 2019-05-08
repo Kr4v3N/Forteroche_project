@@ -28,12 +28,12 @@ class UserController extends AbstractController
         return $this->twig->render('Admin/AdminUser/adminShow.html.twig', ['user' => $user]);
     }
 
-//    public function usersIndex()
-//    {
-//        $usersManager = new UserManager($this->getPdo());
-//        $users = $usersManager->selectAllUsers();
-//        return $this->twig->render('AdminUser/indexUsers.html.twig', ['users' => $users]);
-//    }
+    public function usersIndex()
+    {
+        $usersManager = new UserManager($this->getPdo());
+        $users = $usersManager->selectAllUsers();
+        return $this->twig->render('Admin/AdminUser/indexUsers.html.twig', ['users' => $users]);
+    }
 
     public function userDelete(int $id)
     {
@@ -62,11 +62,11 @@ class UserController extends AbstractController
         return $this->twig->render('signUp.html.twig', ["active" => $active]); // traitement
     }
 
-    public function usersIndex()
-    {
-        $usersManager = new UserManager($this->getPdo());
-        $users = $usersManager->selectAllUsers();
-        $active = 'utilisateurs';
-        return $this->twig->render('Admin/AdminUser/indexUsers.html.twig', ['users' => $users, 'active' => $active]);
-    }
+//    public function usersIndex()
+//    {
+//        $usersManager = new UserManager($this->getPdo());
+//        $users = $usersManager->selectAllUsers();
+//        $active = 'utilisateurs';
+//        return $this->twig->render('Admin/AdminUser/indexUsers.html.twig', ['users' => $users, 'active' => $active]);
+//    }
 }
