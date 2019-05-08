@@ -13,17 +13,18 @@ use Model\UserManager;
  */
 class AdminController extends AbstractController
 {
-//    public function __construct()
-//    {
-//        parent:: __construct();
-//        if ($_SERVER['REQUEST_URI'] != '/admin/logAdmin'){
-//            $this->verifyAdmin();
-//        }
-//    }
+    public function __construct()
+    {
+        parent:: __construct();
+        if ($_SERVER['REQUEST_URI'] != '/admin/logAdmin'){
+            $this->verifyAdmin();
+        }
+    }
+
 
     public function showDashboard() {
         $article = "home";
-        return $this->twig->render('Admin/admin_dashboard.html.twig', ["active" => $article]);
+        return $this->twig->render('Admin/admin_dashboard.html.twig', ["active" => $article, "user" => $_SESSION['admin']]);
     }
 
 
@@ -38,9 +39,9 @@ class AdminController extends AbstractController
     public function indexAdmin()
     {
         $articlesManager = new ArticleManager($this->getPdo());
-        $articles = $articlesManager->selectAllArticles();
+        $articles = $articlesManager->selectAllArticlesAndCategory();
         $active = "articles";
-        return $this->twig->render('Admin/AdminArticle/indexAdmin.html.twig', ['articles' => $articles, "active" => $active]);
+        return $this->twig->render('Admin/AdminArticle/indexAdmin.html.twig', ['articles' => $articles, "active" => $active] );
     }
 
     public function usersIndex()
@@ -89,7 +90,7 @@ class AdminController extends AbstractController
     public function logAdmin()
     {
 
-        // Si admin connecter
+        // Si admin connecté
         if (isset($_SESSION['admin'])) {
             header('Location: /admin/dashboard');
             exit();
@@ -153,5 +154,6 @@ class AdminController extends AbstractController
         }
         return $this->twig->render('Admin/AdminArticle/edit.html.twig', ["article" => $article]);
     }
-}
 
+
+}

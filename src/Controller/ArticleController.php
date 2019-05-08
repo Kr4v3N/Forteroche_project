@@ -3,14 +3,12 @@
 namespace Controller;
 
 use Model\ArticleManager;
-use Model\Article;
 
 /**
  * Class ArticleController
  *
  * @package \Controller
  */
-
 class  ArticleController extends AbstractController
 {
 
@@ -31,3 +29,5 @@ class  ArticleController extends AbstractController
 
 
 }
+
+

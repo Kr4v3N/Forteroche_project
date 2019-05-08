@@ -9,7 +9,6 @@ use Model\UserManager;
  *
  * @package \Controller
  */
-
 class UserController extends AbstractController
 {
     public function userShow(int $id)
