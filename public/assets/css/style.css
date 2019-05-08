@@ -1,4 +1,4 @@
-h1{
+h1 {
     text-align: center;
 }
 
@@ -35,7 +35,8 @@ h1{
 .rounded-circle{
     border: 2px solid #FFC107;
 }
-/* DEBUT CSS FOOTER */
+
+/* FOOTER */
 
 footer {
     background: #FFC107;
@@ -90,7 +91,7 @@ footer {
     padding: 0.5em;
 }
 
-.wild {
+.writer {
     color:black;
     padding: 1em;
 }
@@ -100,4 +101,4 @@ a
     text-decoration: none;
 }
 
-/* FIN CSS FOOTER */
+/* END FOOTER */

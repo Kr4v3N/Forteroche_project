@@ -34,7 +34,7 @@ abstract class AbstractController
             ]
         );
         $this->twig->addExtension(new \Twig_Extension_Debug());
-
+        $this->twig->addExtension(new \Twig_Extensions_Extension_Text());
         $connection = new Connection();
         $this->pdo = $connection->getPdoConnection();
     }
