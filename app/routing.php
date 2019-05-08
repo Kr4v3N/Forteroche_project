@@ -22,13 +22,13 @@ $routes = [
         ['indexAdmin', '/admin/articles', 'GET'], //show index for admin
         ['logAdmin', '/admin/logAdmin', ['GET', 'POST']], //login
         ['logout', '/admin/logout', 'GET'], //logout
-        ['userShow', '/admin/user/{id:\d+}', 'GET'], //show user for admin
-        ['usersIndex', '/admin/users', 'GET'], //show index users for admin
+
     ],
 
     'User' => [
+        ['userShow', '/admin/user/{id:\d+}', 'GET'], //show user for admin
+        ['usersIndex', '/admin/users', 'GET'], //show index users for admin
         ['userDelete', '/admin/user/delete/{id:\d+}', 'GET'], // delete user admin
-
     ],
 
     'AdminComment' => [

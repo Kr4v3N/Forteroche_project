@@ -5,6 +5,8 @@ namespace Controller;
 use Model\Article;
 use Model\ArticleManager;
 use Model\UserManager;
+use http\Env\Request;
+use Model\AuthManager;
 
 /**
  * Class AdminController
@@ -41,29 +43,29 @@ class AdminController extends AbstractController
         $articlesManager = new ArticleManager($this->getPdo());
         $articles = $articlesManager->selectAllArticlesAndCategory();
         $active = "articles";
-        return $this->twig->render('Admin/AdminArticle/indexAdmin.html.twig', ['articles' => $articles, "active" => $active] );
+        return $this->twig->render('Admin/AdminArticle/indexAdmin.html.twig', ['articles' => $articles, 'active' => $active] );
     }
 
-    public function usersIndex()
-    {
-        $usersManager = new UserManager($this->getPdo());
-        $users = $usersManager->selectAllUsers();
-        $active = "utilisateurs";
-        return $this->twig->render('Admin/AdminUser/indexUsers.html.twig', ['users' => $users, "active" => $active]);
-    }
+//    public function usersIndex()
+//    {
+//        $usersManager = new UserManager($this->getPdo());
+//        $users = $usersManager->selectAllUsers();
+//        $active = 'utilisateurs';
+//        return $this->twig->render('Admin/AdminUser/indexUsers.html.twig', ['users' => $users, 'active' => $active]);
+//    }
 
-    public function userShow(int $id)
-    {
-        $userManager = new UserManager($this->getPdo());
-        $user = $userManager->selectOneById($id);
-
-        return $this->twig->render('Admin/AdminUser/adminShow.html.twig', ['user' => $user]);
-    }
+//    public function userShow(int $id)
+//    {
+//        $userManager = new UserManager($this->getPdo());
+//        $user = $userManager->selectOneById($id);
+//
+//        return $this->twig->render('Admin/AdminUser/adminShow.html.twig', ['user' => $user]);
+//    }
 
     public function add()
     {
-        $titleErr = $contentErr = "";
-        $title = $content = "";
+        $titleErr = $contentErr = '';
+        $title = $content = '';
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') // affiche si
         {   if (empty($_POST["title"])) {
@@ -96,11 +98,11 @@ class AdminController extends AbstractController
             exit();
         }
 
-        $errorLogin = "";
+        $errorLogin = '';
 
         if (!empty($_POST)) {
             // Verifier si les données sont postées puis initialise le composant d'authentification.
-            $auth = new \Model\AuthManager($this->getPdo());
+            $auth = new AuthManager($this->getPdo());
             $admin = $auth->login($_POST['email']);
 
 

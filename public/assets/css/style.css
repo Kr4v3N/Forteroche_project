@@ -1,7 +1,11 @@
+body {
+    min-height: 75rem;
+    padding-top: 7rem;
+}
+
 h1 {
     text-align: center;
 }
-
 
 /*color for article date*/
 .articleDate{
@@ -9,7 +13,7 @@ h1 {
 }
 
 /*modify title article size font-color */
-.articleTitre{
+.articleTitre {
     color: black;
     font-size: 2em;
     text-align: center;
@@ -22,17 +26,17 @@ h1 {
 }
 
 /*image in article responsive*/
-.imgArticle{
+.imgArticle {
     max-width: 100%;
 }
 
 /*background color connexion admin*/
-.bgAdminConnexion{
+.bgAdminConnexion {
     background-color: #FFC107;
 }
 
 /* border around picture in admin log*/
-.rounded-circle{
+.rounded-circle {
     border: 2px solid #FFC107;
 }
 
@@ -59,34 +63,34 @@ footer {
     color: black;
     width: 100%;
     align-items: center;
-    padding:0em;
+    padding:0;
 }
 
-.fa-facebook{
+.fa-facebook {
     color:black;
     padding: 0.5em;
 }
 
-.fa-instagram{
+.fa-instagram {
     color: black;
     padding: 0.5em;
 }
 
-.fa-linkedin{
+.fa-linkedin {
     color: black;
     padding: 0.5em;
 }
 
-.fa-twitter{
+.fa-twitter {
     color: black;
     padding: 0.5em;
 }
 
-.fa-youtube{
+.fa-youtube {
     color: black;
     padding: 0.5em;
 }
-.fa-copyright{
+.fa-copyright {
     color: black;
     padding: 0.5em;
 }
@@ -95,8 +99,7 @@ footer {
     color:black;
     padding: 1em;
 }
-a
-{
+a{
     color: black;
     text-decoration: none;
 }
