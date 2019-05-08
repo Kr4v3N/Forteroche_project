@@ -3,67 +3,42 @@
 {% block content %}
 
     <div class="container">
-        <h1>TOUS LES CHAPITRES</h1>
+        <h1>Tous les chapitres</h1>
 
         <table class="table table-striped">
             <thead>
             <tr>
                 <th scope="col">Titre</th>
-{#                <th scope="col">Contenu</th>#}
+                <th scope="col">Catégorie</th>
+                <th scope="col">Contenu</th>
                 <th scope="col">Modifier</th>
                 <th scope="col">Supprimer</th>
             </tr>
             </thead>
+
             <tbody>
-            {% for article in articles %}
+                {% for article in articles %}
+{#                    {{ dump(article) }}#}
 
-                <tr>
-                    <th scope="row">{{ article.title }}</th>
-{#                    <td>{{ article.content|truncate(200) }}</td>#}
-                    <td>
-                        <a href="/admin/article/edit/{{ article.id }}" target="">
-                            <button type="submit" class="btn btn-warning">Modifier</button></a>
-                    </td>
-                    <td>
-                        <a href="/admin/article/delete/{{ article.id }}" target="">
-                            <button type="submit" class="btn btn-warning">Supprimer</button></a>
-                    </td>
-                </tr>
 
-            {% endfor %}
+                    <tr>
+                        <th scope="row">{{ article.title }}</th>
+                        <th scope="row">{{ article.name }}</th>
+                        <td>{{ article.content|truncate(200) }}</td>
+                        <td>
+                            <a href="/admin/article/edit/{{ article.id }}" target="">
+                                <button type="submit" class="btn btn-warning">Modifier</button></a>
+                        </td>
+                        <td>
+                            <a href="/admin/article/delete/{{ article.id }}" target="">
+                                <button type="submit" class="btn btn-warning">Supprimer</button></a>
+                        </td>
+                    </tr>
+
+                {% endfor %}
             </tbody>
         </table>
     </div>
 
 {% endblock content %}
 
-{#{% extends "admin_layout.html.twig" %}#}
-
-{#{% block content %}#}
-
-{#    <div class="container">#}
-{#        <h1>Tous les chapitres</h1>#}
-
-{#        <ul>#}
-{#            {% for article in articles %}#}
-{#                <div class="card article">#}
-{#                    <div class="card-header bg-warning articleTitre">#}
-{#                        {{ article.title }}#}
-{#                    </div>#}
-{#                    <div class="card-body">#}
-{#                        <p class="card-title articleDate">{{ article.date }}</p>#}
-{#                        <p class="card-text articleContenuList">{{ article.content }}</p>#}
-{#                        <a href="/admin/article/{{ article.id }}" target="">#}
-{#                            <button type="submit" class="btn btn-warning">Modifier</button></a>#}
-{#                        <a href="" target="">#}
-{#                            <button type="submit" class="btn btn-warning">Supprimer</button></a>#}
-{#                    </div>#}
-{#                </div>#}
-
-{#            {% endfor %}#}
-{#        </ul>#}
-
-
-{#    </div>#}
-
-{#{% endblock content %}#}

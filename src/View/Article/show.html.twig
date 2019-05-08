@@ -1,20 +1,21 @@
 {% extends "layout.html.twig" %}
 
 {% block content %}
-
     <div class="container">
-        <h1>Billet simple pour l'Alaska</h1>
-        <div class="card article">
-            <div class="card-header bg-warning articleTitre">
-                {{ article.title }}
+        <h1>Billet simple pour l'Alaska - Alpha showArticle</h1>
+    <div class="card article">
+        <div class="card-header bg-warning articleTitre">
+            {{ article.title }}
 
-            </div>
-            <div class="card-body">
-                <p class="card-title articleDate">{{ article.date }}</p>
-                <p class="card-text articleContenu">{{ article.content }}</p>
-
-            </div>
         </div>
+        <div class="card-body">
+            <p class="card-title articleDate">{{ article.date }}</p>
+            <p class="card-text">{{ article.content }}</p>
+        </div>
+    </div>
     </div>
 
 {% endblock content %}
+
+
+
