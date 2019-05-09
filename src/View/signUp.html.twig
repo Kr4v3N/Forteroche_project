@@ -5,6 +5,12 @@
     <div class="main-w3layouts wrapper">
         <h1>Inscription Billet simple pour l'Alaska</h1>
         <div class="main-agileinfo">
+            {% if errorLogin %}
+
+                <div class="alert alert-danger" role="alert">
+                    {{ errorLogin }}</div>
+
+            {% endif %}
             <div class="agileits-top">
 
                 <form action="#" method="post">
@@ -17,9 +23,9 @@
 
                     <input class="text" type="password" id="password" name="password" placeholder="Mot de passe" required="">
 
-                    <input class="text w3lpass" type="password" id="password" name="password" placeholder="Confirmer mot de passe" required="">
+                    <input class="text w3lpass" type="password" id="password" name="password_control" placeholder="Confirmer mot de passe" required="">
 
-                    <input type="submit" value="ENVOYER">
+                    <input type="submit" name="inscription" value="ENVOYER">
 
                 </form>
             </div>

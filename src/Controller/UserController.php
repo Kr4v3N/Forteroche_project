@@ -37,22 +37,23 @@ class UserController extends AbstractController
 
     public function suscribeUser()
     {
+        $errorLogin = [];
         if ($_SERVER['REQUEST_METHOD'] === 'POST') // affiche si
-        {
-            $userManager = new UserManager($this->getPdo());
-            $newUser = new User();
-            $newUser->setFirstname($_POST['firstname']);
-            $newUser->setLastname($_POST['lastname']);
-            $newUser->setEmail($_POST['email']);
-            $newUser->setPass($_POST['password']);
-            $id = $userManager->suscribe($newUser);
-            // TODO rediriger vers page d'acceuil
-            header('Location: /articles');
-            /*        }elseif($newUser === false) {
-                        die('Impossible d\'ajouter cet utilisateur');*/
-        }
-        $active = "suscribeUser";
-        return $this->twig->render('signUp.html.twig', ["active" => $active]); // traitement
+            if($_POST['password'] == ($_POST['password_control']))
+            {
+                $userManager = new UserManager($this->getPdo());
+                $newUser = new User ;
+                $newUser->setFirstname($_POST['firstname']);
+                $newUser->setLastname($_POST['lastname']);
+                $newUser->setEmail($_POST['email']);
+                $newUser->setPass($_POST['password']);
+                $id = $userManager->suscribe($newUser);
+                // TODO rediriger vers page d'acceuil
+                header('Location: /articles');
+            } else{
+                $errorLogin = 'Les mots de passe saisis ne sont pas identiques.';
+            }
+        return $this->twig->render('signUp.html.twig', ["errorLogin" => $errorLogin]); // traitement
     }
 
 }
