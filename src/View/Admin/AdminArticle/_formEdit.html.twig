@@ -3,7 +3,7 @@
     <div class="card article">
         <div class="card-body">
 
-            <form method="post">
+            <form method="post" action="" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="titre">Titre</label>
                     <input type="text" class="form-control" id="text" name="title" value="{{ article.title }}">
@@ -12,6 +12,11 @@
                     <label for="contenu">Contenu</label>
                     <textarea class="form-control" id="contenu" name="content" rows="6">{{ article.content }}
                     </textarea>
+                </div>
+                <div>
+                    <label for='image'>Cliquez pour ajouter une image : </label>
+                    <br/>
+                    <input id='image' name="image" type="file">
                 </div>
 
                 <button type="submit" class="btn btn-warning">Envoyer</button>

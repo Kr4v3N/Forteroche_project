@@ -64,38 +64,72 @@ class AdminController extends AbstractController
 
     public function add()
     {
-        $titleErr = $contentErr = '';
-        $title = $content = '';
+        $errors = [];
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') // affiche si
-        {   if (empty($_POST['title'])) {
-            $titleErr = 'Le titre est requis !';
-        } elseif (empty($_POST['content'])) {
-            $contentErr = 'Le contenu est requis !';
-        }
-        else
-        {
-
-            $articleManager = new ArticleManager($this->getPdo());
+        {   $articleManager = new ArticleManager($this->getPdo());
             $article = new Article();
-            $article->setTitle($_POST['title']);
-            $article->setContent($_POST['content']);
-
-            if (!empty($_FILES)) {
-
-                $extension = strtolower(strrchr($_FILES['image']['name'], '.'));
-                $filename = 'image-' . uniqid() . $extension;
-                move_uploaded_file($_FILES['image']['tmp_name'], '../public/assets/images/' . $filename);
+            if (empty($_POST["title"])) {
+                $errors["title"] = "Le titre est requis !";
             }
-            $article->setPicture($filename);
 
-            $id = $articleManager->insert($article);
-            header('Location:/admin/article/' . $id);
-        }
-        }
-        $active = 'add';
-        return $this->twig->render('Admin/AdminArticle/add.html.twig', ['active' => $active, 'titleErr'=> $titleErr, 'contentErr' => $contentErr ]); // traitement
+            if (empty($_POST["content"])) {
+                $errors["content"] = "Le contenu est requis !";
+            }
+            if (empty($_FILES['image']['name'])) {
+                $errors['image'] = 'Ajoutez une image';
+            } elseif (!empty($_POST) && !empty($_FILES['image'])){
+                $allowExtension = ['.jpg', '.jpeg', '.gif', '.png'];
+                $maxSize = 1000000;
+                $extension = strtolower(strrchr($_FILES['image']['name'], '.'));
+                $size = $_FILES['image']['size'];
+                if (!in_array($extension, $allowExtension)) {
+                    $errors['image'] = 'Seuls les fichiers image .jpg, .jpeg, .gif et .png sont autorisés.';
+                }
+                if (($size > $maxSize) || ($size == 0)) {
+                    $errors['image'] = 'Votre fichier est trop volumineux. Taille maximale autorisée : 1Mo.';
+                }
+                if(empty($errors)) {
 
+                }
+
+            }
+            if (empty($_FILES['imageMin']['name'])) {
+                $errors['imageMin'] = 'Ajoutez une miniature';
+            } elseif (!empty($_POST) && !empty($_FILES['imageMin'])) {
+                // TODO show message when miniature error
+                $allowExtension = ['.jpg', '.jpeg', '.gif', '.png'];
+                $maxSize = 1000000;
+                $extension = strtolower(strrchr($_FILES['image']['name'], '.'));
+                $size = $_FILES['imageMin']['size'];
+
+                if (!in_array($extension, $allowExtension)) {
+                    $errors['imageMin'] = 'Seuls les fichiers image .jpg, .jpeg, .gif et .png sont autorisés.';
+                }
+                if (($size > $maxSize) || ($size == 0)) {
+                    $errors['imageMin'] = 'Votre fichier est trop volumineux. Taille maximale autorisée : 1Mo.';
+                }
+            }
+
+
+            if (empty($errors)) {
+                $filename = 'image-' . $_FILES['image']['name'];
+                move_uploaded_file($_FILES['image']['tmp_name'], '../public/assets/images/image-' . $filename);
+                $filenameMin = 'image-' . $_FILES['imageMin']['name'];
+                move_uploaded_file($_FILES['image']['tmp_name'], '../public/assets/images/' . $filenameMin);
+                $article->setUserId($_SESSION['admin']['id']);
+                $article->setTitle($_POST['title']);
+                $article->setContent($_POST['content']);
+                $article->setCategoryId($_POST['category']);
+                $article->setMiniature($filenameMin);
+                $article->setPicture($filename);
+                $id = $articleManager->insert($article);
+                header('Location:/admin/article/' . $id);
+            }
+
+        }
+        $active = "add";
+        return $this->twig->render('Admin/AdminArticle/add.html.twig', ["active" => $active, 'errors' => $errors, 'content' => $_POST]); // traitement
     }
 
     public function logAdmin()
@@ -156,24 +190,16 @@ class AdminController extends AbstractController
         $articleManager = new ArticleManager($this->getPdo());
         $article = $articleManager->selectOneById($id);
         if ($_SERVER['REQUEST_METHOD'] === 'POST')
-        {   var_dump($_FILES);
-            var_dump($_POST);
+        {
             $article->setTitle($_POST['title']);
             $article->setContent($_POST['content']);
-
-            if (!empty($_FILES)) {
-                $extension = strtolower(strrchr($_FILES['image']['name'], '.'));
-                $filename = 'image-' . uniqid() . $extension;
-                move_uploaded_file($_FILES['image']['tmp_name'], '../public/assets/images/' . $filename);
-            }
-            $article->setPicture($filename);
-            if ($_POST['supprimer']){
-                $article->setPicture(NULL);
-            }
+//            if (!empty($_FILES['image']){
+//                $article->setPicture($_FILES['image']['name']);
+//            }
             $articleManager->update($article);
-            header('Location: /admin/article/' . $id);
+            header('Location: /admin/articles');
         }
-        return $this->twig->render('Admin/AdminArticle/edit.html.twig', ['article' => $article]);
+        return $this->twig->render('Admin/AdminArticle/edit.html.twig', ["article" => $article]);
     }
 
 

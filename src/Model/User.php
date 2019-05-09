@@ -116,7 +116,11 @@ class User
      */
     public function setPass($pass)
     {
+        /*        if(strlen($_POST['pass']. $pass) >= 8 ) {*/
         $this->pass = $pass;
+        /*        }else{
+                    die("Le mot de passe doit comporter au minimum 8 caractères");
+                }*/
     }
     /**
      * @return mixed

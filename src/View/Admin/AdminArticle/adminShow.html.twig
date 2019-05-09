@@ -1,26 +1,51 @@
+{#{% extends "admin_layout.html.twig" %}#}
+
+{#{% block content %}#}
+
+{#    <div class="container">#}
+
+{#        <h1>Modifier chapitre</h1>#}
+
+{#        <div class="card article">#}
+{#            <div class="card-header bg-warning articleTitre">#}
+{#                {{ article.title }}#}
+{#            </div>#}
+
+{#            <div class="card-body">#}
+{#                <p class="card-title articleDate">{{ article.date}}</p>#}
+{#                <p class="card-text articleContenu">{{ article.content }}</p>#}
+{#            </div>#}
+
+{#        </div>#}
+
+{#    </div>#}
+
+{#{% endblock content %}#}
+
+
+
+
 {% extends "admin_layout.html.twig" %}
 
 {% block content %}
 
     <div class="container">
-
-        <h1>Modifier chapitre</h1>
+        <h1>Voici l'article que vous venez de créer</h1>
 
         <div class="card article">
             <div class="card-header bg-warning articleTitre">
                 {{ article.title }}
             </div>
-
-            <div class="card-body">
-                <p class="card-title articleDate">{{ article.date}}</p>
-                <p class="card-text articleContenu">{{ article.content }}</p>
+            <div class="row">
+                <div class="col-5">
+                    <img class="imgArticle" src="/assets/images/{{ article.picture }}">
+                </div>
+                <div class="col-6 card-body">
+                    <p class="card-title articleDate">Rédigé le {{ article.date }}</p>
+                    <p class="card-text ">{{ article.content|truncate(200) }}</p>
+                </div>
             </div>
-
         </div>
-
     </div>
 
 {% endblock content %}
-
-
-
