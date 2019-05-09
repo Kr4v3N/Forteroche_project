@@ -25,8 +25,8 @@ class AdminController extends AbstractController
 
 
     public function showDashboard() {
-        $article = "home";
-        return $this->twig->render('Admin/admin_dashboard.html.twig', ["active" => $article, "user" => $_SESSION['admin']]);
+        $article = 'home';
+        return $this->twig->render('Admin/admin_dashboard.html.twig', ['active' => $article, 'user' => $_SESSION['admin']]);
     }
 
 
@@ -41,26 +41,26 @@ class AdminController extends AbstractController
     public function indexAdmin()
     {
         $articlesManager = new ArticleManager($this->getPdo());
-        $articles = $articlesManager->selectAllArticlesAndCategory();
-        $active = "articles";
-        return $this->twig->render('Admin/AdminArticle/indexAdmin.html.twig', ['articles' => $articles, 'active' => $active] );
+        $articles = $articlesManager->selectAllArticles();
+        $active = 'articles';
+        return $this->twig->render('Admin/AdminArticle/indexAdmin.html.twig', ['articles' => $articles, 'active' => $active]);
     }
 
-//    public function usersIndex()
-//    {
-//        $usersManager = new UserManager($this->getPdo());
-//        $users = $usersManager->selectAllUsers();
-//        $active = 'utilisateurs';
-//        return $this->twig->render('Admin/AdminUser/indexUsers.html.twig', ['users' => $users, 'active' => $active]);
-//    }
+    public function usersIndex()
+    {
+        $usersManager = new UserManager($this->getPdo());
+        $users = $usersManager->selectAllUsers();
+        $active = 'utilisateurs';
+        return $this->twig->render('Admin/AdminUser/indexUsers.html.twig', ['users' => $users, 'active' => $active]);
+    }
 
-//    public function userShow(int $id)
-//    {
-//        $userManager = new UserManager($this->getPdo());
-//        $user = $userManager->selectOneById($id);
-//
-//        return $this->twig->render('Admin/AdminUser/adminShow.html.twig', ['user' => $user]);
-//    }
+    public function userShow(int $id)
+    {
+        $userManager = new UserManager($this->getPdo());
+        $user = $userManager->selectOneById($id);
+
+        return $this->twig->render('Admin/AdminUser/adminShow.html.twig', ['user' => $user]);
+    }
 
     public function add()
     {
@@ -68,24 +68,33 @@ class AdminController extends AbstractController
         $title = $content = '';
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') // affiche si
-        {   if (empty($_POST["title"])) {
-            $titleErr = "Le titre est requis !";
-        } elseif (empty($_POST["content"])) {
-            $contentErr = "Le contenu est requis !";
+        {   if (empty($_POST['title'])) {
+            $titleErr = 'Le titre est requis !';
+        } elseif (empty($_POST['content'])) {
+            $contentErr = 'Le contenu est requis !';
         }
         else
         {
+
             $articleManager = new ArticleManager($this->getPdo());
             $article = new Article();
             $article->setTitle($_POST['title']);
             $article->setContent($_POST['content']);
-            $article->setCategoryId($_POST['category']);
+
+            if (!empty($_FILES)) {
+
+                $extension = strtolower(strrchr($_FILES['image']['name'], '.'));
+                $filename = 'image-' . uniqid() . $extension;
+                move_uploaded_file($_FILES['image']['tmp_name'], '../public/assets/images/' . $filename);
+            }
+            $article->setPicture($filename);
+
             $id = $articleManager->insert($article);
             header('Location:/admin/article/' . $id);
         }
         }
-        $active = "add";
-        return $this->twig->render('Admin/AdminArticle/add.html.twig', ["active" => $active, 'titleErr'=> $titleErr, 'contentErr' => $contentErr ]); // traitement
+        $active = 'add';
+        return $this->twig->render('Admin/AdminArticle/add.html.twig', ['active' => $active, 'titleErr'=> $titleErr, 'contentErr' => $contentErr ]); // traitement
 
     }
 
@@ -102,7 +111,7 @@ class AdminController extends AbstractController
 
         if (!empty($_POST)) {
             // Verifier si les données sont postées puis initialise le composant d'authentification.
-            $auth = new AuthManager($this->getPdo());
+            $auth = new \Model\AuthManager($this->getPdo());
             $admin = $auth->login($_POST['email']);
 
 
@@ -111,9 +120,9 @@ class AdminController extends AbstractController
                 if (password_verify($_POST['password'], $admin->getPass())) {
                     //Si password ok, creation session admin avec lastname, firstname, et email.
                     $_SESSION['admin'] = [
-                        "lastname" => $admin->getlastname(),
-                        "firstname" => $admin->getFirstname(),
-                        "email" => $admin->getEmail(),
+                        'lastname' => $admin->getlastname(),
+                        'firstname' => $admin->getFirstname(),
+                        'email' => $admin->getEmail(),
                     ];
 
                     header('Location: /admin/dashboard');
@@ -122,10 +131,8 @@ class AdminController extends AbstractController
             else {
                 $errorLogin = 'Identifiant incorrect';
             }
-
-
         }
-        return $this->twig->render('Admin/logAdmin.html.twig', ["errorLogin" => $errorLogin]);
+        return $this->twig->render('Admin/logAdmin.html.twig', ['errorLogin' => $errorLogin]);
 
 
     }
@@ -148,14 +155,27 @@ class AdminController extends AbstractController
     {
         $articleManager = new ArticleManager($this->getPdo());
         $article = $articleManager->selectOneById($id);
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST')
+        {   var_dump($_FILES);
+            var_dump($_POST);
             $article->setTitle($_POST['title']);
             $article->setContent($_POST['content']);
+
+            if (!empty($_FILES)) {
+                $extension = strtolower(strrchr($_FILES['image']['name'], '.'));
+                $filename = 'image-' . uniqid() . $extension;
+                move_uploaded_file($_FILES['image']['tmp_name'], '../public/assets/images/' . $filename);
+            }
+            $article->setPicture($filename);
+            if ($_POST['supprimer']){
+                $article->setPicture(NULL);
+            }
             $articleManager->update($article);
-            header('Location: /admin/articles');
+            header('Location: /admin/article/' . $id);
         }
-        return $this->twig->render('Admin/AdminArticle/edit.html.twig', ["article" => $article]);
+        return $this->twig->render('Admin/AdminArticle/edit.html.twig', ['article' => $article]);
     }
 
 
 }
+

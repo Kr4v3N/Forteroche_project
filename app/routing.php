@@ -35,6 +35,7 @@ $routes = [
     'AdminComment' => [
         ['add', '/article/{id:\d+}/comment', ['GET','POST']], //add comment by user
         ['indexAdminComments', '/admin/comments', 'GET'], //show index comment for admin
+        ['delete', '/admin/comment/delete/{id:\d+}', 'GET'], // delete an article admin
     ]
 
 ];

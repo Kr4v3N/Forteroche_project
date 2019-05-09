@@ -31,4 +31,10 @@ class AdminCommentController extends AbstractController
         $active = "comments";
         return $this->twig->render('Admin/AdminComment/indexAdminComment.html.twig', ['comments' => $comments, 'active' => $active ]);
     }
+
+    public function delete(int $id)
+    {
+        $commentManager = new AdminCommentManager($this->getPdo());
+        $commentManager->delete($id);
+    }
 }

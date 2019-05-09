@@ -1,0 +1,35 @@
+{% extends "admin_layout.html.twig" %}
+
+{% block content %}
+
+    <div class="container">
+        <h1>Tous les commmentaires</h1>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Commentaires</th>
+                <th scope="col">Titre chapitre</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for content in comments %}
+
+                <tr>
+                    <td data-toggle="tooltip" data-placement="top" title="{{ content.content }}">{{ content.content|truncate(80) }}</td>
+                    <td>{{ content.title }}</td>
+
+                    <td>
+                        <a href="/admin/comment/delete/{{ content.id }}" target="">
+                            <button type="submit" class="btn btn-warning">Supprimer</button></a>
+                    </td>
+                </tr>
+
+
+
+            {% endfor %}
+
+        </table>
+    </div>
+
+{% endblock content %}
