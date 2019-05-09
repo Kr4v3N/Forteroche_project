@@ -3,7 +3,7 @@
 {% block content %}
 
     <div class="container">
-        <h1>Billet simple pour l'Alaska</h1>
+        <h1>Actualités</h1>
 
         <ul>
             {% for article in articles %}
@@ -13,10 +13,10 @@
                     </div>
                     <div class="row">
                         <div class="col-5">
-                            <img class="imgArticle" src="/assets/images/alaska.jpg">
+                            <img class="imgArticle" src="/assets/images/{{ article.picture }}">
                         </div>
                         <div class="col-6 card-body">
-                            <p class="card-text">{{ article.content|truncate(300) }}</p>
+                            <p class="card-text ">{{ article.content|truncate(200) }}</p>
                             <p class="card-title articleDate">{{ article.date }}</p>
                             <a href="/article/{{ article.id }}" target="">
                                 <button type="submit" class="btn btn-warning">Lire la suite</button>

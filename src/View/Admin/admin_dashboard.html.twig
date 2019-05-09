@@ -3,11 +3,29 @@
 {% block content %}
 
     <div class="container">
-        <h1>-Alpha Dashboard-</h1>
+        <h1>-Beta Dashboard-</h1>
     <div class="mx-auto text-center" style="max-width=600px">
-        <img src="/assets/images/work-in-progress-md.png"  style="width: 40%" >
+        <img src="/assets/images/work-in-progress-md.png"  height="200px" width="200px" >
     </div>
     </div>
+
+    <!-- Ajout des 3 divs pour chacun des élements, totalComments, totalUser, totalArticles sont des éléments récupérés de l'adminController -->
+    <div class="row d-flex justify-content-around">
+        <div class="dash col-3 text-center bg-secondary text-white">
+            <a href="/admin/comments">Nombre de commentaires <br><br> {{ totalComments }}</a>
+        </div>
+
+        <div class="dash col-3 text-center bg-success text-white">
+            <a href="/admin/users">Nombre d'utilisateurs <br><br> {{ totalUsers }}</a>
+
+        </div>
+
+        <div class="dash col-3 text-center bg-info text-white">
+            <a href="/admin/articles">Nombre de billets <br><br> {{ totalArticles }}</a>
+
+        </div>
+    </div>
+
 
 
 {% endblock content %}

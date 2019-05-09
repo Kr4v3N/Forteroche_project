@@ -3,7 +3,7 @@
 {% block content %}
 
     <div class="container">
-        <h1>Tous les chapitres</h1>
+        <h1>Tous les billets</h1>
 
         <table class="table table-striped">
             <thead>
@@ -11,34 +11,44 @@
                 <th scope="col">Titre</th>
                 <th scope="col">Catégorie</th>
                 <th scope="col">Contenu</th>
+                <th scope="col">Image</th>
                 <th scope="col">Modifier</th>
                 <th scope="col">Supprimer</th>
             </tr>
             </thead>
-
             <tbody>
-                {% for article in articles %}
-{#                    {{ dump(article) }}#}
+            {% for article in articles %}
+            {#{{ dump(article) }}#}
 
+                <tr>
 
-                    <tr>
-                        <th scope="row">{{ article.title }}</th>
-                        <th scope="row">{{ article.name }}</th>
-                        <td>{{ article.content|truncate(200) }}</td>
-                        <td>
-                            <a href="/admin/article/edit/{{ article.id }}" target="">
-                                <button type="submit" class="btn btn-warning">Modifier</button></a>
-                        </td>
-                        <td>
-                            <a href="/admin/article/delete/{{ article.id }}" target="">
-                                <button type="submit" class="btn btn-warning">Supprimer</button></a>
-                        </td>
-                    </tr>
+                <th scope="row">{{ article.title |truncate(50) }}</th>
+                <td>{{ article.content|truncate(100) }}</td>
+                <td style="width: 30px; height: 30px">
+                    <div>
+                        <img class="imgArticle" src="/assets/images/{{ article.picture }}" alt="illustration du billet">
+                    </div>
+                </td>
+                <td>
+                    <a href="/admin/article/{{ article.id }}" target="">
+                        <button type="submit" class="btn btn-warning">Voir</button></a>
+                </td>
+                <td>
+                    <a href="/admin/article/edit/{{ article.id }}" target="">
+                        <button type="submit" class="btn btn-warning">Modifier</button></a>
+                </td>
+                <td>
+                    <a href="/admin/article/delete/{{ article.id }}" target="">
+                        <button type="submit" class="btn btn-warning">Supprimer</button></a>
+                </td>
+            </tr>
 
-                {% endfor %}
+            {% endfor %}
             </tbody>
         </table>
     </div>
 
 {% endblock content %}
+
+
 

@@ -16,6 +16,7 @@ abstract class AbstractManager
      * @var string
      */
     protected $table;
+
     /**
      * @var string
      */

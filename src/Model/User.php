@@ -16,6 +16,7 @@ class User
     private $pass;
     private $registered;
     private $status;
+
     /**
      * @return mixed
      */
@@ -23,6 +24,7 @@ class User
     {
         return $this->id;
     }
+
     /**
      * @param mixed $id
      */
@@ -30,6 +32,7 @@ class User
     {
         $this->id = $id;
     }
+
     /**
      * @return mixed
      */
@@ -37,6 +40,7 @@ class User
     {
         return $this->firstname;
     }
+
     /**
      * @param mixed $firstname
      */
@@ -58,6 +62,7 @@ class User
             die ('Seul les lettres et espaces sont autorisés.') ;
         }
     }
+
     /**
      * @return mixed
      */
@@ -65,6 +70,7 @@ class User
     {
         return $this->lastname;
     }
+
     /**
      * @param mixed $lastname
      */
@@ -86,6 +92,7 @@ class User
             die ('Seul les lettres et espaces sont autorisés.') ;
         }
     }
+
     /**
      * @return mixed
      */
@@ -93,6 +100,7 @@ class User
     {
         return $this->email;
     }
+
     /**
      * @param mixed $email
      */
@@ -104,6 +112,7 @@ class User
             die('Ton mail !!!');
         }
     }
+
     /**
      * @return mixed
      */
@@ -111,6 +120,7 @@ class User
     {
         return $this->pass;
     }
+
     /**
      * @param mixed $pass
      */
@@ -122,6 +132,7 @@ class User
                     die("Le mot de passe doit comporter au minimum 8 caractères");
                 }*/
     }
+
     /**
      * @return mixed
      */
@@ -129,6 +140,7 @@ class User
     {
         return $this->registered;
     }
+
     /**
      * @param mixed $registered
      */
@@ -136,6 +148,7 @@ class User
     {
         $this->registered = $registered;
     }
+
     /**
      * @return mixed
      */
@@ -143,6 +156,7 @@ class User
     {
         return $this->status;
     }
+
     /**
      * @param mixed $status
      */

@@ -1,42 +1,57 @@
 {% extends "layout.html.twig" %}
 
 {% block content %}
-
     <div class="container">
-        <h1>Billet simple pour l'Alaska - Alpha showArticle</h1>
-    <div class="card article">
-        <div class="card-header bg-warning articleTitre">
-            {{ article.title }}
-
-        </div>
-        <div class="card-body">
-            <p class="card-title articleDate">{{ article.date }}</p>
-            <p class="card-text">{{ article.content }}</p>
-        </div>
-    </div>
-    </div>
-
-    {#create a form to add a comment#}
-    <div class="container">
-        <div class="card">
-            <div class="card-body">
-
-                <form method="post" action="/article/{{ article.id }}/comment">
-
-                    <div class="form-group">
-                        <label for="content">Ajoutez un commentaire</label>
-                        <textarea class="form-control" id="content" name="content" rows="6"></textarea>
-                    </div>
-
-                    <button type="submit" class="btn btn-warning">Envoyer</button>
-
-                </form>
-
+        <div class="card article">
+            <div class="card-header bg-warning articleTitre">
+                {{ article.title }}
+            </div>
+            <div class="row">
+                <div class="col-5">
+                        <img class="imgArticle" src="/assets/images/{{ article.picture }}" alt="illustration du billet">
+                </div>
+                <div class="col-6 card-body">
+                    <p class="card-title articleDate">Rédigé le {{ article.date }}</p>
+                    <p class="card-text ">{{ article.content | nl2br}}</p>
+                </div>
             </div>
         </div>
     </div>
 
-{% endblock content %}
+    <br/>
+    {#create a form to add a comment#}
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" action="/article/{{ article.id }}/comment">
+                    <div class="form-group">
+                        <label for="content">Ajoutez un commentaire</label>
+                        <textarea class="form-control" id="content" name="content" rows="6"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-warning">Envoyer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br/>
+    {#Add table to show all comments#}
+    <div class="container">
+        <div class="list-group list-group-item flex-column align-items-start active">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">Commentaires</h5>
+            </div>
+        </div>
+        {% for comment in comments %}
+            <div class="list-group list-group-item flex-column align-items-center">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{ comment.user_id}}</h5>
+                    <small class="text-muted">{{ comment.date }}</small>
+                </div>
+                <p class="mb-1">{{ comment.content}}</p>
+            </div>
+        {% endfor %}
+    </div>
 
+{% endblock content %}
 
 

@@ -1,18 +1,18 @@
 <?php
 
- /**
-  * Database connection
-  *
-  */
+/**
+ * Database connection
+ *
+ */
 
- namespace App;
+namespace App;
 
- use \PDO;
+use \PDO;
 
 /**
-*
-* This class only make a PDO object instanciation.
-*/
+ *
+ * This class only make a PDO object instanciation.
+ */
 class Connection
 {
     /**
@@ -53,6 +53,6 @@ class Connection
      */
     public function getPdoConnection() :PDO
     {
-       return $this->pdoConnection;
+        return $this->pdoConnection;
     }
 }

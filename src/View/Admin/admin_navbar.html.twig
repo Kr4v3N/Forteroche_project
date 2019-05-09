@@ -10,7 +10,7 @@
     <div class="col-lg-4 text-white text-center">
 
         <!-- Appel du nom utilisateur et capitalize pour avoir la première lettre en capitale-->
-         {{ user.firstname | capitalize  }}
+        {{ user.firstname | capitalize  }}
     </div>
 
     <!-- Navbar sur le côté droit-->
@@ -22,7 +22,7 @@
             <div class="">
                 <li class="nav-item dropdown">
                     <a class="nav-link  text-white dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Commentaires
+                        Commentaires
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item {{ active == "articles" ? "active" }}" href="/admin/comments">Tous les commentaires</a>
@@ -31,11 +31,12 @@
             </div>
             <div class="">
                 <li class="nav-item dropdown">
-                    <a class="nav-link  text-white dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link  text-white dropdown-toggle href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Utilisateurs
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item {{ active == "articles" ? "active" }}" href="/admin/users">Tous les utilisateurs</a>
+                        <a class="dropdown-item {{ active == "users" ? "active" }}" href="/admin/users">Tous les utilisateurs</a>
+                        <a class="dropdown-item {{ active == "user" ? "active" }}" href="/admin/user/createUser">Créer un utilisateur</a>
                     </div>
                 </li>
             </div>
@@ -43,11 +44,11 @@
             <div class="">
                 <li class="nav-item dropdown">
                     <a class="nav-link  text-white dropdown-toggle {{ active == "articles" ? "active" }}" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Chapitres
+                        Billets
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item {{ active == "articles" ? "active" }}" href="/admin/articles">Tous les chapitres</a>
-                        <a class="dropdown-item {{ active == "add" ? "active" }}" href="/admin/createArticle">Créer un chapitre</a>
+                        <a class="dropdown-item {{ active == "articles" ? "active" }}" href="/admin/articles">Tous les billets</a>
+                        <a class="dropdown-item {{ active == "add" ? "active" }}" href="/admin/createArticle">Créer un billet</a>
                     </div>
                 </li>
             </div>

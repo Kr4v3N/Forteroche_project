@@ -8,6 +8,122 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     vertical-align: baseline;
 }
 
+h1{
+    text-align: center;
+}
+
+.dash{
+    border: 5px solid black;
+    height: 150px;
+    font-size: 2em;
+    margin-top: 5%;
+}
+
+/*color for article date*/
+.articleDate{
+    color: lightslategray;
+}
+
+/*modify title article size font-color */
+.articleTitre{
+    color: black;
+    font-size: 2em;
+    text-align: center;
+
+}
+
+/*margin above articles*/
+.article {
+    margin-top: 20px;
+}
+
+/*image in article responsive*/
+.imgArticle{
+    max-width: 100%;
+}
+
+/*background color connexion admin*/
+.bgAdminConnexion{
+    background-color: #FFC107;
+}
+
+/* border around picture in admin log*/
+.rounded-circle{
+    border: 2px solid #FFC107;
+}
+
+/*-------------------*/
+
+/* DEBUT CSS FOOTER */
+
+footer {
+    background: #FFC107;
+    font-family: sans-serif;
+    width: 100%;
+    height: 70px;
+    margin: 0;
+}
+
+.footer-icons {
+    text-align: center;
+    font-size: 20px;
+    width: 100%;
+    align-items: center;
+    margin-top: 2px;
+    margin-bottom: 0;
+}
+.footer-bottom {
+    text-align: center;
+    color: black;
+    width: 100%;
+    align-items: center;
+    padding:0em;
+}
+
+.fa-facebook{
+    color:black;
+    padding: 0.5em;
+}
+
+.fa-instagram{
+    color: black;
+    padding: 0.5em;
+}
+
+.fa-linkedin{
+    color: black;
+    padding: 0.5em;
+}
+
+.fa-twitter{
+    color: black;
+    padding: 0.5em;
+}
+
+.fa-youtube{
+    color: black;
+    padding: 0.5em;
+}
+.fa-copyright{
+    color: black;
+    padding: 0.5em;
+}
+
+.wild {
+    color:black;
+    padding: 1em;
+}
+a
+{
+    color: black;
+    text-decoration: none;
+}
+
+/* FIN CSS FOOTER */
+
+/* ----SignUp page----- */
+/* -------------------- */
+
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
     display: block;
 }
@@ -31,116 +147,6 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
-/*-- end reset --*/
-
-h1 {
-    text-align: center;
-}
-
-/*color for article date*/
-.articleDate{
-    color: lightslategray;
-}
-
-/*modify title article size font-color */
-.articleTitre {
-    color: black;
-    font-size: 2em;
-    text-align: center;
-
-}
-
-/*margin above articles*/
-.article {
-    margin-top: 20px;
-}
-
-/*image in article responsive*/
-.imgArticle {
-    max-width: 100%;
-}
-
-/*background color connexion admin*/
-.bgAdminConnexion {
-    background-color: #FFC107;
-}
-
-/* border around picture in admin log*/
-.rounded-circle {
-    border: 2px solid #FFC107;
-}
-
-/* FOOTER */
-
-footer {
-    background: #FFC107;
-    font-family: sans-serif;
-    width: 100%;
-    height: 70px;
-    margin: 0;
-}
-
-.footer-icons {
-    text-align: center;
-    font-size: 20px;
-    width: 100%;
-    align-items: center;
-    margin-top: 2px;
-    margin-bottom: 0;
-}
-.footer-bottom {
-    text-align: center;
-    color: black;
-    width: 100%;
-    align-items: center;
-    padding:0;
-}
-
-.fa-facebook {
-    color:black;
-    padding: 0.5em;
-}
-
-.fa-instagram {
-    color: black;
-    padding: 0.5em;
-}
-
-.fa-linkedin {
-    color: black;
-    padding: 0.5em;
-}
-
-.fa-twitter {
-    color: black;
-    padding: 0.5em;
-}
-
-.fa-youtube {
-    color: black;
-    padding: 0.5em;
-}
-.fa-copyright {
-    color: black;
-    padding: 0.5em;
-}
-
-.writer {
-    color:black;
-    padding: 1em;
-}
-a{
-    color: black;
-    text-decoration: none;
-}
-
-/* END FOOTER */
-
-
-/* -------------------- */
-/* ----SignUp page----- */
-/* -------------------- */
-
 
 /*-- start editing from here --*/
 a {
@@ -320,3 +326,5 @@ input[type="submit"]:hover {
     transition: .5s all;
     background: #FF5722;
 }
+
+

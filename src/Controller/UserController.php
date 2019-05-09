@@ -4,6 +4,8 @@ namespace Controller;
 
 use Model\User;
 use Model\UserManager;
+use Model\AdminCommentManager;
+use Model\Comment;
 
 /**
  * Class UserController
@@ -12,27 +14,72 @@ use Model\UserManager;
  */
 class UserController extends AbstractController
 {
-
     public function userShow(int $id)
     {
+
         $userManager = new UserManager($this->getPdo());
         $user = $userManager->selectOneById($id);
+        $commentManager = new AdminCommentManager($this->getPdo());
+        $comment = $commentManager->selectCommentByUser($id);
+        return $this->twig->render('Admin/AdminUser/adminShow.html.twig', ['user' => $user, 'comments' => $comment]);
 
-        return $this->twig->render('Admin/AdminUser/adminShow.html.twig', ['user' => $user]);
     }
 
     public function usersIndex()
     {
-        $usersManager = new UserManager($this->getPdo());
-        $users = $usersManager->selectAllUsers();
-        return $this->twig->render('Admin/AdminUser/indexUsers.html.twig', ['users' => $users]);
+        $newUsersManager = new UserManager($this->getPdo());
+        $newUsers = $newUsersManager->selectAllUsers();
+        return $this->twig->render('Admin/AdminUser/indexUsers.html.twig', ['users' => $newUsers]);
     }
 
     public function userDelete(int $id)
     {
-        $userManager = new UserManager($this->getPdo());
-        $userManager->userDelete($id);
+        $newUserManager = new UserManager($this->getPdo());
+        $newUserManager->userDelete($id);
 
+    }
+
+    public function addUser()
+    {
+        /*$fisrtnameErr = $lastnameErr = $emailErr = $pwdErr = $statusErr = "";
+        $fisrtname = $lastname = $email = $pwd = $status = "";*/
+
+        $errors = [];
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') // affiche si
+        {
+            if (empty($_POST["firstname"])) {
+                //$fisrtnameErr = "Le nom est requis !";
+                $errors['firstname'] = "le nom est requis";
+            }
+            if (empty($_POST["lastname"])) {
+                $errors['lastname'] = "Le prénom est requis !";
+            }
+            if (empty($_POST["email"])) {
+                $errors['email'] = "L'email est requis !";
+            }
+            if (empty($_POST["password"])) {
+                $errors['password'] = "Le mot de passe est requis !";
+            }
+            if (empty($_POST["status"])) {
+                $errors['status'] = "Le status est requis !";
+            }
+            if (empty($errors)) {
+                $newUserManager = new UserManager($this->getPdo());
+                $newUser = new User;
+
+                $newUser->setLastname($_POST['firstname']);
+                $newUser->setFirstname($_POST['lastname']);
+                $newUser->setEmail($_POST['email']);
+                $newUser->setPass($_POST['password']);
+                $newUser->setStatus($_POST['status']);
+                $id = $newUserManager->userAdd($newUser);
+                header('Location: /admin/users');
+            }
+        }
+
+        $active = "add";
+        return $this->twig->render('Admin/AdminUser/addUser.html.twig', ["active" => $active, 'errors' => $errors, 'nameErr' => $_POST]); // traitement
     }
 
     public function suscribeUser()

@@ -14,6 +14,7 @@ class Comment
     protected $content;
     protected $user_id;
     protected $article_id;
+
     /**
      * @return mixed
      */
@@ -21,6 +22,7 @@ class Comment
     {
         return $this->id;
     }
+
     /**
      * @param mixed $id
      */
@@ -28,6 +30,7 @@ class Comment
     {
         $this->id = $id;
     }
+
     /**
      * @return mixed
      */
@@ -35,6 +38,7 @@ class Comment
     {
         return $this->date;
     }
+
     /**
      * @param mixed $date
      */
@@ -42,6 +46,7 @@ class Comment
     {
         $this->date = $date;
     }
+
     /**
      * @return mixed
      */
@@ -49,6 +54,7 @@ class Comment
     {
         return $this->content;
     }
+
     /**
      * @param mixed $content
      */
@@ -56,6 +62,7 @@ class Comment
     {
         $this->content = $content;
     }
+
     /**
      * @return mixed
      */
@@ -63,6 +70,7 @@ class Comment
     {
         return $this->user_id;
     }
+
     /**
      * @param mixed $user_id
      */
@@ -70,6 +78,7 @@ class Comment
     {
         $this->user_id = $user_id;
     }
+
     /**
      * @return mixed
      */
@@ -77,6 +86,7 @@ class Comment
     {
         return $this->article_id;
     }
+
     /**
      * @param mixed $article_id
      */
@@ -84,5 +94,5 @@ class Comment
     {
         $this->article_id = $article_id;
     }
-}
 
+}

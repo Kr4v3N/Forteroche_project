@@ -1,51 +1,29 @@
-{#{% extends "admin_layout.html.twig" %}#}
-
-{#{% block content %}#}
-
-{#    <div class="container">#}
-
-{#        <h1>Modifier chapitre</h1>#}
-
-{#        <div class="card article">#}
-{#            <div class="card-header bg-warning articleTitre">#}
-{#                {{ article.title }}#}
-{#            </div>#}
-
-{#            <div class="card-body">#}
-{#                <p class="card-title articleDate">{{ article.date}}</p>#}
-{#                <p class="card-text articleContenu">{{ article.content }}</p>#}
-{#            </div>#}
-
-{#        </div>#}
-
-{#    </div>#}
-
-{#{% endblock content %}#}
-
-
-
-
 {% extends "admin_layout.html.twig" %}
 
 {% block content %}
 
     <div class="container">
-        <h1>Voici l'article que vous venez de créer</h1>
-
+        <h1>Voici le billet que vous venez de créer</h1>
         <div class="card article">
             <div class="card-header bg-warning articleTitre">
                 {{ article.title }}
             </div>
             <div class="row">
                 <div class="col-5">
-                    <img class="imgArticle" src="/assets/images/{{ article.picture }}">
+                    <img class="imgArticle" src="/assets/images/{{ article.picture }}" alt="illustration du billet">
                 </div>
                 <div class="col-6 card-body">
                     <p class="card-title articleDate">Rédigé le {{ article.date }}</p>
-                    <p class="card-text ">{{ article.content|truncate(200) }}</p>
+                    <p class="card-text ">{{ article.content }}</p>
                 </div>
             </div>
         </div>
+        <a href="/admin/article/edit/{{ article.id }}" target="">
+            <button type="submit" class="btn btn-warning">Modifier</button></a>
+    </div>
     </div>
 
 {% endblock content %}
+
+
+
