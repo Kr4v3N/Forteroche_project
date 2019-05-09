@@ -1,11 +1,8 @@
-# Simple MVC
+# Forteroche_project
 
 ## Description
 
-This repository is a simple PHP MVC structure from scratch.
-
 It uses some cool vendors/libraries such as FastRouter (fast request php router), Twig and PHP_CodeSniffer soon.
-For this one, just a simple example where users can chose one of their databases and see tables in it.
 
 ## Steps
 
@@ -18,10 +15,8 @@ define('APP_DB_NAME', 'your_db_name');
 define('APP_DB_USER', 'your_db_user_wich_is_not_root');
 define('APP_DB_PWD', 'your_db_password');
 ```
-4. Import `simple-mvc.sql` in your SQL server,
-5. Run the internal PHP webserver with `php -S localhost:8000 -t public/`. The option `-t` with `public` as parameter, mean your localhost will target the `/public` folder.
-6. Go to `localhost:8000` with your favorite browser.
-7. From this starter kit, create your own web application.
+4. Import `database.sql` in your SQL server.
+6. Go to `localhost:8000` with your browser.
 
 
-03/07/2018 @wildcodeschool.fr
+
