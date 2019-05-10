@@ -16,12 +16,22 @@ class AdminCommentController extends AbstractController
 
     public function add(int $articleId)
     {
-        $CommentManager = new AdminCommentManager($this->getPdo());
-        $comment = new Comment();
-        $comment->setContent($_POST['content']);
-        $comment->setArticleId($articleId);
-        $id = $CommentManager->insert($comment);
-        header('Location:/article/' . $articleId);
+        $errorConnexion ='';
+        if (isset($_SESSION['user'])) {
+            $CommentManager = new AdminCommentManager($this->getPdo());
+            $comment = new Comment();
+            $comment->setContent($_POST['content']);
+            $comment->setArticleId($articleId);
+    // TODO modify user value with session start
+            $comment->setUserId($_SESSION['user']['id']);
+            $id = $CommentManager->insert($comment);
+            header('Location: /article/' . $articleId);
+        }else{
+            $errorConnexion = 'Vous devez être connecté pour commenter cet article.';
+            return $this->twig->render('Article/logToComment.html.twig', ['errorConnexion' => $errorConnexion]);
+            // renvoyer sur la page précédente après connexion
+//            $retour =
+        }
     }
 
     public function indexAdminComments()

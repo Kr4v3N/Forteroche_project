@@ -23,7 +23,7 @@ class ArticleManager extends AbstractManager
         $statement->bindValue(':title', $article->getTitle(), \PDO::PARAM_STR);
         $statement->bindValue(':content', $article->getContent(),\PDO::PARAM_STR);
         $statement->bindValue(':picture', $article->getPicture(), \PDO::PARAM_STR);
-        $statement->bindValue(':user_id', 1, \PDO::PARAM_STR);
+        $statement->bindValue(':user_id', $article->getUserId(), \PDO::PARAM_STR);
         $statement->bindValue(':category', $article->getCategoryId(), \PDO::PARAM_STR);
 
 
