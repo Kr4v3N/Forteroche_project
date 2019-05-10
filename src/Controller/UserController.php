@@ -85,6 +85,7 @@ class UserController extends AbstractController
     public function suscribeUser()
     {
         $errorLogin = [];
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') // affiche si
             if($_POST['password'] == ($_POST['password_control']))
             {
@@ -94,6 +95,7 @@ class UserController extends AbstractController
                 $newUser->setLastname($_POST['lastname']);
                 $newUser->setEmail($_POST['email']);
                 $newUser->setPass($_POST['password']);
+
                 $id = $userManager->suscribe($newUser);
                 // TODO rediriger vers page d'acceuil
                 header('Location: /articles');
