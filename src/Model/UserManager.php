@@ -10,11 +10,11 @@ namespace Model;
 class UserManager extends AbstractManager
 {
     const TABLE = 'user';
+
     public function __construct(\PDO $pdo)
     {
         parent::__construct(self::TABLE, $pdo);
     }
-
 
     public function selectAllUsers(): array
     {
@@ -29,10 +29,19 @@ class UserManager extends AbstractManager
         return header('Location: ' . $_SERVER['HTTP_REFERER']);
     }
 
+    public function suscribe(User $user)
+    {
+        $addUser = $this->pdo->prepare("INSERT INTO $this->table (firstname, lastname, email, pass, registered, status) VALUES (:firstname,:lastname, :email, :password, NOW(),'user')");
+        $addUser->bindValue(':firstname', $user->getFirstname(), \PDO::PARAM_STR);
+        $addUser->bindValue(':lastname', $user->getLastname(), \PDO::PARAM_STR);
+        $addUser->bindValue(':email', $user->getEmail(), \PDO::PARAM_STR);
+        $addUser->bindValue(':password', password_hash($user->getPass(), PASSWORD_DEFAULT), \PDO::PARAM_STR);
+        return $addUser->execute();
+    }
+
     public function userAdd(User $user)
     {
         $statement = $this->pdo->prepare("INSERT INTO $this->table (firstname, lastname, email, pass, registered, status)
-
         VALUES (:firstname, :lastname, :email, :pass, DATE(NOW()), :status)");
         $statement->bindValue(':firstname', $user->getFirstname(),\PDO::PARAM_STR);
         $statement->bindValue(':lastname', $user->getLastname(), \PDO::PARAM_STR);
@@ -59,13 +68,13 @@ class UserManager extends AbstractManager
         return $res;
     }
 
-    public function suscribe(User $user)
+    public function loginUser($email)
     {
-        $addUser = $this->pdo->prepare("INSERT INTO $this->table (firstname, lastname, email, pass, registered, status) VALUES (:firstname,:lastname, :email, :password, NOW(),'user')");
-        $addUser->bindValue(':firstname', $user->getFirstname(), \PDO::PARAM_STR);
-        $addUser->bindValue(':lastname', $user->getLastname(), \PDO::PARAM_STR);
-        $addUser->bindValue(':email', $user->getEmail(),\PDO::PARAM_STR);
-        $addUser->bindValue(':password', password_hash($user->getPass(), PASSWORD_DEFAULT), \PDO::PARAM_STR);
-        return $addUser->execute();
+        $reqUser = $this->pdo->prepare("SELECT * FROM $this->table WHERE email = :email");
+        $reqUser->execute(array(':email' => $email));
+        $reqUser->setFetchMode(\PDO::FETCH_CLASS, 'Model\User');
+        $res =  $reqUser->fetch();
+        return $res;
     }
+
 }

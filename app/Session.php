@@ -1,10 +1,18 @@
 <?php
 
-class Session {
+namespace App;
+
+/**
+ * Class session
+ *
+ * @package \App
+ */
+class Session{
     // Permet de démarrer session-start
     public function __construct(){
         session_start();
     }
+
     // Fonction qui permet de définir un message de notification avec 2 paramètres
     public function setFlash($message,$type = 'error'){
         $_SESSION['flash'] = array(
@@ -12,6 +20,7 @@ class Session {
             'type'	  => $type
         );
     }
+
     // Fonction qui détecte s'il y a un message dans la vue
     public function flash(){
         if(isset($_SESSION['flash'])){
@@ -25,4 +34,5 @@ class Session {
             unset($_SESSION['flash']);
         }
     }
+
 }

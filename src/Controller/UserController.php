@@ -2,12 +2,12 @@
 
 namespace Controller;
 
-use Model\UserManager;
-use Model\User;
-use App\Session;
 use http\Env\Request;
+use Model\User;
+use Model\UserManager;
 use Model\Comment;
 use Model\AdminCommentManager;
+use App\Session;
 
 /**
  * Class UserController
@@ -19,46 +19,53 @@ class UserController extends AbstractController
     public function __construct()
     {
         parent:: __construct();
-        if ($_SERVER['REQUEST_URI'] != '/login'){
+        if ($_SERVER['REQUEST_URI'] != '/login' && ($_SERVER['REQUEST_URI'] != '/logout')) {
             $this->verifyUser();
         }
     }
 
     public function logoutUser()
     {
-        session_start();
         session_destroy();
-        header('Location: index.php?dc=ok');
+        header('Location: /');
     }
+
 
     public function userShow(int $id)
     {
+
         $userManager = new UserManager($this->getPdo());
         $user = $userManager->selectOneById($id);
         $commentManager = new AdminCommentManager($this->getPdo());
         $comment = $commentManager->selectCommentByUser($id);
         return $this->twig->render('Admin/AdminUser/adminShow.html.twig', ['user' => $user, 'comments' => $comment]);
+
     }
 
     public function usersIndex()
     {
-        $usersManager = new UserManager($this->getPdo());
-        $users = $usersManager->selectAllUsers();
-        return $this->twig->render('AdminUser/indexUsers.html.twig', ['users' => $users]);
+        $newUsersManager = new UserManager($this->getPdo());
+        $newUsers = $newUsersManager->selectAllUsers();
+        return $this->twig->render('Admin/AdminUser/indexUsers.html.twig', ['users' => $newUsers]);
     }
 
     public function userDelete(int $id)
     {
-        $userManager = new UserManager($this->getPdo());
-        $userManager->userDelete($id);
+        $newUserManager = new UserManager($this->getPdo());
+        $newUserManager->userDelete($id);
+
     }
+
 
     public function suscribeUser()
     {
         $errorRegister = [];
+
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // appeler le manager
             $userManager = new UserManager($this->getPdo());
+
             if (!preg_match("/^[a-zA-Z ]*$/",$_POST['lastname']))
             {
                 $errorRegister['lastname'] = "Seul les lettres et espaces sont autorisés." ;
@@ -101,42 +108,50 @@ class UserController extends AbstractController
                 $newUser->setPass($_POST['password']);
                 $id = $userManager->suscribe($newUser);
                 // TODO Renvoyer vers le bonne page
-                header('Location: /articles');
+                header('Location: /login');
+
             }
+
         }
-        return $this->twig->render('signUp.html.twig', ["errorRegister" => $errorRegister]); // traitement
+        return $this->twig->render('signUp.html.twig', ["errorRegister" => $errorRegister]);
+
     }
 
     public function logUser()
     {
+
         // Si user connecter
         if (isset($_SESSION['user'])) {
             //TODO Renvoyer vers l'index
             header('Location: /articles');
             exit();
         }
-        $errorLoginUser = "";
+
+
+        $errorLoginUser = '';
+
         if (!empty($_POST)) {
+
             // appeler le manager
             $auth = new UserManager($this->getPdo());
             $user = $auth->loginUser($_POST['email']);
+
             if ($user) {
                 if (password_verify($_POST['password'], $user->getPass())) {
                     // Si password ok, creation session user avec lastname, firstname, et email.
                     $_SESSION['user'] = [
-                        "id" => $user->getId(),
-                        "lastname" => $user->getlastname(),
-                        "firstname" => $user->getFirstname(),
-                        "email" => $user->getEmail(),
-                        "message" => 'Vous êtes connecté'
+                        'id' => $user->getId(),
+                        'lastname' => $user->getlastname(),
+                        'firstname' => $user->getFirstname(),
+                        'email' => $user->getEmail(),
+                        'message' => 'Vous êtes connecté'
                     ];
-                    // Message
-//                    $this->twig->addGlobal('session', $_SESSION);
-//                    $this->session->setFlash('Vous êtes connecté !','success');
-                    // TODO Renvoyer vers l'index
-                    header('Location: /articles');
+
+                    header('Location: /');
+
                 }else{
                     $errorLoginUser = 'Identifiants incorrects ';
+
                 }
             }
             else {
@@ -146,10 +161,48 @@ class UserController extends AbstractController
         return $this->twig->render('loginUser.html.twig', ['errorLoginUser' => $errorLoginUser]);
     }
 
-    public function logout()
+    public function addUser()
     {
-        session_start();
-        session_destroy();
-        header('Location: /login');
+        /*$fisrtnameErr = $lastnameErr = $emailErr = $pwdErr = $statusErr = "";
+        $fisrtname = $lastname = $email = $pwd = $status = "";*/
+
+        $errors = [];
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') // affiche si
+        {
+            if (empty($_POST['firstname'])) {
+                //$fisrtnameErr = "Le nom est requis !";
+                $errors['firstname'] = 'le nom est requis';
+            }
+            if (empty($_POST['lastname'])) {
+                $errors['lastname'] = 'Le prénom est requis !';
+            }
+            if (empty($_POST['email'])) {
+                $errors['email'] = "L'email est requis !";
+            }
+            if (empty($_POST['password'])) {
+                $errors['password'] = 'Le mot de passe est requis !';
+            }
+            if (empty($_POST['status'])) {
+                $errors['status'] = 'Le status est requis !';
+            }
+            if (empty($errors))
+            {
+                $newUserManager = new UserManager($this->getPdo());
+                $newUser = new User;
+
+                $newUser->setLastname($_POST['firstname']);
+                $newUser->setFirstname($_POST['lastname']);
+                $newUser->setEmail($_POST['email']);
+                $newUser->setPass($_POST['password']);
+                $newUser->setStatus($_POST['status']);
+                $id = $newUserManager->userAdd($newUser);
+                header('Location: /admin/users');
+            }
+        }
+
+        $active = 'add';
+        return $this->twig->render('Admin/AdminUser/addUser.html.twig', ['active' => $active, 'errors' => $errors, 'nameErr' =>$_POST]); // traitement
     }
 }
+

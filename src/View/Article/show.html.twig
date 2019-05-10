@@ -1,6 +1,8 @@
 {% extends "layout.html.twig" %}
 
 {% block content %}
+
+    {# show an article #}
     <div class="container">
         <div class="card article">
             <div class="card-header bg-warning articleTitre">
@@ -16,37 +18,27 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <br/>
-    {#create a form to add a comment#}
-    <div class="container">
-        <div class="card">
-            <div class="card-body">
-                <form method="post" action="/article/{{ article.id }}/comment">
-                    <div class="form-group">
-                        <label for="content">Ajoutez un commentaire</label>
-                        <textarea class="form-control" id="content" name="content" rows="6"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-warning">Envoyer</button>
-                    {% if errorConnexion %}
-
-                        <div class="alert alert-danger" role="alert">
-                            {{ errorConnexion }}</div>
-
-                    {% endif %}
-                </form>
+        <br>
+        {#create a form to add a comment#}
+            <div class="card">
+                <div class="card-body">
+                    <form method="post" action="/article/{{ article.id }}/comment">
+                        <div class="form-group">
+                            <label for="content">Ajoutez un commentaire</label>
+                            <textarea class="form-control" id="content" name="content" rows="6"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-warning">Envoyer</button>
+                        {% if errorConnexion %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ errorConnexion }}</div>
+                        {% endif %}
+                    </form>
+                </div>
             </div>
-        </div>
-    </div>
-    <br/>
-    {#Add table to show all comments#}
-    <div class="container">
-        <div class="list-group list-group-item flex-column align-items-start active">
-            <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">Commentaires</h5>
-            </div>
-        </div>
+
+        <br/>
+        {#Add table to show all comments#}
         {% for comment in comments %}
             <div class="list-group list-group-item flex-column align-items-center">
                 <div class="d-flex w-100 justify-content-between">
@@ -57,7 +49,8 @@
                 <p class="mb-1">{{ comment.content}}</p>
             </div>
         {% endfor %}
-    </div>
 
+    </div>
 {% endblock content %}
+
 

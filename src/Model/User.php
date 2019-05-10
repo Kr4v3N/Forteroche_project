@@ -46,21 +46,7 @@ class User
      */
     public function setFirstname($firstname)
     {
-        if (!empty($_POST['firstname'] . $firstname)) {
-            $this->firstname = $firstname;
-        }else {
-            die('Veuillez renseigner votre prénom');
-        }
-        if(strlen($_POST['firstname']. $firstname) >= 2 || strlen($_POST['firstname']). $firstname <= 30) {
-            $this->firstname = $firstname;
-        }else{
-            die('Le prénom doit comporter entre 2 et 30 caractères');
-        }
-        if (preg_match("/^[a-zA-Z ]*$/",$_POST['firstname']. $firstname)) {
-            $this->firstname = $firstname;
-        }else{
-            die ('Seul les lettres et espaces sont autorisés.') ;
-        }
+        $this->firstname = $firstname;
     }
 
     /**
@@ -76,21 +62,7 @@ class User
      */
     public function setLastname($lastname)
     {
-        if (!empty($_POST['lastname'] . $lastname)) {
-            $this->lastname = $lastname;
-        }else {
-            die('Veuillez renseigner votre nom');
-        }
-        if(strlen($_POST['lastname']. $lastname) >= 2 || strlen($_POST['lastname']). $lastname <= 30) {
-            $this->lastname = $lastname;
-        }else{
-            die('Le nom doit comporter entre 2 et 30 caractères');
-        }
-        if (preg_match("/^[a-zA-Z ]*$/",$_POST['lastname']. $lastname)) {
-            $this->lastname = $lastname;
-        }else{
-            die ('Seul les lettres et espaces sont autorisés.') ;
-        }
+        $this->lastname = $lastname;
     }
 
     /**
@@ -106,11 +78,7 @@ class User
      */
     public function setEmail($email)
     {
-        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $this->email = $email;
-        }else{
-            die('Ton mail !!!');
-        }
+        $this->email = $email;
     }
 
     /**
@@ -126,11 +94,7 @@ class User
      */
     public function setPass($pass)
     {
-        /*        if(strlen($_POST['pass']. $pass) >= 8 ) {*/
         $this->pass = $pass;
-        /*        }else{
-                    die("Le mot de passe doit comporter au minimum 8 caractères");
-                }*/
     }
 
     /**

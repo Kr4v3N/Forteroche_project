@@ -146,4 +146,5 @@ class Article
         $this->category_id = $category_id;
     }
 
+
 }

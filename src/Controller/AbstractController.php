@@ -2,6 +2,7 @@
 
 namespace Controller;
 
+use App\Session;
 use Twig_Loader_Filesystem;
 use Twig_Environment;
 
@@ -23,6 +24,8 @@ abstract class AbstractController
     /**
      *  Initializes this class.
      */
+    protected $session;
+
     public function __construct()
     {
         $loader = new Twig_Loader_Filesystem(APP_VIEW_PATH);
@@ -37,6 +40,8 @@ abstract class AbstractController
         $this->twig->addExtension(new \Twig_Extensions_Extension_Text());
         $connection = new Connection();
         $this->pdo = $connection->getPdoConnection();
+        // Initialise l'objet et dans la class Session.php fait un session-start dans la fonction construct
+        $this->session = new Session();
     }
 
     /**
@@ -47,18 +52,19 @@ abstract class AbstractController
         return $this->pdo;
     }
 
-    public function verifyAdmin() {
+    public function verifyAdmin()
+    {
         if(!isset($_SESSION['admin'])){
             header('Location: /admin/logAdmin');
             exit();
         }
     }
 
-    public function verifyUser() {
-            if(!isset($_SESSION['user'])){
-                header('Location: \login');
-                exit;
-            }
+    public function verifyUser()
+    {
+        if(isset($_SESSION['user'])){
+            header('Location: \login');
+            exit;
         }
+    }
 }
-
