@@ -24,6 +24,13 @@ class  ArticleController extends AbstractController
         header("Location: /article/' . $articleId");
     }
 
+    public function indexAccueil()
+    {
+        $articlesManager = new ArticleManager($this->getPdo());
+        $articles = $articlesManager->selectArticlesForIndex();
+        return $this->twig->render('Users/index.html.twig', ['articles' => $articles]);
+    }
+
     public function index()
     {
         $articlesManager = new ArticleManager($this->getPdo());

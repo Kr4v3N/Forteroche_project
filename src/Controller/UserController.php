@@ -22,6 +22,13 @@ class UserController extends AbstractController
         }
     }
 
+    public function logoutUser()
+    {
+        session_start();
+        session_destroy();
+        header('Location: index.php?dc=ok');
+    }
+
     public function userShow(int $id)
     {
         $userManager = new UserManager($this->getPdo());
