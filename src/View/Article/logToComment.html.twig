@@ -1,26 +1,21 @@
+
 {% extends "layout.html.twig" %}
 
 {% block content %}
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">{{ errorConnexion }}</h5>
-            <a href="/login" class="card-link">Connectez-vous</a>
-            <a href="/article/{id\d+}" class="card-link">Retour au billet</a>
-        </div>
-    </div>
-{% endblock %}
 
-{#<div class="card text-center">#}
-{#    <div class="card-header">#}
-{#        Featured#}
-{#    </div>#}
-{#    <div class="card-body">#}
-{#        <h5 class="card-title">Attention</h5>#}
-{#        <p class="card-text">{{ errorConnexion }}</p>#}
-{#        <a href="/login" class="btn btn-primary">Connectez-vous</a>#}
-{#        <a href="{{ retour }}" class="btn btn-primary">Connectez-vous</a>#}
-{#    </div>#}
-{#    <div class="card-footer text-muted">#}
-{#        2 days ago#}
-{#    </div>#}
-{#</div>#}
+    <div class="container">
+
+        <div class="card text-center">
+            <div class="card-body">
+
+                <h5 class="card-title">Attention</h5>
+                <p class="card-text">{{ errorConnexion }}</p>
+                <a href="/login" class="btn btn-primary">Connectez-vous</a>
+                <a href="{{ retour }}" class="btn btn-primary">Retour à l'article</a>
+
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
