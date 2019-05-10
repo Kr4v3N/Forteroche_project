@@ -40,8 +40,16 @@ class AdminCommentManager extends AbstractManager
 
     public function selectAllComments(): array
     {
-        return $this->pdo->query("SELECT comment.id, comment.content, article.title FROM $this->table INNER JOIN article ON article.id = comment.article_id", \PDO::FETCH_CLASS, $this->className)->fetchAll();
+        return $this->pdo->query("SELECT comment.id, comment.content, article.title FROM $this->table 
+        INNER JOIN article ON article.id = comment.article_id", \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
+
+//    public function selectAllComments(): array
+//    {
+//        return $this->pdo->query("SELECT comment.id, comment.content, article.title, user.lastname  FROM comment
+//        INNER JOIN article ON article.id = comment.article_id
+//        INNER JOIN user ON user.id=comment.user_id;", \PDO::FETCH_CLASS, $this->className)->fetchAll();
+//    }
 
     public function delete(int $id): int
     {

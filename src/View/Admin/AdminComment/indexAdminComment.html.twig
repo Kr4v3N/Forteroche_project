@@ -10,19 +10,28 @@
             <tr>
                 <th scope="col">Titre du billet</th>
                 <th scope="col">Commentaires</th>
+                <th scope="col">utilisateur</th>
+                <th scope="col">Supprimer</th>
             </tr>
             </thead>
+
             <tbody>
             {% for content in comments %}
 
                 <tr>
-                    <td data-toggle="tooltip" data-placement="top" title="{{ content.content }}">{{ content.content|truncate(80) }}</td>
-                    <td>{{ content.title }}</td>
+                    <td>{{ content.title }} </td>
+                    <td data-toggle="tooltip" data-placement="top" title="{{ content.content }}">
+                        {{ content.content|truncate(80) }}
+                    </td>
 
                     <td>
-                        <a href="/admin/comment/delete/{{ content.id }}" target="">
-                            <button type="submit" class="btn btn-warning"><i class="far fa-trash-alt"></i></button></a>
+                        {{ content.lastname}}
                     </td>
+                    <td>
+                        <a href="/admin/comment/delete/{{ content.id }}" target="">
+                            <button type="submit" class="btn buttonColorAdmin">Supprimer</button></a>
+                    </td>
+
                 </tr>
 
 
