@@ -4,7 +4,6 @@
  * This file define app constants.
  *
  */
-
 define('APP_DEV', true);
 
 //Model (for connexion data, see unversionned db.php)

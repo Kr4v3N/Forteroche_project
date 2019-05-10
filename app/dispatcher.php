@@ -4,7 +4,6 @@
  * This file handle routes dispatching.
  *
  */
-
 require_once __DIR__ . '/routing.php';
 $routesCollection = function (FastRoute\RouteCollector $r) use ($routes) {
     foreach ($routes as $controller => $actions) {

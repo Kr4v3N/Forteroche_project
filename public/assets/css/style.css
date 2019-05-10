@@ -327,4 +327,8 @@ input[type="submit"]:hover {
     background: #FF5722;
 }
 
+.btn-warning {
+    background-color: #ffcc80;
+}
+
 

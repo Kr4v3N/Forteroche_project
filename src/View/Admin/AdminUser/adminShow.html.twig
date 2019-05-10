@@ -3,31 +3,33 @@
 {% block content %}
 
     <div class="container">
-        <h1>Informations utilisateur</h1>
-        <div class="card user">
-            <div class="card-header bg-warning userFirstname">
-                {{ user.firstname }}
-
-            </div>
+        <h1 class="text-white titlePageAdmin">Info utilisateur de {{ user.lastname }} {{ user.firstname }}</h1>
+        <div class="card user text-white text-center cardUser">
             <div class="card-body">
                 <p class="card-title userFirstname">Nom :  {{ user.firstname}}</p>
                 <p class="card-text userLastname">Prénom :  {{ user.lastname }}</p>
                 <p class="card-text userEmail">Email :  {{ user.email }}</p>
-                <p class="card-text userRegistered">Date d'inscription :  {{ user.registered }}</p>
+                <p class="card-text userRegistered">Date d'inscription :  {{ user.registered |date("j F Y") }}</p>
                 <p class="card-text userStatus">Status :  {{ user.status }}</p>
-
             </div>
         </div>
 
+        <div class="col-md-12 text-center btnSupp">
+            <a href="/admin/user/delete/{{ user.id }}" target="" data-confirm="Etes-vous certain de vouloir supprimer?">
+                <button type="submit" class="btn btn-danger">Supprimer</button></a>
+        </div>
 
-            <h1>Tous ces commentaires</h1>
+        {% if not comments %}
+            <h1 class="text-white">Pas de commentaire</h1>
+        {% else %}
+            <h1 class="text-white">Tous ses commentaires</h1>
 
-            <table class="table table-striped">
-                <thead>
+            <table class="table table-striped text-center text-white">
+                <thead class="thead-light">
                 <tr>
-                    <th scope="col">Commentaire</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Supprimer</th>
+                    <th scope="col">COMMENTAIRE</th>
+                    <th scope="col">DATE</th>
+                    <th scope="col">SUPPRIMER</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -35,18 +37,45 @@
 
                     <tr>
                         <td>{{ comment.content }}</td>
-                        <td>{{ comment.date }}</td>
+                        <td>{{ comment.date|date("j F Y") }}</td>
                         <td>
-                            <a href="/admin/comment/delete/{{ comment.id }}" target="">
-                                <button type="submit" class="btn btn-warning">Supprimer</button></a>
+                            <a href="/admin/comment/delete/{{ comment.id }}" target="" data-confirm="Etes-vous certain de vouloir supprimer?">
+                                <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i></button></a>
                         </td>
                     </tr>
 
                 {% endfor %}
                 </tbody>
             </table>
-        </div>
+        {% endif %}
+
+        {% if articles %}
+            <h1 class="text-white">Tous ses articles</h1>
+            <table class="table table-striped text-center text-white">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">TITRE</th>
+                    <th scope="col">DATE</th>
+                    <th scope="col">CONTENU</th>
+                    <th scope="col">SUPPRIMER</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for article in articles %}
+                    <tr>
+                        <td>{{ article.title }}</td>
+                        <td>{{ article.date|date("j F Y") }}</td>
+                        <td>{{ article.content|truncate(100) }}</td>
+                        <td>
+                            <a href="/admin/article/delete/{{ article.id }}" target="" data-confirm="Etes-vous certain de vouloir supprimer?">
+                                <button type="submit"  class="btn btn-danger"><i class="far fa-trash-alt"></i></button></a>
+                        </td>
+                    </tr>
+
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
     </div>
 
 {% endblock content %}
-
