@@ -10,14 +10,9 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 
 h1{
     text-align: center;
+
 }
 
-.dash{
-    border: 5px solid black;
-    height: 150px;
-    font-size: 2em;
-    margin-top: 5%;
-}
 
 /*color for article date*/
 .articleDate{
@@ -121,103 +116,11 @@ a
 
 /* FIN CSS FOOTER */
 
+
+/* -------------------- */
 /* ----SignUp page----- */
 /* -------------------- */
 
-article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
-    display: block;
-}
-
-ol, ul {
-    list-style: none;
-    margin: 0px;
-    padding: 0px;
-}
-
-blockquote, q {
-    quotes: none;
-}
-
-blockquote:before, blockquote:after, q:before, q:after {
-    content: '';
-    content: none;
-}
-
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-
-/*-- start editing from here --*/
-a {
-    text-decoration: none;
-}
-
-.txt-rt {
-    text-align: right;
-}
-
-/* text align right */
-.txt-lt {
-    text-align: left;
-}
-
-/* text align left */
-.txt-center {
-    text-align: center;
-}
-
-/* text align center */
-.float-rt {
-    float: right;
-}
-
-/* float right */
-.float-lt {
-    float: left;
-}
-
-/* float left */
-.clear {
-    clear: both;
-}
-
-/* clear float */
-.pos-relative {
-    position: relative;
-}
-
-/* Position Relative */
-.pos-absolute {
-    position: absolute;
-}
-
-/* Position Absolute */
-.vertical-base {
-    vertical-align: baseline;
-}
-
-/* vertical align baseline */
-.vertical-top {
-    vertical-align: top;
-}
-
-/* vertical align top */
-nav.vertical ul li {
-    display: block;
-}
-
-/* vertical menu */
-nav.horizontal ul li {
-    display: inline-block;
-}
-
-/* horizontal menu */
-img {
-    max-width: 100%;
-}
-
-/*-- end reset --*/
 body {
     background: #76b852;
     /* fallback for old browsers */
@@ -227,7 +130,8 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
-h1 {
+/*title register form*/
+.titre {
     font-size: 3em;
     text-align: center;
     color: #fff;
@@ -281,14 +185,6 @@ input.email, input.text.w3lpass {
     background-position: 0 0;
 }
 
-.text:focus::-webkit-input-placeholder, .text:valid::-webkit-input-placeholder {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: .9em;
-    -webkit-transform: translateY(-30px);
-    transform: translateY(-30px);
-    visibility: visible !important;
-}
-
 ::-webkit-input-placeholder {
     color: #fff;
     font-weight: 100;
@@ -320,15 +216,90 @@ input[type="submit"] {
     width: 100%;
     margin: 2em 0;
     letter-spacing: 4px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
 }
 
 input[type="submit"]:hover {
     transition: .5s all;
     background: #FF5722;
 }
-
-.btn-warning {
-    background-color: #ffcc80;
+.etc-login-form {
+    color: white;
+}
+span {
+    color: red;
 }
 
 
+/* ----------------------- */
+/* ----loginUser page----- */
+/* ----------------------- */
+
+.panel h2{
+    color:#444444;
+    font-size:18px;
+    margin:0 0 8px 0;
+}
+.panel p {
+    color:#777777;
+    font-size:14px;
+    margin-bottom:30px;
+    line-height:24px;
+}
+
+.login-form .form-control {
+    background: #f7f7f7 none repeat scroll 0 0;
+    border: 1px solid #d4d4d4;
+    border-radius: 4px;
+    font-size: 14px;
+    height: 50px;
+    line-height: 50px;
+}
+.main-div {
+    background: #ffffff none repeat scroll 0 0;
+    border-radius: 2px;
+    margin: 10px auto 30px;
+    max-width: 50%;
+    padding: 50px 70px 70px 71px;
+}
+
+.login-form .form-group {
+    margin-bottom:10px;
+}
+.login-form{ text-align:center;}
+.forgot a {
+    color: #777777;
+    font-size: 14px;
+    text-decoration: underline;
+}
+.login-form  .btn.btn-primary {
+    background: #FF3D00 none repeat scroll 0 0;
+    border-color: #FF3D00;
+    color: #ffffff;
+    font-size: 14px;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    padding: 0;
+}
+.forgot {
+    text-align: left; margin-bottom:30px;
+}
+.botto-text {
+    color: #ffffff;
+    font-size: 14px;
+    margin: auto;
+}
+.login-form .btn.btn-primary.reset {
+    background: #ff9900 none repeat scroll 0 0;
+}
+.back {
+    text-align: left; margin-top:10px;
+}
+/*.back a {*/
+/*color: #444444; */
+/*font-size: 13px;*/
+/*text-decoration: none;*/
+/*}*/
