@@ -9,6 +9,7 @@ $routes = [
     'Article' => [
         ['index', '/articles', 'GET'], //show index to users
         ['show', '/article/{id:\d+}', 'GET'], //show article to users
+        ['indexAccueil', '/', 'GET'], //show article to users
 
     ],
   
@@ -21,6 +22,7 @@ $routes = [
         ['indexAdmin', '/admin/articles', 'GET'], //show index for admin
         ['logAdmin', '/admin/logAdmin', ['GET', 'POST']], //login admin
         ['logout', '/admin/logout', 'GET'], //logout admin
+
         ['userShow', '/admin/user/{id:\d+}', 'GET'], //show user for admin
         ['usersIndex', '/admin/users', 'GET'], //show index users for admin
         ['userDelete', '/admin/user/delete/{id:\d+}', 'GET'], //delete user admin
@@ -36,6 +38,7 @@ $routes = [
         ['addUser', '/admin/user/createUser', ['GET', 'POST']],
         ['suscribeUser', '/register', ['GET','POST']], //register page
         ['logUser', '/login', ['GET','POST']], //login page
+        ['addUser', '/admin/user/createUser', ['GET', 'POST']], //create user
 
     ]
 

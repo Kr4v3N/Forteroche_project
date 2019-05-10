@@ -6,6 +6,8 @@ use Model\UserManager;
 use Model\User;
 use App\Session;
 use http\Env\Request;
+use Model\Comment;
+use Model\AdminCommentManager;
 
 /**
  * Class UserController
@@ -33,7 +35,9 @@ class UserController extends AbstractController
     {
         $userManager = new UserManager($this->getPdo());
         $user = $userManager->selectOneById($id);
-        return $this->twig->render('AdminUser/show.html.twig', ['user' => $user]);
+        $commentManager = new AdminCommentManager($this->getPdo());
+        $comment = $commentManager->selectCommentByUser($id);
+        return $this->twig->render('Admin/AdminUser/adminShow.html.twig', ['user' => $user, 'comments' => $comment]);
     }
 
     public function usersIndex()
