@@ -53,4 +53,12 @@ abstract class AbstractController
             exit();
         }
     }
+
+//    public function verifyUser() {
+//            if(!isset($_SESSION['user'])){
+//                header('Location: \login');
+//                exit;
+//            }
+//        }
 }
+

@@ -20,7 +20,7 @@ class  ArticleController extends AbstractController
         $article = $articleManager->selectOneById($id);
         $commentsManager = new AdminCommentManager($this->getPdo());
         $comments = $commentsManager->ShowAllComments($id);
-        return $this->twig->render('Article/show.html.twig', ['article' => $article, 'comments'=> $comments]);
+        return $this->twig->render('Article/show.html.twig', ['article' => $article, 'comments'=> $comments, 'session' => $_SESSION]);
         header("Location: /article/' . $articleId");
     }
 
@@ -28,7 +28,7 @@ class  ArticleController extends AbstractController
     {
         $articlesManager = new ArticleManager($this->getPdo());
         $articles = $articlesManager->selectAllArticles();
-        return $this->twig->render('Article/indexUser.html.twig', ['articles' => $articles]);
+        return $this->twig->render('Article/indexUser.html.twig', ['articles' => $articles, 'session' => $_SESSION]);
     }
 
 

@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 
 if (preg_match('/\.(?:png|jpg|jpeg|gif)$/', $_SERVER['REQUEST_URI']))
 {

@@ -3,6 +3,14 @@
 {% block content %}
 
     <div class="container">
+        {% if session.user %}
+
+            <div id="alert" class="alert alert-success">
+                <a class="close" >x</a>
+                <p>{{ session.user.message}}</p>
+            </div>
+        {% endif %}
+
         <h1>Billet simple pour l'Alaska</h1>
 
         <ul>
