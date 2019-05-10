@@ -112,8 +112,7 @@ class AdminController extends AbstractController
 
     }
 
-
-
+    
     public function logAdmin()
     {
 
@@ -123,7 +122,7 @@ class AdminController extends AbstractController
             exit();
         }
 
-        $errorLogin = "";
+        $errorLogin = '';
 
         if (!empty($_POST)) {
             // Verifier si les données sont postées puis initialise le composant d'authentification.
@@ -148,10 +147,8 @@ class AdminController extends AbstractController
                 $errorLogin = 'Identifiant incorrect';
             }
 
-
         }
         return $this->twig->render('Admin/logAdmin.html.twig', ['errorLogin' => $errorLogin]);
-
 
     }
 
@@ -162,6 +159,7 @@ class AdminController extends AbstractController
         header('Location: /admin/logAdmin');
     }
 
+    //delete an article
     public function delete(int $id)
     {
         $articleManager = new ArticleManager($this->getPdo());
@@ -169,48 +167,51 @@ class AdminController extends AbstractController
 
     }
 
+    // edit an article, change title, content, picture
     public function edit(int $id)
     {
-
+        $titleErr = $contentErr = '';
+        $error = [];
         $articleManager = new ArticleManager($this->getPdo());
         $article = $articleManager->selectOneById($id);
-        if ($_SERVER['REQUEST_METHOD'] === 'POST')
-        {
-            $article->setTitle($_POST['title']);
-            $article->setContent($_POST['content']);
 
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            var_dump($_POST);
+            if ($_POST["title"] == "") {
+                $titleErr = "Le titre est requis !";
+            } elseif ($_POST["content"] == "") {
+                $contentErr = "Le contenu est requis !";
+            } else {
+                $article->setTitle($_POST['title']);
+                $article->setContent($_POST['content']);
 
-            if ($_POST['supprimer']){
-                $article->setPicture(NULL);
-            }
-
-            if (!empty($_FILES['image']['name'])) {
-
-                $allowExtension = ['.jpg', '.jpeg', '.gif', '.png'];
-                $maxSize= 1000000;
-
-                $extension = strtolower(strrchr($_FILES['image']['name'], '.'));
-                $size = $_FILES['image']['size'];
-
-                if (!in_array($extension, $allowExtension)) {
-                    $error['errorExt'] = 'Seuls les fichiers image .jpg, .jpeg, .gif et .png sont autorisés';
-                }
-                if ($size > $maxSize) {
-                    $error['errorSize'] = 'Votre fichier est trop volumineux.';
-                }else{
-
+                if (!empty($_FILES)) {
+                    $allowExtension = ['.jpg', '.jpeg', '.gif', '.png'];
+                    $maxSize = 1000000;
                     $extension = strtolower(strrchr($_FILES['image']['name'], '.'));
-                    $filename = 'image-' . $_FILES['image']['name'] . $extension;
-                    move_uploaded_file($_FILES['image']['tmp_name'], '../public/assets/images/' . $filename);
+                    $size = $_FILES['image']['size'];
 
-                    $article->setPicture($filename);
+                    if (!in_array($extension, $allowExtension)) {
+                        $error['errorExt'] = 'Seuls les fichiers image .jpg, .jpeg, .gif et .png sont autorisés.';
+                    }
+                    if ($size > $maxSize) {
+                        $error['errorSize'] = 'Votre fichier est trop volumineux. Taille maximale autorisée : 1Mo.';
+                    }
+
+                    if (!$error) {
+                        $filename = 'image-' . $_FILES['image']['name'];
+                        move_uploaded_file($_FILES['image']['tmp_name'], '../public/assets/images/' . $filename);
+                        $article->setPicture($filename);
+                    }
+
                 }
+
+                header('Location: /admin/article/' . $id);
+                $id = $articleManager->update($article);
             }
 
-            $articleManager->update($article);
-            header('Location: /admin/article/' . $id);
         }
-        return $this->twig->render('Admin/AdminArticle/edit.html.twig', ['article' => $article]);
+        return $this->twig->render('Admin/AdminArticle/edit.html.twig', ["article" => $article, 'titleErr' => $titleErr, 'contentErr' => $contentErr, 'errorFile' => $error]);
     }
 
 

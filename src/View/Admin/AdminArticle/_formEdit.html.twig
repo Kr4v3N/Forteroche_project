@@ -12,12 +12,12 @@
 
                     <label for="titre">Titre</label>
                     <input type="text" class="form-control" id="text" name="title" value="{{ article.title }}">
-
+                    {{ titleErr }}
                     <label for="contenu">Contenu</label>
 
                     <textarea class="form-control" id="contenu" name="content" rows="6">{{ article.content }}
                     </textarea>
-
+                    {{ contentErr }}
                     <label for='image'>Cliquez pour ajouter une image : </label>
                     <br/>
 

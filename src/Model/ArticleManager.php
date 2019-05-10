@@ -10,11 +10,13 @@ namespace Model;
 class ArticleManager extends AbstractManager
 {
     const TABLE = 'article';
+
     public function __construct(\PDO $pdo)
     {
         parent::__construct(self::TABLE, $pdo);
     }
 
+    //create a new article
     public function insert(Article $article): int
     {
         $statement = $this->pdo->prepare("INSERT INTO $this->table (date, title, content, picture, user_id, category_id)
@@ -26,18 +28,18 @@ class ArticleManager extends AbstractManager
         $statement->bindValue(':user_id', $article->getUserId(), \PDO::PARAM_STR);
         $statement->bindValue(':category', $article->getCategoryId(), \PDO::PARAM_STR);
 
-
         if ($statement->execute()) {
             return $this->pdo->lastInsertId();
+
         }
     }
-
+    // show all articles on index user
     public function selectAllArticles(): array
     {
         return $this->pdo->query('SELECT * FROM article ORDER BY date DESC', \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
 
-
+    // delete article by id
     public function delete(int $id): int
     {
         $statement = $this->pdo->prepare("DELETE FROM article WHERE id=:id");
@@ -46,6 +48,7 @@ class ArticleManager extends AbstractManager
         return header('Location: ' . $_SERVER['HTTP_REFERER']);
     }
 
+    // update article and picture
     public function update(Article $article): int
     {
         $statement = $this->pdo->prepare("UPDATE $this->table SET title = :title, content = :content, picture = :picture WHERE id=:id");
@@ -65,5 +68,6 @@ class ArticleManager extends AbstractManager
 
     public function selectAllArticlesAndCategory(): array
     {
-        return $this->pdo->query('SELECT article.id, article.title, category.name, article.content, article.picture FROM article INNER JOIN category ON category.id = article.user_id;;', \PDO::FETCH_CLASS, $this->className)->fetchAll();}
+        return $this->pdo->query('SELECT article.id, article.title, category.name, article.content, 
+        article.picture FROM article INNER JOIN category ON category.id = article.user_id;;', \PDO::FETCH_CLASS, $this->className)->fetchAll();}
 }
