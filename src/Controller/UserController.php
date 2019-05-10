@@ -5,6 +5,7 @@ namespace Controller;
 use Model\UserManager;
 use Model\User;
 use App\Session;
+use http\Env\Request;
 
 /**
  * Class UserController
@@ -13,13 +14,13 @@ use App\Session;
  */
 class UserController extends AbstractController
 {
-//    public function __construct()
-//    {
-//        parent:: __construct();
-//        if ($_SERVER['REQUEST_URI'] != '/login'){
-//            $this->verifyUser();
-//        }
-//    }
+    public function __construct()
+    {
+        parent:: __construct();
+        if ($_SERVER['REQUEST_URI'] != '/login'){
+            $this->verifyUser();
+        }
+    }
 
     public function userShow(int $id)
     {
@@ -63,7 +64,6 @@ class UserController extends AbstractController
             {
                 $errorRegister['firstname'] = "Le prénom doit comporter entre 2 et 15 caractères";
             }
-            // if (filter_var('email', FILTER_VALIDATE_EMAIL) === false)
             if (!preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $_POST['email']))
             {
                 $errorRegister['email'] = "Mauvais format de votre adresse email";
@@ -96,7 +96,7 @@ class UserController extends AbstractController
         return $this->twig->render('signUp.html.twig', ["errorRegister" => $errorRegister]); // traitement
     }
 
-    public function logUser() // user: pascal.dutroux@free.fr  password: azertyuio
+    public function logUser()
     {
         // Si user connecter
         if (isset($_SESSION['user'])) {
