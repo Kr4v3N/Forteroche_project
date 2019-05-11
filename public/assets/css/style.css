@@ -1,18 +1,50 @@
-/*-- reset --*/
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, dl, dt, dd, ol, nav ul, nav li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+
+/*-----------------*/
+/*----General------*/
+/*-----------------*/
+
+@font-face {
+    font-family: 'gill_sans_lightregular';
+    src: url('/public/assets/fonts/gill_sans_light.woff2') format('woff2'),
+    url('/public/assets/fonts/gill_sans_light.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
     margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
+    padding: 70px 0 0 0;
+    position:relative;
+    background: linear-gradient(to top, #424242, #424242);
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: 'Roboto', sans-serif;
 }
 
 h1{
     text-align: center;
-
 }
 
+.navbar{
+    background-color: #ffcc80;
+    color: white;
+}
+
+.front_body{
+    background: radial-gradient(ellipse at center, #dae6f2 0%,#b8bac1 77%,#808487 100%);
+    background-attachment: fixed;
+}
+
+/* caroussel haut */
+
+.carouselhaut{
+    height: 500px;
+}
 
 /*color for article date*/
 .articleDate{
@@ -24,17 +56,17 @@ h1{
     color: black;
     font-size: 2em;
     text-align: center;
-
 }
 
 /*margin above articles*/
 .article {
     margin-top: 20px;
+    min-height: 400px;
 }
 
 /*image in article responsive*/
 .imgArticle{
-    max-width: 100%;
+    max-width: 50%;
 }
 
 /*background color connexion admin*/
@@ -46,19 +78,20 @@ h1{
 .rounded-circle{
     border: 2px solid #FFC107;
 }
+/*----------------------*/
+/*---- End General------*/
+/*----------------------*/
 
-/*-------------------*/
-
-/* DEBUT CSS FOOTER */
-
+/* -------------------- */
+/* ------Footer-------- */
+/* -------------------- */
 footer {
-    background: #FFC107;
+    background: #ffcc80;
     font-family: sans-serif;
     width: 100%;
-    height: 70px;
-    margin: 0;
+    position: absolute;
+    bottom: 0;
 }
-
 .footer-icons {
     text-align: center;
     font-size: 20px;
@@ -72,29 +105,24 @@ footer {
     color: black;
     width: 100%;
     align-items: center;
-    padding:0em;
+    /*padding:0em;*/
 }
-
 .fa-facebook{
     color:black;
     padding: 0.5em;
 }
-
 .fa-instagram{
     color: black;
     padding: 0.5em;
 }
-
 .fa-linkedin{
     color: black;
     padding: 0.5em;
 }
-
 .fa-twitter{
     color: black;
     padding: 0.5em;
 }
-
 .fa-youtube{
     color: black;
     padding: 0.5em;
@@ -103,42 +131,31 @@ footer {
     color: black;
     padding: 0.5em;
 }
-
 .wild {
     color:black;
     padding: 1em;
 }
-a
-{
+a {
     color: black;
     text-decoration: none;
 }
-
-/* FIN CSS FOOTER */
+/* -------------------- */
+/* ----End footer------ */
+/* -------------------- */
 
 
 /* -------------------- */
 /* ----SignUp page----- */
 /* -------------------- */
-
-body {
-    background: #76b852;
-    /* fallback for old browsers */
-    background: linear-gradient(to top, #424242, #424242);
-    background-size: cover;
-    background-attachment: fixed;
-    font-family: 'Roboto', sans-serif;
-}
-
 /*title register form*/
 .titre {
     font-size: 3em;
     text-align: center;
     color: #fff;
     font-weight: 100;
-    text-transform: capitalize;
     letter-spacing: 4px;
     font-family: 'Roboto', sans-serif;
+    padding-top: 5rem;
 }
 
 /*-- main --*/
@@ -207,9 +224,9 @@ input.email, input.text.w3lpass {
 input[type="submit"] {
     font-size: .9em;
     color: #fff;
-    background: #FF3D00;
+    background: #50E3C2;
     outline: none;
-    border: 1px solid #FF3D00;
+    border: 1px solid #50E3C2;
     cursor: pointer;
     padding: 0.9em;
     -webkit-appearance: none;
@@ -223,7 +240,7 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
     transition: .5s all;
-    background: #FF5722;
+    background: #26A69A;
 }
 .etc-login-form {
     color: white;
@@ -231,36 +248,36 @@ input[type="submit"]:hover {
 span {
     color: red;
 }
+/* ------------------------ */
+/* ----End SignUp page----- */
+/* ------------------------ */
 
 
 /* ----------------------- */
-/* ----loginUser page----- */
+/* ----LoginUser page----- */
 /* ----------------------- */
 
 .panel h2{
-    color:#444444;
+    color:white;
     font-size:18px;
     margin:0 0 8px 0;
 }
 .panel p {
-    color:#777777;
+    color:white;
     font-size:14px;
     margin-bottom:30px;
     line-height:24px;
 }
 
 .login-form .form-control {
-    background: #f7f7f7 none repeat scroll 0 0;
     border: 1px solid #d4d4d4;
-    border-radius: 4px;
     font-size: 14px;
     height: 50px;
     line-height: 50px;
 }
 .main-div {
-    background: #ffffff none repeat scroll 0 0;
-    border-radius: 2px;
-    margin: 10px auto 30px;
+    background: rgba(0, 0, 0, 0.18);
+    margin: 100px auto 30px;
     max-width: 50%;
     padding: 50px 70px 70px 71px;
 }
@@ -270,13 +287,13 @@ span {
 }
 .login-form{ text-align:center;}
 .forgot a {
-    color: #777777;
+    color: white;
     font-size: 14px;
     text-decoration: underline;
 }
 .login-form  .btn.btn-primary {
-    background: #FF3D00 none repeat scroll 0 0;
-    border-color: #FF3D00;
+    background: #50E3C2 none repeat scroll 0 0;
+    border-color: #50E3C2;
     color: #ffffff;
     font-size: 14px;
     width: 100%;
@@ -291,15 +308,143 @@ span {
     color: #ffffff;
     font-size: 14px;
     margin: auto;
+    font-size: 3em;
+    text-align: center;
+    color: white;
+    font-weight: 100;
+    letter-spacing: 4px;
+    font-family: 'Roboto', sans-serif;
 }
 .login-form .btn.btn-primary.reset {
-    background: #ff9900 none repeat scroll 0 0;
+    background: #26A69A none repeat scroll 0 0;
+    color: #ffffff;
 }
-.back {
+.back { 
     text-align: left; margin-top:10px;
 }
-/*.back a {*/
-/*color: #444444; */
-/*font-size: 13px;*/
-/*text-decoration: none;*/
-/*}*/
+
+.link {
+    color: #4A4A4A;
+}
+
+.link:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.articleTitre {
+    text-align: left;
+    color: black;
+}
+
+.row.featurette {
+    height: 420px;
+}
+.front_body{
+    background: radial-gradient(ellipse at center, #DAE6F2 0%,#b8bac1 77%,#808487 100%);
+    background-attachment: fixed;
+}
+
+img.featurette-image {
+    max-height: 400px;
+}
+
+h1.titleActualite {
+    margin-bottom: 10rem;
+    border-bottom: 1px black solid;
+    color: #4A4A4A;
+}
+
+.btn-warning {
+    background-color: #ffcc80;
+    border: 0px;
+}
+
+.navAdmin {
+    background-color: #50E3C2;
+    color: #424242;
+}
+/* --------------------------- */
+/* ----End loginUser page----- */
+/* --------------------------- */
+
+
+/* ----------------------- */
+/* ----Media Queries------ */
+/* ----------------------- */
+
+@media screen and (max-width: 1259px) {
+    /* ----SignUp page-------- */
+    .main-agileinfo {
+        width: 55%;
+    }
+}
+
+@media screen and (max-width: 780px) {
+    /* ----SignUp page-------- */
+    .main-agileinfo {
+        width: 75%;
+    }
+    /* ----LoginUser-------- */
+    .main-div {
+        max-width: 70%;
+    }
+}
+
+@media screen and (max-width: 622px) {
+    /* ----LoginUser-------- */
+    .main-div {
+        max-width: 100%;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    /* ----SignUp page-------- */
+    .main-agileinfo {
+        width: 95%;
+    }
+}
+@media screen and (max-width: 400px) {
+    /* ----SignUp page-------- */
+    .main-agileinfo {
+        width: 100%;
+    }
+}
+
+.lasuite {
+    background-color: #50E3C2;
+    border: 0;
+}
+
+.portfoliosImg {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    box-shadow: 2px 2px 20px grey;
+
+}
+
+
+/* admin article*/
+.fontWhite{
+    color: white;
+}
+
+/*log to comment page*/
+.cardFond{
+    background-color: transparent !important;
+}
+
+.navbar-brand {
+    padding-left: 20px;
+}
+.categories {
+    position: fixed;
+    font-family: gillsans-lightlight;
+    font-size: 1.7rem;
+}
+
+.menuCategories {
+    color: #4A4A4A;
+}
+/* end admin article */
