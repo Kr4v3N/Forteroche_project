@@ -358,21 +358,39 @@ h1.titleActualite {
 
 .btn-warning {
     background-color: #ffcc80;
-    border: 0px;
+    border: 0;
 }
 
 .navAdmin {
     background-color: #50E3C2;
     color: #424242;
 }
-
-#sessionAdmin {
-    margin-top: 50px;
-}
 /* --------------------------- */
 /* ----End loginUser page----- */
 /* --------------------------- */
 
+
+/* ----------------------- */
+/* ----Session flash------ */
+/* ----------------------- */
+
+/*---alert admin---*/
+#sessionAdmin {
+    margin-top: 50px;
+}
+#alert{
+    display: none;
+    z-index: 125;
+}
+
+/*---alert user---*/
+#alert1{
+    display: none;
+    z-index: 125;
+}
+/* ----------------------- */
+/* ----End Session flash------ */
+/* ----------------------- */
 
 /* ----------------------- */
 /* ----Media Queries------ */

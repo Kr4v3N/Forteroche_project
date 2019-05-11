@@ -72,4 +72,10 @@ abstract class AbstractController
     {
         return (isset($_SESSION['user']));
     }
+
+    public function isLoggedAdmin()
+    {
+        return (isset($_SESSION['admin']));
+    }
+
 }
