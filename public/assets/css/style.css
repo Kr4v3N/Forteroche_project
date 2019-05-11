@@ -43,7 +43,7 @@ h1{
 /* caroussel haut */
 
 .carouselhaut{
-    height: 150px;
+    max-height: 50px;
 }
 
 /*color for article date*/
@@ -418,14 +418,6 @@ h1.titleActualite {
 .lasuite {
     background-color: #50E3C2;
     border: 0;
-}
-
-.portfoliosImg {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    box-shadow: 2px 2px 20px grey;
-
 }
 
 

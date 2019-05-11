@@ -5,12 +5,12 @@
     <div class="container-fluid">
         {# show an article #}
 
-        <div class="row featurette">
-            <div class="col-md-6 offset-3 order-md-1 d-flex mt-5 mb-5t">
-                <img class="featurette-image img-fluid mx-auto" src="/assets/images/{{ article.picture }}" alt="Generic placeholder image">
+        <div class="row ">
+            <div class="col-sm-12 d-flex mt-5 mb-5t">
+                <img class="featurette-image img-fluid mx-auto shadow mb-5 rounded" src="/assets/images/{{ article.picture }}" alt="Generic placeholder image">
             </div>
         </div>
-        <div class="col-md-10 offset-1 order-md-2">
+        <div class="col-lg-8 offset-2 order-md-2">
             <h2 class="featurette-heading articleTitre">{{ article.title }}<span class="text-muted"></span></h2>
             <p class="lead">{{ article.content }}</p>
         </div>
@@ -19,9 +19,10 @@
 
         {#Add table to show all comments#}
         <div class="row">
-            <div class="col-md-10 offset-1">
+            <div class="col-md-8 offset-2">
+                <h5>Vos commentaires</h5>
                 {% for comment in comments %}
-                    <div class="list-group list-group-item flex-column align-items-center cardFond">
+                    <div class="list-group list-group-item flex-column align-items-center cardFond rounded">
                         <div class="d-flex w-100 justify-content-between">
                             {#<h5 class="mb-1">{{ comment.user_id}}</h5>#}
                             <small class="text-muted">commenté par : {{ comment.lastname }}</small>
@@ -29,6 +30,7 @@
                         </div>
                         <p class="mb-1">{{ comment.content}}</p>
                     </div>
+                    <br/>
                 {% endfor %}
 
             </div>
@@ -37,11 +39,11 @@
 
         {#create a form to add a comment#}
         <div class="row">
-            <div class="col-md-10 offset-1">
+            <div class="col-md-8 offset-2">
 
                 <form method="post" action="/article/{{ article.id }}/comment">
                     <div class="form-group">
-                        <label for="content">Ajoutez un commentaire</label>
+                        <label for="content"><h5>Ajoutez un commentaire</h5></label>
                         <textarea class="form-control commentFond" id="content" name="content" rows="6"></textarea>
                     </div>
                     <button type="submit" class="btn btn-warning">Envoyer</button>
@@ -53,7 +55,5 @@
             </div>
         </div>
     </div>
-
-    {#<br/>#}
 
 {% endblock content %}
