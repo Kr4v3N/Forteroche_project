@@ -348,6 +348,9 @@ span {
     font-size: 14px;
     text-decoration: underline;
 }
+.btn-outline-Login {
+    color: #50E3C2; !important
+}
 .login-form  .btn.btn-primary {
     background: #50E3C2 none repeat scroll 0 0;
     border-color: #50E3C2;
