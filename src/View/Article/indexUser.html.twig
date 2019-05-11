@@ -16,11 +16,11 @@
             <h1 class="titleActualite col-md-9 text-left">Billet simple pour l'Alaska</h1>
         </div>
         <div class="row">
-            <div class="col-3">
+            <div class="col-2">
                 {% include "Article/categories.html.twig" %}
             </div>
             <div class="col-9">
-                <div class="">
+                <div class="indexArticles">
 
                     {% for article in articles %}
                         {% if loop.index is not divisible by(2) %}
