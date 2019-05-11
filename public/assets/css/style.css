@@ -62,6 +62,9 @@ h1{
     background: #ffcc80;
     margin-top: 10px;
 }
+.presentation {
+    font-size: 25px;
+}
 
 /*---------------------------------------------Title Actualites-------------------------------------------------------*/
 .btn-apropos_bas{
