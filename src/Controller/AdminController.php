@@ -24,14 +24,16 @@ class AdminController extends AbstractController
     }
 
     public function showDashboard() {
-        $article = "home";
+        $article = 'home';
         $countArticle = new ArticleManager($this->getPdo());            // connexion au pdo de l'article manager
         $numberArticles = $countArticle->count();                       // comptage du nombre d'article
         $countUsers = new UserManager($this->getPdo());                 // idem mais pour les utilisateurs
         $numberUsers = $countUsers->count();
         $countComment = new AdminCommentManager($this->getPdo());       // idem pour les commentaires
         $numberComments = $countComment->count();
-        return $this->twig->render('Admin/admin_dashboard.html.twig', ["active" => $article, "user" => $_SESSION['admin'], 'totalArticles' => $numberArticles, 'totalUsers' => $numberUsers, 'totalComments' => $numberComments]);
+        return $this->twig->render('Admin/admin_dashboard.html.twig', ['active' => $article, 'user' => $_SESSION['admin'],
+            'totalArticles' => $numberArticles, 'totalUsers' => $numberUsers,
+            'totalComments' => $numberComments, 'session' => $_SESSION]);
     }
 
 

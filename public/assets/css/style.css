@@ -18,7 +18,7 @@ html {
 body {
     min-height: 100%;
     margin: 0;
-    padding: 70px 0 0 0;
+    padding: 70px 0 ;
     position:relative;
     background: linear-gradient(to top, #424242, #424242);
     background-size: cover;
@@ -178,7 +178,7 @@ input[type="text"], input[type="email"], input[type="password"] {
     font-size: 0.9em;
     color: #fff;
     font-weight: 100;
-    width: 94.5%;
+    width: 100%;
     display: block;
     border: none;
     padding: 0.8em;
@@ -364,6 +364,10 @@ h1.titleActualite {
     background-color: #50E3C2;
     color: #424242;
 }
+
+#sessionAdmin {
+    margin-top: 50px;
+}
 /* --------------------------- */
 /* ----End loginUser page----- */
 /* --------------------------- */
@@ -440,7 +444,7 @@ h1.titleActualite {
 }
 .categories {
     position: fixed;
-    font-family: gillsans-lightlight;
+    font-family: "Roboto";
     font-size: 1.7rem;
 }
 
