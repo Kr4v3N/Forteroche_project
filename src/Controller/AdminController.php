@@ -63,7 +63,7 @@ class AdminController extends AbstractController
         $usersManager = new UserManager($this->getPdo());
         $users = $usersManager->selectAllUsers();
         $active = "utilisateurs";
-        return $this->twig->render('Admin/AdminUser/indexUsers.html.twig', ['users' => $users, "active" => $active]);
+        return $this->twig->render('Admin/AdminUser/indexUsers.html.twig', ['users' => $users, 'active' => $active]);
     }
 
     // delete a user TODO add cascade to delete user and his comments
@@ -97,7 +97,7 @@ class AdminController extends AbstractController
         $articlesManager = new ArticleManager($this->getPdo());
         $articles = $articlesManager->selectAllArticles();
         $active = "articles";
-        return $this->twig->render('Admin/AdminArticle/indexAdmin.html.twig', ['articles' => $articles, "active" => $active]);
+        return $this->twig->render('Admin/AdminArticle/indexAdmin.html.twig', ['articles' => $articles, 'active' => $active]);
     }
 
 
@@ -105,8 +105,8 @@ class AdminController extends AbstractController
     // add an article
     public function add()
     {
-        $titleErr = $contentErr = "";
-        $title = $content = "";
+        $titleErr = $contentErr = '';
+        $title = $content = '';
         $error = [];
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') // affiche si
@@ -123,7 +123,7 @@ class AdminController extends AbstractController
                 $article->setCategoryId($_POST['category']);
                 if (!empty($_FILES)) {
                     $allowExtension = ['.jpg', '.jpeg', '.gif', '.png'];
-                    $maxSize = 1000000;
+                    $maxSize = 3000000;
                     $extension = strtolower(strrchr($_FILES['image']['name'], '.'));
                     $size = $_FILES['image']['size'];
 
@@ -131,7 +131,7 @@ class AdminController extends AbstractController
                         $error['errorExt'] = 'Seuls les fichiers image .jpg, .jpeg, .gif et .png sont autorisés.';
                     }
                     if ($size > $maxSize) {
-                        $error['errorSize'] = 'Votre fichier est trop volumineux. Taille maximale autorisée : 1Mo.';
+                        $error['errorSize'] = 'Votre fichier est trop volumineux. Taille maximale autorisée : 3Mo.';
                     }
 
                      if (!$error){

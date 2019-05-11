@@ -2,23 +2,13 @@
 
 {% block content %}
 
-{#    <div class="container" id="sessionAdmin" >#}
-{#    {% if session.admin %}#}
-
-{#        <div id="alert" class="alert alert-success">#}
-{#            <a class="close" >x</a>#}
-{#            <p>{{ session.admin.message}}</p>#}
-{#        </div>#}
-{#        </div>#}
-{#    {% endif %}#}
-
 <div class="container" id="sessionAdmin">
     {% if connexionMessage %}
 
         <div id="alert" class="alert alert-success">
 
             <div>Bonjour {{ user.firstname | capitalize  }}</div>
-            {#<a class="close" >x</a>#}
+            <a class="close" >x</a>
             <p>{{ connexionMessage }}</p>
         </div>
 

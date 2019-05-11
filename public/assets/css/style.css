@@ -496,23 +496,19 @@ h1.titleActualite {
 /*---alert admin---*/
 #sessionAdmin {
     margin-top: 50px;
+
 }
 #alert{
     display: none;
     z-index: 125;
 }
 
-/*---alert user---*/
-#alert1{
-    display: none;
-    z-index: 125;
-}
 
 /* ------------------------------- */
-/* ----Barre d'acceuil Admin------ */
+/* ----Barre d'accueil Admin------ */
 /* ------------------------------- */
 #alertinfo {
-    margin-top: 100px;
+    /*margin-top: 100px;*/
 }
 
 

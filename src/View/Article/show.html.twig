@@ -28,7 +28,7 @@
                             <small class="text-muted">commenté par : {{ comment.lastname }}</small>
                             <small class="text-muted">{{ comment.date }}</small>
                         </div>
-                        <p class="mb-1">{{ comment.content}}</p>
+                        <p class="mb-1">{{ comment.content|raw }}</p>
                     </div>
                     <br/>
                 {% endfor %}
