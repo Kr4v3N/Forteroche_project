@@ -4,7 +4,7 @@
 /*-----------------*/
 
 @font-face {
-    font-family: 'gill_sans_lightregular';
+    font-family: 'gill_sans_light';
     src: url('/public/assets/fonts/gill_sans_light.woff2') format('woff2'),
     url('/public/assets/fonts/gill_sans_light.woff') format('woff');
     font-weight: normal;
@@ -18,7 +18,7 @@ html {
 body {
     min-height: 100%;
     margin: 0;
-    padding: 70px 0 ;
+    padding: 70px 0 90px;
     position:relative;
     background: linear-gradient(to top, #424242, #424242);
     background-size: cover;
@@ -43,7 +43,7 @@ h1{
 /* caroussel haut */
 
 .carouselhaut{
-    height: 500px;
+    height: 150px;
 }
 
 /*color for article date*/
@@ -434,11 +434,14 @@ h1.titleActualite {
     color: white;
 }
 
-/*log to comment page*/
+/*show article & log to comment page*/
 .cardFond{
     background-color: transparent !important;
 }
 
+.commentFond{
+    background-color: #b8bac1;
+}
 .navbar-brand {
     padding-left: 20px;
 }
