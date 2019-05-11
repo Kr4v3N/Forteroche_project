@@ -3,29 +3,45 @@
 {% block content %}
 
     <div class="container">
-        <h1>-Beta Dashboard-</h1>
-    <div class="mx-auto text-center" style="max-width=600px">
-        <img src="/assets/images/work-in-progress-md.png"  height="200px" width="200px" >
-    </div>
-    </div>
 
-    <!-- Ajout des 3 divs pour chacun des élements, totalComments, totalUser, totalArticles sont des éléments récupérés de l'adminController -->
-    <div class="row d-flex justify-content-around">
-        <div class="dash col-3 text-center bg-secondary text-white">
-            <a href="/admin/comments">Nombre de commentaires <br><br> {{ totalComments }}</a>
+
+        <!-- Ajout des 3 divs pour chacun des élements, totalComments, totalUser, totalArticles sont des éléments récupérés de l'adminController -->
+        <div class="row mt-5">
+
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+                    <div class="card-header"style="text-align: center">
+                        <a href="/admin/users">Nombre d'utilisateurs</a>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title" style="text-align: center">{{ totalUsers }}</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+                    <div class="card-header" style="text-align: center">
+                        <a href="/admin/articles">Nombre d'articles</a>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title" style="text-align: center">{{ totalArticles }}</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
+                    <div class="card-header">
+                        <a href="/admin/comments" style="text-align: center">Nombre de commentaires</a>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title" style="text-align: center">{{ totalComments }}</h5>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <div class="dash col-3 text-center bg-success text-white">
-            <a href="/admin/users">Nombre d'utilisateurs <br><br> {{ totalUsers }}</a>
-
-        </div>
-
-        <div class="dash col-3 text-center bg-info text-white">
-            <a href="/admin/articles">Nombre de billets <br><br> {{ totalArticles }}</a>
-
-        </div>
     </div>
-
 
 
 {% endblock content %}

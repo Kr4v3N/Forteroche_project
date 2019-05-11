@@ -17,6 +17,7 @@
                 <th scope="col">Supprimer</th>
             </tr>
             </thead>
+
             <tbody>
             {% for user in users %}
 
@@ -32,15 +33,16 @@
                     </td>
                     <td>
                         <a href="/admin/user/delete/{{ user.id }}" target="">
-                            <button type="submit" class="btn btn-warning"><i class="far fa-trash-alt"></i></button></a>
+                            <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i></button></a>
                     </td>
                 </tr>
 
             {% endfor %}
             </tbody>
+
         </table>
     </div>
-
+    <br/>
 {% endblock content %}
 
 

@@ -3,19 +3,22 @@
 {% block content %}
 
     <div class="container">
+
         <h1 class="text-white">Tous les commmentaires</h1>
 
         <table class="table table-striped text-white">
+
             <thead>
             <tr>
-                <th scope="col">Titre du billet</th>
-                <th scope="col">Commentaires</th>
+                <th scope="col">Titre de l'article</th>
+                <th scope="col">Commentaire</th>
                 <th scope="col">utilisateur</th>
                 <th scope="col">Supprimer</th>
             </tr>
             </thead>
 
             <tbody>
+
             {% for content in comments %}
 
                 <tr>
@@ -29,13 +32,11 @@
                     </td>
                     <td>
                         <a href="/admin/comment/delete/{{ content.id }}" target="">
-                            <button type="submit" class="btn buttonColorAdmin">Supprimer</button></a>
+
+                            <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i></button></a>
+
                     </td>
-
                 </tr>
-
-
-
             {% endfor %}
 
         </table>

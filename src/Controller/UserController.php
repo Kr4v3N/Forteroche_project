@@ -113,7 +113,7 @@ class UserController extends AbstractController
             }
 
         }
-        return $this->twig->render('signUp.html.twig', ["errorRegister" => $errorRegister]);
+        return $this->twig->render('signUp.html.twig', ['errorRegister' => $errorRegister]);
 
     }
 
@@ -126,7 +126,6 @@ class UserController extends AbstractController
             header('Location: /articles');
             exit();
         }
-
 
         $errorLoginUser = '';
 
