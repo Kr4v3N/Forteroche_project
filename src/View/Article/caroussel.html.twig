@@ -1,11 +1,11 @@
 
 {% block content %}
 
-    <div id="carouselExampleControls" class="carousel slide carouselhaut  " data-ride="carousel">
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
 
         {% if connexionMessage %}
 
-            <div id="alert1" class="alert alert-success">
+            <div id="alert" class="alert alert-success">
                 <div>Bonjour {{ session.user.firstname | capitalize  }}</div>
                 <a class="close" >x</a>
                 <p>{{ connexionMessage }}</p>
@@ -19,7 +19,7 @@
                 <img class=" d-block w-100" src="/assets/images/caroussel11.jpg" alt="First slide">
             </div>
             <div class="carousel-item">
-                <img class=" d-block w-100" src="/assets/images/caroussel22.jpeg" alt="Second slide">
+                <img class=" d-block w-100" src="/assets/images/caroussel22.jpg" alt="Second slide">
             </div>
             <div class="carousel-item ">
                 <img class=" d-block w-100" src="/assets/images/caroussel33.jpg" alt="Third slide">
@@ -35,6 +35,81 @@
         </a>
     </div>
     {#-------------------------------------------End Carrousel------------------------------------------------------------#}
+
+    {#-------------------------------------------Title About the author---------------------------------------------------#}
+    <div class="container-fluid">
+        <div class="row rowhaut "></div>
+        <div class="row titleAPropos">
+            <div class="col-3">
+                <h1 class="btn_apropos_haut"> À propos de moi </h1>
+            </div>
+        </div>
+    </div>
+    {#-------------------------------------------End Title About the author-----------------------------------------------#}
+
+
+    {#-------------------------------------------About the author----------------------------------------------------------#}
+    <div class="container-fluid">
+
+        <div class="row text-center ">
+            <div class="col-6">
+            <p class="">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sapien velit, aliquet eget commodo nec, auctor a
+                sapien. Nam eu neque vulputate diam rhoncus faucibus. Curabitur quis varius libero. Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit. Aliquam placerat sem at mauris suscipit porta. Cras metus velit, elementum sed
+                pellentesque a, pharetra eu eros. Etiam facilisis placerat euismod. Nam faucibus neque arcu, quis accumsan leo
+                incidunt varius. In vel diam enim. Sed id ultrices ligula. Maecenas at urna arcu. Sed quis nulla sapien. Nam felis
+                mauris, tincidunt at convallis id, tempor molestie libero. Quisque viverra sollicitudin nisl sit amet hendrerit.
+                Etiam sit amet arcu sem. Morbi eu nibh condimentum, interdum est quis, tempor nisi. Vivamus convallis erat in pharetra
+                elementum. Phasellus metus neque, <br> <br> <br>commodo vitae venenatis sed, pellentesque non purus. Pellentesque egestas
+                convallis suscipit. Ut luctus, leo quis porta vulputate, purus purus pellentesque ex, id consequat mi nisl quis eros.
+                Integer ornare libero
+                vitae faucibus. Quisque malesuada ex nisi, a bibendum erat commodo in. Pellentesque suscipit varius gravida.
+                Nam scelerisque est sit amet laoreet pharetra. Vivamus quis ligula sed lacus mattis mollis. Vivamus facilisis
+                orci rutrum nulla porta dignissim. Fusce fermentum id nibh laoreet volutpat. Suspendisse venenatis, risus sed</p>
+            </div>
+
+            <div class="col-6 sm-12">
+                <img class="img-fluid" src="/assets/images/ecriture.jpg" alt="ecrivain">
+            </div>
+        </div>
+
+    </div>
+
+    {#-------------------------------------------End About the author-------------------------------------------------------#}
+
+
+    {#---------------------------------------------Title Actualites-------------------------------------------------------#}
+
+    <div class="container-fluid">
+        <div class="row rowhaut">
+        </div>
+        <div class="row mb-5 titleActualite">
+            <div class="col-sm-3 offset-sm-9">
+                <h1 class="btn_apropos_bas"> Actualités </h1>
+            </div>
+        </div>
+    </div>
+    {#-----------------------------------------------Actualites-----------------------------------------------------------#}
+
+    <div class="container-fluid">
+        <div class="row card-deck text-center cardArticle">
+            {% for article in articles %}
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="/assets/images/{{ article.picture }}/" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ article.title|truncate(25) }}</h5>
+                        <p class="card-text">{{ article.content|truncate(150) }}</p>
+                        <a href="/article/{{ article.id }}" target="">
+                            <button type="submit" class="btn lasuite">Lire la suite</button>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    {#---------------------------------------------End Actualites---------------------------------------------------------#}
 
 
 {% endblock %}

@@ -1,18 +1,9 @@
 
 $(document).ready(function($){
 
-    var alert = $('#alert');
+    let alert = $('#alert');
     if(alert.length > 0){
-        alert.hide().slideDown(500).delay(3500).slideUp();
-    }
-    var alert = $('#alert1');
-
-    if(alert.length > 0){
-        alert.hide().slideDown(500);
-        alert.find('.close').click(function(e){
-            e.preventDefault();
-            alert.slideUp();
-        })
+        alert.hide().slideDown(800).delay(3500).slideUp();
     }
 
 });

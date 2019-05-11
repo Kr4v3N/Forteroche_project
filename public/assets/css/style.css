@@ -1,39 +1,34 @@
-
-/*-----------------*/
-/*----General------*/
-/*-----------------*/
-
-@font-face {
-    font-family: 'gill_sans_light';
-    src: url('/public/assets/fonts/gill_sans_light.woff2') format('woff2'),
-    url('/public/assets/fonts/gill_sans_light.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
 html {
     height: 100%;
+    width: 100%;
 }
-
 body {
     min-height: 100%;
     margin: 0;
-    padding: 70px 0 90px;
+    padding: 70px 0 90px 0;
     position:relative;
-    background: linear-gradient(to top, #424242, #424242);
+    background: linear-gradient(to top, #757575, #757575);
     background-size: cover;
     background-attachment: fixed;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Dosis','Roboto', sans-serif;
 }
 
 h1{
     text-align: center;
-}
 
+}
+.navbar-nav{
+    font-size: 20px;
+
+}
 .navbar{
     background-color: #ffcc80;
     color: white;
-    width: 100%;
+}
+
+.navv1:hover{
+    background: #ffb480;
+    border-radius: 10px;
 }
 
 .front_body{
@@ -44,7 +39,47 @@ h1{
 /* caroussel haut */
 
 .carouselhaut{
-    max-height: 50px;
+    height: 300px;
+}
+
+/*--------------------------------------------Title About the author---------------------------------------------------------*/
+
+.rowhaut{
+    height: 50px;
+}
+
+.btn_apropos_haut{
+    border-bottom: 2px solid black;
+    height: 50px;
+    margin-bottom: 70px;
+    font-family: 'Dosis','Krub', sans-serif;
+    font-weight: lighter;
+    text-align: end;
+
+}
+
+.btn-logadmin{
+    background: #ffcc80;
+    margin-top: 10px;
+}
+
+/*---------------------------------------------Title Actualites-------------------------------------------------------*/
+.btn-apropos_bas{
+    border-bottom: 2px solid black;
+    font-family: 'Dosis','Krub', sans-serif;
+    height: 50px;
+    font-weight: lighter;
+    margin-bottom: 100px;
+    width: 350px;
+}
+
+.rowcentre{
+    height: 200px;
+}
+
+.user_tr{
+    height: 150px;
+    vertical-align: center;
 }
 
 /*color for article date*/
@@ -72,27 +107,30 @@ h1{
 
 /*background color connexion admin*/
 .bgAdminConnexion{
-    background-color: #FFC107;
+    background-color: #50E3C2;
+    margin-top: -80px;
 }
 
 /* border around picture in admin log*/
 .rounded-circle{
-    border: 2px solid #FFC107;
+    border: 2px solid #50E3C2;
 }
-/*----------------------*/
-/*---- End General------*/
-/*----------------------*/
 
-/* -------------------- */
-/* ------Footer-------- */
-/* -------------------- */
+/* color bottun cards*/
+.lasuite {
+    background-color: #50E3C2;
+    border: 0;
+}
+
+/*------------------------------------------------Footer--------------------------------------------------------------*/
 footer {
     background: #ffcc80;
-    font-family: sans-serif;
+    font-family: 'Dosis',sans-serif;
     width: 100%;
     position: absolute;
     bottom: 0;
 }
+
 .footer-icons {
     text-align: center;
     font-size: 20px;
@@ -100,54 +138,85 @@ footer {
     align-items: center;
     margin-top: 2px;
     margin-bottom: 0;
+
 }
 .footer-bottom {
     text-align: center;
-    color: black;
+    color: white;
     width: 100%;
     align-items: center;
-    /*padding:0em;*/
+    padding-bottom: 12px;
+    text-decoration: none;
+
 }
+.footer-bottom-wrapper{
+    padding-bottom: 1px;
+}
+
 .fa-facebook{
-    color:black;
-    padding: 0.5em;
+    color:white;
+    font-size: 30px;
+    text-align: left;
+    padding: 0.2em;
 }
+.fa-facebook:hover {
+    background: #ffb480;
+    border-radius: 20px;
+}
+
 .fa-instagram{
-    color: black;
-    padding: 0.5em;
+    color: white;
+    font-size: 30px;
+    text-align: left;
+    padding: 0.2em;
+}
+.fa-instagram:hover {
+    background: #ffb480;
+    border-radius: 20px;
 }
 .fa-linkedin{
-    color: black;
-    padding: 0.5em;
+    color: white;
+    font-size: 30px;
+    text-align: left;
+    padding: 0.2em;
 }
+.fa-linkedin:hover {
+    background: #ffb480;
+    border-radius: 20px;
+}
+
 .fa-twitter{
-    color: black;
-    padding: 0.5em;
+    color: white;
+    font-size: 30px;
+    text-align: left;
+    padding: 0.2em;
+}
+.fa-twitter:hover {
+    background: #ffb480;
+    border-radius: 20px;
 }
 .fa-youtube{
-    color: black;
-    padding: 0.5em;
+    color: white;
+    font-size: 30px;
+    padding: 0.2em;
+    text-align: left;
+}
+.fa-youtube:hover {
+    background: #ffb480;
+    border-radius: 20px;
 }
 .fa-copyright{
-    color: black;
-    padding: 0.5em;
+    color: white;
+    font-size: 15px;
 }
-.wild {
-    color:black;
+
+.writer {
+    color:white;
     padding: 1em;
 }
-a {
-    color: black;
-    text-decoration: none;
-}
-/* -------------------- */
-/* ----End footer------ */
-/* -------------------- */
+/*--------------------------------------------------End Footer--------------------------------------------------------*/
 
-
-/* -------------------- */
-/* ----SignUp page----- */
-/* -------------------- */
+/*--------------------------------------------------SignUp page--------------------------------------------------------*/
 /*title register form*/
 .titre {
     font-size: 3em;
@@ -155,46 +224,39 @@ a {
     color: #fff;
     font-weight: 100;
     letter-spacing: 4px;
-    font-family: 'Roboto', sans-serif;
-    padding-top: 5rem;
+    font-family: 'Dosis','Roboto', sans-serif;
 }
 
 /*-- main --*/
 .main-w3layouts {
-    padding: 3em 0 1em;
 }
 
 .main-agileinfo {
     width: 35%;
-    margin: 3em auto;
-    background: rgba(0, 0, 0, 0.18);
-    background-size: cover;
+    margin: 1px auto;
+    background: rgba(0, 0, 0, 0.28);
 }
 
 .agileits-top {
     padding: 3em;
 }
 
-input[type="text"], input[type="email"], input[type="password"] {
+.inputStyle input[type="text"], input[type="email"], input[type="password"], input[type="name"] {
     font-size: 0.9em;
     color: #fff;
     font-weight: 100;
     width: 100%;
     display: block;
     border: none;
-    padding: 0.8em;
-    border: solid 1px rgba(255, 255, 255, 0.37);
+    padding: 0.7em;
+    border: solid 1px lightgrey;
     transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #fff 4%);
     background-position: -800px 0;
     background-size: 100%;
     background-repeat: no-repeat;
-    color: #fff;
-    font-family: 'Roboto', sans-serif;
-}
-
-input.email, input.text.w3lpass {
-    margin: 2em 0;
+    font-family: 'Dosis','Roboto', sans-serif;
+    margin: 1em 0;
 }
 
 .text:focus, .text:valid {
@@ -249,15 +311,9 @@ input[type="submit"]:hover {
 span {
     color: red;
 }
-/* ------------------------ */
-/* ----End SignUp page----- */
-/* ------------------------ */
+/*-------------------------------------------------- End SignUp page--------------------------------------------------------*/
 
-
-/* ----------------------- */
-/* ----LoginUser page----- */
-/* ----------------------- */
-
+/*--------------------------------------------------loginUser page----------------------------------------------------------*/
 .panel h2{
     color:white;
     font-size:18px;
@@ -277,7 +333,7 @@ span {
     line-height: 50px;
 }
 .main-div {
-    background: rgba(0, 0, 0, 0.18);
+    background: rgba(0, 0, 0, 0.28);
     margin: 100px auto 30px;
     max-width: 50%;
     padding: 50px 70px 70px 71px;
@@ -296,7 +352,7 @@ span {
     background: #50E3C2 none repeat scroll 0 0;
     border-color: #50E3C2;
     color: #ffffff;
-    font-size: 14px;
+    font-size: 15px;
     width: 100%;
     height: 50px;
     line-height: 50px;
@@ -314,16 +370,40 @@ span {
     color: white;
     font-weight: 100;
     letter-spacing: 4px;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Dosis','Roboto', sans-serif;
 }
 .login-form .btn.btn-primary.reset {
     background: #26A69A none repeat scroll 0 0;
     color: #ffffff;
 }
-.back { 
+.back {
     text-align: left; margin-top:10px;
 }
+.btnhover[type="submit"] {
+    font-size: .9em;
+    color: #fff;
+    background: #50E3C2;
+    outline: none;
+    border: 1px solid #50E3C2;
+    cursor: pointer;
+    padding: 0.9em;
+    -webkit-appearance: none;
+    width: 100%;
+    margin: 2em 0;
+    letter-spacing: 4px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
 
+
+.btnhover:hover {
+    transition: .5s all;
+    background: #26A69A;
+}
+/*------------------------------------------------End LoginUser page--------------------------------------------------*/
+
+/* ---------------------------------------------Index Articles------------------------------------------------------- */
 .link {
     color: #4A4A4A;
 }
@@ -336,11 +416,42 @@ span {
 .articleTitre {
     text-align: left;
     color: black;
+    font-family: 'Dosis', sans-serif;
 }
 
+/*Espace entre cards*/
 .row.featurette {
     height: 420px;
 }
+
+.categories {
+    position: fixed;
+    font-family: 'Dosis', 'Roboto',sans-serif;
+    font-weight: 100;
+    list-style:none;
+    padding-left: 0;
+}
+
+.menuCategories {
+    color: #4A4A4A;
+    font-size: 1.4rem;
+}
+
+.menuCategories:hover {
+    color: black;
+    text-decoration: none;
+}
+
+.test {
+    background-color: #ffcc80;
+}
+
+.titleActualite {
+    margin-top: 40px;
+}
+
+/*----------------------------------------------End Index Articles----------------------------------------------------*/
+
 .front_body{
     background: radial-gradient(ellipse at center, #DAE6F2 0%,#b8bac1 77%,#808487 100%);
     background-attachment: fixed;
@@ -365,22 +476,20 @@ h1.titleActualite {
     background-color: #50E3C2;
     color: #424242;
 }
-/* --------------------------- */
-/* ----End loginUser page----- */
-/* --------------------------- */
 
-
-/* --------------------------- */
-/* ---Barre d'acceuil Admin--- */
-/* --------------------------- */
-#alertinfo {
-    margin-top: 100px;
+.btnn{
+    color: #FFFFFF;
+    font-size: 20px;
+    border-radius: 8px;
 }
 
-/* ----------------------- */
-/* ----Session flash------ */
-/* ----------------------- */
+/*---------------------------------ONE ARTICLE------------------------------------------------*/
+.imageOneArticle{
+    width: 100%;
+    height: 100%;
+}
 
+/*--------------------------------Session flash-----------------------------------------------*/
 /*---alert admin---*/
 #sessionAdmin {
     margin-top: 50px;
@@ -395,29 +504,66 @@ h1.titleActualite {
     display: none;
     z-index: 125;
 }
-/* ----------------------- */
-/* ----End Session flash------ */
-/* ----------------------- */
+
+/* ------------------------------- */
+/* ----Barre d'acceuil Admin------ */
+/* ------------------------------- */
+#alertinfo {
+    margin-top: 100px;
+}
+
 
 /* ----------------------- */
 /* ----Media Queries------ */
 /* ----------------------- */
-
+@media screen and (min-width: 1215px){
+    .dropdown-toggle1 {
+        display: none;
+    }
+}
+@media screen and (max-width: 1215px){
+    .categories {
+        display: none;
+    }
+}
 @media screen and (max-width: 1259px) {
     /* ----SignUp page-------- */
     .main-agileinfo {
         width: 55%;
     }
 }
-
+@media screen and (max-width: 1024px){
+    .categories {
+        width: 940px;
+    }
+}
+@media screen and (max-width: 768px){
+    .categories {
+        width: 880px;
+    }
+}
 @media screen and (max-width: 780px) {
     /* ----SignUp page-------- */
     .main-agileinfo {
         width: 75%;
     }
+    .titre {
+        padding: 1rem 1rem;
+    }
+
     /* ----LoginUser-------- */
     .main-div {
         max-width: 70%;
+    }
+
+    .bgAdminConnexion {
+        margin-top: -80px;
+        font-size: 30px;
+    }
+
+    .btn-apropos_bas {
+        margin-left: 120px;
+        width: 200px;
     }
 }
 
@@ -426,6 +572,10 @@ h1.titleActualite {
     .main-div {
         max-width: 100%;
     }
+    /* ----SignUp page-------- */
+    .titre {
+        font-size: 2em;
+    }
 }
 
 @media screen and (max-width: 575px) {
@@ -433,21 +583,74 @@ h1.titleActualite {
     .main-agileinfo {
         width: 95%;
     }
+    .cardArticle {
+        margin-left: 30px;
+    }
+    .titleAPropos {
+        padding-left: 50px;
+    }
+    .rowhaut {
+        display: none;
+    }
+    .btn_apropos_haut {
+        width: 200px;
+        margin-left: -70px;
+    }
+    .btn-apropos_bas {
+        margin-left: 120px;
+        width: 200px;
+    }
+    .article {
+        margin-top: 0;
+        min-height: 0;
+    }
+    .articleTitre {
+        text-align: center;
+    }
+    .row.featurette {
+        height: 600px;
+        margin-left: 50%;
+    }
+    .articleTitre {
+        text-align: left;
+        font-size: 1.3rem;
+    }
+    .lead {
+        font-size: 1rem;
+    }
+    .featurette-image {
+        width: 250px;
+        height: 250px;
+    }
 }
+
+@media screen and (max-width: 425px) {
+    .categories {
+        width: 0;
+    }
+    .categories {
+        width: 980px;
+    }
+}
+
 @media screen and (max-width: 400px) {
     /* ----SignUp page-------- */
     .main-agileinfo {
         width: 100%;
     }
+    /* ----SignUp page-------- */
+    .titre {
+        font-size: 1.4em;
+    }
+    .categories {
+        width: 0;
+
+    }
 }
 
-.lasuite {
-    background-color: #50E3C2;
-    border: 0;
-}
+/*-----------------------------------------------End Media Queries----------------------------------------------------*/
 
-
-/* admin article*/
+/*CSS admin article*/
 .fontWhite{
     color: white;
 }
@@ -460,17 +663,64 @@ h1.titleActualite {
 .commentFond{
     background-color: #b8bac1;
 }
+
+.btnFond{
+    background-color: #50E3C2;
+}
+
 .navbar-brand {
     padding-left: 20px;
 }
-.categories {
-    position: fixed;
-    font-family: "Roboto";
-    font-size: 1.7rem;
+
+/*-----------------------------------------------Admin----------------------------------------------------------------*/
+
+/*------cards with 3 last items---------*/
+
+.dropdown-item {
+    background: #defff4;
 }
 
-.menuCategories {
-    color: #4A4A4A;
-    line-height: 1.5em;
+.cardFondDashboard{
+    background: rgba(0, 0, 0, 0.2);
+    color: lightgrey;
+    min-height: 12rem;
+    margin-bottom: 2%;
 }
-/* end admin article */
+
+.dashboardCount{
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+/*-------cards to create article (and user)------- */
+.cardFondCreate{
+    background: rgba(0, 0, 0, 0.1);
+    color: lightgrey;
+    min-height: 12rem;
+    margin-bottom: 2%;
+}
+
+.titlePageAdmin {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.btnSupp {
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.cardUser {
+    background-color: #808487;
+    border-radius: 1.25rem;
+}
+
+.btnModify {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.addNewUser {
+
+    margin-bottom: 10px;
+}
