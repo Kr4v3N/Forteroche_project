@@ -1,25 +1,18 @@
-<style>
-    body {
-        min-height: 75rem;
-        padding-top: 7rem;
-    }
-</style>
-<nav class="navbar navbar-expand-md bg-warning fixed-top">
 
-    <!-- Logo -->
-    <a class="navbar-brand" href="#">
-        <img src="/assets/images/favicon1.png"  style="width:50px;">
-    </a>
 
-    <!-- Links -->
-    <ul class="navbar-nav">
-        <li class="nav-item">
-            <a class="nav-link text-dark"  href="/articles" ><strong> Billets </strong></a>
-        </li>
-        <a class="nav-link text-dark" href='/register'><strong> Inscription </strong></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" href="/login"><strong> Connection </strong></a>
-        </li>
-        </li>
+<nav class="navbar navbar-expand-lg shadow fixed-top navbar-light " style="background-color: #ffcc80;">
+    <img src="/assets/images/favicon1.png"  style="width:50px;">
+    <a class="navbar-brand text-white" href="#">Billet simple pour l'Alaska</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+        <div class="navbar-nav ">
+            <a class="nav-item nav-link active text-white" href="/">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link text-white" href="/articles">Billets</a>
+            <a class="nav-item nav-link text-white" href="/login">Connexion</a>
+            <a class="nav-link nav-link text-white" href='/register'><strong> Inscription </strong></a>
+            <a class="nav-link nav-link text-white" href="/logout">Déconnexion</a>
+        </div>
+    </div>
 </nav>
