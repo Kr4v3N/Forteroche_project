@@ -1,37 +1,28 @@
-<div    class="container">
-
+<div class="container">
     <div class="card article">
         <div class="card-body">
+            {% if errorFile %}
 
+                <div class="alert alert-danger" role="alert">
+                    {{ errorFile.errorExt }} {{ errorFile.errorSize }}</div>
+
+            {% endif %}
             <form method="post" action="" enctype="multipart/form-data">
-
                 <div class="form-group">
-                    <div class="col-5">
-                        <img class="imgArticle" src="/assets/images/{{ article.picture }}" alt="illustration du billet">
-                    </div>
-
                     <label for="titre">Titre</label>
-                    <input type="text" class="form-control" id="text" name="title" value="{{ article.title }}">
+                    <input type="text" class="form-control" id="text" required name="title" value="{{ article.title }}">
                     {{ titleErr }}
+                    <br/>
                     <label for="contenu">Contenu</label>
-
-                    <textarea class="form-control" id="contenu" name="content" rows="6">{{ article.content }}
+                    <textarea class="form-control" id="contenu" name="content" rows="20">{{ article.content }}
                     </textarea>
                     {{ contentErr }}
-                    <label for='image'>Cliquez pour ajouter une image : </label>
+                    <label for='image'>Cliquez pour modifier l'image : </label>
                     <br/>
-
                     <input id='image' name="image" type="file">
-
-                    <button type="submit" name="supprimer" value="supprimer" class="btn btn-danger">Supprimer la photo</button>
-
                 </div>
-
-                    <button type="submit" class="btn btn-warning">Valider le billet</button>
+                <button type="submit" class="btn btn-warning">Envoyer</button>
             </form>
-
         </div>
     </div>
-
-</div>
 
