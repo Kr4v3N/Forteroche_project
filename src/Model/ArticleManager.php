@@ -72,6 +72,18 @@ class ArticleManager extends AbstractManager
 
     public function selectAllArticlesAndCategory(): array
     {
-        return $this->pdo->query('SELECT article.id, article.title, category.name, article.content, article.picture FROM article INNER JOIN category ON category.id = article.user_id;;', \PDO::FETCH_CLASS, $this->className)->fetchAll();
+        return $this->pdo->query('SELECT article.id, article.title, category.name, article.content, article.picture 
+        FROM article INNER JOIN category ON category.id = article.user_id;;', \PDO::FETCH_CLASS, $this->className)->fetchAll();
+    }
+
+    public function selectCategory(){
+        return $this->pdo->query('SELECT id, name FROM category', \PDO::FETCH_CLASS, $this->className)->fetchAll();
+    }
+
+    public function selectArticlesByCategory(int $id): array
+    {
+        return $this->pdo->query("SELECT article.id, article.title, category.name, article.content, article.picture 
+        FROM article INNER JOIN category ON category.id = article.category_id WHERE category_id= $id"
+            , \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
 }
