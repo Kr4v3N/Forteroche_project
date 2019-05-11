@@ -122,8 +122,7 @@ class UserController extends AbstractController
 
         // Si user connecter
         if (isset($_SESSION['user'])) {
-            //TODO Renvoyer vers l'index
-            header('Location: /articles');
+            header('Location: /');
             exit();
         }
 
