@@ -20,23 +20,28 @@ class  ArticleController extends AbstractController
         $article = $articleManager->selectOneById($id);
         $commentsManager = new AdminCommentManager($this->getPdo());
         $comments = $commentsManager->ShowAllComments($id);
-        return $this->twig->render('Article/show.html.twig', ['article' => $article, 'comments'=> $comments]);
+        return $this->twig->render('Article/show.html.twig', ['article' => $article, 'comments'=> $comments, 'isLogged' => $this->isLogged()]);
         header("Location: /article/' . $articleId");
     }
 
 
     public function indexAccueil()
-    {
+    {   $connexionMessage = null;
         $articlesManager = new ArticleManager($this->getPdo());
         $articles = $articlesManager->selectArticlesForIndex();
-        return $this->twig->render('Users/index.html.twig', ['articles' => $articles, 'session' => $_SESSION]);
+        if (isset($_SESSION['user']) && isset($_SESSION['user']['message'])){
+            $connexionMessage = $_SESSION['user']['message'];
+            unset($_SESSION['user']['message']);
+        };
+        return $this->twig->render('Users/index.html.twig', ['articles' => $articles, 'session' => $_SESSION,
+            'connexionMessage' => $connexionMessage, 'isLogged' => $this->isLogged()]);
     }
 
     public function index()
     {
         $articlesManager = new ArticleManager($this->getPdo());
         $articles = $articlesManager->selectAllArticles();
-        return $this->twig->render('Article/indexUser.html.twig', ['articles' => $articles]);
+        return $this->twig->render('Article/indexUser.html.twig', ['articles' => $articles, 'isLogged' => $this->isLogged()]);
     }
 
 

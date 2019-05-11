@@ -38,7 +38,7 @@ $routes = [
     'Article' => [
         ['index', '/articles', 'GET'], //show index to users
         ['show', '/article/{id:\d+}', 'GET'], //show article to users
-        ['indexAccueil', '/', 'GET'], //show article to users
+        ['indexAccueil', '/', 'GET'], //show homepage to users
     ],
 ];
 

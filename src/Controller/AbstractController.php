@@ -67,4 +67,9 @@ abstract class AbstractController
             exit;
         }
     }
+
+    public function isLogged()
+    {
+        return (isset($_SESSION['user']));
+    }
 }
