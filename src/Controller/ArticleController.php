@@ -29,14 +29,14 @@ class  ArticleController extends AbstractController
     {
         $articlesManager = new ArticleManager($this->getPdo());
         $articles = $articlesManager->selectArticlesForIndex();
-        return $this->twig->render('Users/index.html.twig', ['articles' => $articles]);
+        return $this->twig->render('Users/index.html.twig', ['articles' => $articles, 'session' => $_SESSION]);
     }
 
     public function index()
     {
         $articlesManager = new ArticleManager($this->getPdo());
         $articles = $articlesManager->selectAllArticles();
-        return $this->twig->render('Article/indexUser.html.twig', ['articles' => $articles, 'session' => $_SESSION]);
+        return $this->twig->render('Article/indexUser.html.twig', ['articles' => $articles]);
     }
 
 
