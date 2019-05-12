@@ -19,11 +19,11 @@ h1{
 }
 .navbar-nav{
     font-size: 20px;
-
 }
 .navbar{
-    background-color: #ffcc80;
+    background-color: #e26020;
     color: white;
+
 }
 
 .navv1:hover{
@@ -127,7 +127,7 @@ h1{
 
 /*------------------------------------------------Footer--------------------------------------------------------------*/
 footer {
-    background: #ffcc80;
+    background: #e26020;
     font-family: 'Dosis',sans-serif;
     width: 100%;
     position: absolute;

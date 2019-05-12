@@ -29,6 +29,11 @@
                             <small class="text-muted">{{ comment.date }}</small>
                         </div>
                         <p class="mb-1">{{ comment.content|raw }}</p>
+                        <p style="text-align: right">
+
+                        <a href="/article/comment/signal/{{ comment.id }}" target="" data-confirm="Etes-vous certain de vouloir signaler ce commentaire ?">
+
+                            <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i>Signaler ?</button></a>
                     </div>
                     <br/>
                 {% endfor %}

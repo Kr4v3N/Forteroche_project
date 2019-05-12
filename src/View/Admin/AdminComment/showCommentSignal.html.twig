@@ -1,0 +1,56 @@
+{% extends "admin_layout.html.twig" %}
+
+{% block content %}
+
+    <div class="container-fluid">
+        <h1 class="text-white titlePageAdmin">Commentaires signalés</h1>
+
+        <table class="table table-striped text-white text-center">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Titre du billet</th>
+                <th scope="col">Commentaire(s)</th>
+                <th scope="col">Date(s)</th>
+                <th scope="col">Utilisateur(s)</th>
+                <th scope="col">Nombre de signalement</th>
+                <th scope="col">Annuler</th>
+                <th scope="col">Supprimer</th>
+
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for content in comments %}
+
+                <tr>
+                    <td>{{ content.title }} </td>
+                    <td data-toggle="tooltip" data-placement="top" title="{{ content.content }}">
+                        {{ content.content|truncate(80) }}
+                    </td>
+                    <td>
+                        {{ content.date}}
+                    </td>
+                    <td>
+                        {{ content.lastname}}
+                    </td>
+                    <td>
+                        {{ content.signale}}
+                    </td>
+                    <td>
+                        <a href="/admin/comment/reset/{{ content.id }}" target="" data-confirm="Etes-vous certain de vouloir réinitialiser ?">
+                            <button type="submit" class="btn btn-danger"><i class="far fa-copyright"></i></button>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="/admin/comment/delete/{{ content.id }}" target="" data-confirm="Etes-vous certain de vouloir supprimer?">
+                            <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                        </a>
+                    </td>
+                </tr>
+
+            {% endfor %}
+
+        </table>
+    </div>
+
+{% endblock content %}

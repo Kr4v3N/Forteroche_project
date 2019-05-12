@@ -12,6 +12,7 @@ class Comment
     protected $id;
     protected $date;
     protected $content;
+    protected $signale;
     protected $user_id;
     protected $article_id;
 
@@ -61,6 +62,22 @@ class Comment
     public function setContent($content)
     {
         $this->content = $content;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSignale()
+    {
+        return $this->signale;
+    }
+
+    /**
+     * @param mixed $signale
+     */
+    public function setSignale($signale)
+    {
+        $this->signale = $signale;
     }
 
     /**

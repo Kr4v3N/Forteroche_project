@@ -32,17 +32,16 @@ class AdminController extends AbstractController
         $numberUsers = $countUsers->count();
         $countComment = new AdminCommentManager($this->getPdo());       // idem pour les commentaires
         $numberComments = $countComment->count();
+        $signals = $countComment->countSignal();
 
         if (isset($_SESSION['admin']) && isset($_SESSION['admin']['message'])){
             $connexionMessage = $_SESSION['admin']['message'];
             unset($_SESSION['admin']['message']);
         }
-
         return $this->twig->render('Admin/admin_dashboard.html.twig', ['active' => $article, 'user' => $_SESSION['admin'],
             'totalArticles' => $numberArticles, 'totalUsers' => $numberUsers, 'totalComments' => $numberComments,
-            'session' => $_SESSION, 'connexionMessage' => $connexionMessage, 'isLogged' => $this->isLoggedAdmin()]);
+            'signals' => $signals, 'session' => $_SESSION, 'connexionMessage' => $connexionMessage, 'isLogged' => $this->isLoggedAdmin()]);
     }
-
 
     //show user and his comments
     public function userShow(int $id)
@@ -54,8 +53,6 @@ class AdminController extends AbstractController
         return $this->twig->render('Admin/AdminUser/adminShow.html.twig', ['user' => $user, 'comments' => $comment]);
 
     }
-
-
 
     // show all users to manage them
     public function usersIndex()
@@ -99,8 +96,6 @@ class AdminController extends AbstractController
         $active = "articles";
         return $this->twig->render('Admin/AdminArticle/indexAdmin.html.twig', ['articles' => $articles, 'active' => $active]);
     }
-
-
 
     // add an article
     public function add()
@@ -147,20 +142,19 @@ class AdminController extends AbstractController
         }
 
         $active = "add";
-        return $this->twig->render('Admin/AdminArticle/add.html.twig', ["active" => $active, 'titleErr' => $titleErr, 'contentErr' => $contentErr, 'errorFile' => $error]); // traitement
+        return $this->twig->render('Admin/AdminArticle/add.html.twig', ["active" => $active, 'titleErr' => $titleErr, 'contentErr' => $contentErr,
+            'errorFile' => $error]); // traitement
     }
 
 
     public function logAdmin()
     {
-
         // Si admin connecter
         if (isset($_SESSION['admin'])) {
             header('Location: /admin/dashboard');
             exit();
         }
-
-        $errorLogin = "";
+        $errorLogin = '';
 
         if (!empty($_POST)) {
             // Verifier si les données sont postées puis initialise le composant d'authentification.
@@ -184,12 +178,8 @@ class AdminController extends AbstractController
             else {
                     $errorLogin = 'Identifiant incorrect';
                 }
-
-
         }
         return $this->twig->render('Admin/logAdmin.html.twig', ["errorLogin" => $errorLogin]);
-
-
     }
 
     //delete an article
@@ -197,7 +187,6 @@ class AdminController extends AbstractController
     {
         $articleManager = new ArticleManager($this->getPdo());
         $articleManager->delete($id);
-
     }
 
     // edit an article, change title, content, picture
@@ -220,7 +209,7 @@ class AdminController extends AbstractController
 
                 if (!empty($_FILES)) {
                     $allowExtension = ['.jpg', '.jpeg', '.gif', '.png'];
-                    $maxSize = 1000000;
+                    $maxSize = 3000000;
                     $extension = strtolower(strrchr($_FILES['image']['name'], '.'));
                     $size = $_FILES['image']['size'];
 
@@ -228,7 +217,7 @@ class AdminController extends AbstractController
                         $error['errorExt'] = 'Seuls les fichiers image .jpg, .jpeg, .gif et .png sont autorisés.';
                     }
                     if ($size > $maxSize) {
-                        $error['errorSize'] = 'Votre fichier est trop volumineux. Taille maximale autorisée : 1Mo.';
+                        $error['errorSize'] = 'Votre fichier est trop volumineux. Taille maximale autorisée : 3Mo.';
                     }
 
                     if (!$error) {
@@ -236,15 +225,12 @@ class AdminController extends AbstractController
                         move_uploaded_file($_FILES['image']['tmp_name'], '../public/assets/images/' . $filename);
                         $article->setPicture($filename);
                     }
-
                 }
-
                 header('Location: /admin/article/' . $id);
                 $id = $articleManager->update($article);
             }
-
         }
-        return $this->twig->render('Admin/AdminArticle/edit.html.twig', ["article" => $article, 'titleErr' => $titleErr, 'contentErr' => $contentErr, 'errorFile' => $error]);
+        return $this->twig->render('Admin/AdminArticle/edit.html.twig', ['article' => $article, 'titleErr' => $titleErr, 'contentErr' => $contentErr, 'errorFile' => $error]);
     }
 
 }

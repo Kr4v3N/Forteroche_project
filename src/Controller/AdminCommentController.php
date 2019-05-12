@@ -42,11 +42,31 @@ class AdminCommentController extends AbstractController
         return $this->twig->render('Admin/AdminComment/indexAdminComment.html.twig', ['comments' => $comments, "active" => $active] );
     }
 
+    //Index of all reported comments
+    public function indexAdminCommentsSignals()
+    {
+        $commentsSignals = new AdminCommentManager($this->getPdo());
+        $shows = $commentsSignals->showSignal();
+        return $this->twig->render('Admin/AdminComment/showCommentSignal.html.twig', ['comments' => $shows]);
+    }
+
     public function delete(int $id)
     {
         $commentManager = new AdminCommentManager($this->getPdo());
         $commentManager->delete($id);
+    }
 
+    //To add a report to a specific comment, it is incremental
+    public function addCommentSignal($id)
+    {
+        $commentSignal = new AdminCommentManager($this->getPdo());
+        $commentSignal->addSignal($id);
+    }
+   //delete reports if this is not justified
+    public function resetSignal($id)
+    {
+        $commentSignal = new AdminCommentManager($this->getPdo());
+        $commentSignal->resetSignal($id);
     }
 
 }

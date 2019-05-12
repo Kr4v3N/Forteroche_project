@@ -50,12 +50,19 @@
                     </div>
                     <div class="card-body">
                         <h5 class="card-title" style="text-align: center">{{ totalComments }}</h5>
+
+                        {% if signals == 0 %}
+                            <h5 class="card-title dashboardCount text-white"><a href="/admin/comments/signals"> aucun signalé, super</a></h5>
+                        {% else %}
+                            <h5 class="card-title dashboardCount text-white"><a href="/admin/comments/signals">{{ signals }} signalé(s)</a></h5>
+                        {% endif %}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+</div>
 
 {% endblock content %}
 
