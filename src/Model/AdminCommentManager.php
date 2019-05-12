@@ -19,8 +19,8 @@ class AdminCommentManager extends AbstractManager
     //TODO insert comment if user is logged
     public function insert(Comment $comment): int
     {
-        var_dump(intval($_SESSION['user']['id']));
-        var_dump($comment);
+//        var_dump(intval($_SESSION['user']['id']));
+//        var_dump($comment);
         //die();
         $statement = $this->pdo->prepare("INSERT INTO $this->table (date, content, article_id, user_id)
         VALUES (DATE(NOW()), :content, :article_id, :user_id)");
@@ -86,6 +86,7 @@ class AdminCommentManager extends AbstractManager
         $signals = $this->pdo->query("SELECT COUNT(signale) AS Signals FROM $this->table  WHERE signale !=0 ")->fetchColumn();
         return $signals;
     }
+
     //Selection of all reported comments
     public function showSignal()
     {
@@ -94,6 +95,7 @@ class AdminCommentManager extends AbstractManager
         INNER JOIN user ON user.id=comment.user_id INNER JOIN article ON article.id=comment.article_id WHERE comment.signale != 0 
         ORDER BY date DESC', \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
+
     //Adding a comment with increment if the comment has already been reported
     public function addSignal(int $id)
     {
@@ -102,6 +104,7 @@ class AdminCommentManager extends AbstractManager
         $statement->execute();
         return header('Location: ' . $_SERVER['HTTP_REFERER']);
     }
+
     //delete a report
     public function resetSignal(int $id)
     {
