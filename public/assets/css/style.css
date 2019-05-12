@@ -314,9 +314,16 @@ input[type="submit"]:hover {
 span {
     color: red;
 }
+.etc-login-form {
+    font-size: 20px;
+}
 /*-------------------------------------------------- End SignUp page--------------------------------------------------------*/
 
 /*--------------------------------------------------loginUser page----------------------------------------------------------*/
+.etc-login-form.text-left {
+    font-size: 20px;
+    margin-top: -30px;
+}
 .panel h2{
     color:white;
     font-size:18px;

@@ -26,7 +26,7 @@ class AdminCommentController extends AbstractController
                 $id = $CommentManager->insert($comment);
                 header('Location: /article/' . $articleId);
         }else{
-            $errorConnexion = 'Vous devez être connecté pour commenter cet article.';
+            $errorConnexion = 'Vous devez être connecté pour commenter ce billet.';
             $return = $_SERVER['HTTP_REFERER'];
             return $this->twig->render('Article/logToComment.html.twig', ['errorConnexion' => $errorConnexion, 'return' => $return]);
             // TODO redirection on last visited page after connexion
@@ -59,9 +59,16 @@ class AdminCommentController extends AbstractController
     //To add a report to a specific comment, it is incremental
     public function addCommentSignal($id)
     {
-        $commentSignal = new AdminCommentManager($this->getPdo());
-        $commentSignal->addSignal($id);
+        if (isset($_SESSION['user']) && (!empty($_POST))) {
+            $commentSignal = new AdminCommentManager($this->getPdo());
+            $commentSignal->addSignal($id);
+        }else{
+            $errorConnexion = 'Vous devez être connecté pour signaler ce commentaire.';
+            $return = $_SERVER['HTTP_REFERER'];
+            return $this->twig->render('Article/logToSignal.html.twig', ['errorConnexion' => $errorConnexion, 'return' => $return]);
+        }
     }
+
    //delete reports if this is not justified
     public function resetSignal($id)
     {
