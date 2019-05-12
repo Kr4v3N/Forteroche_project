@@ -52,9 +52,11 @@
                         <h5 class="card-title" style="text-align: center">{{ totalComments }}</h5>
 
                         {% if signals == 0 %}
-                            <h5 class="card-title dashboardCount text-white"><a href="/admin/comments/signals"> aucun signalé, super</a></h5>
+                            <p class="card-title dashboardCount" style="font-size: 20px" ><a href="/admin/comments/signals"> Pas de signalement</a></p>
+                        {% elseif signals == 1 %}
+                            <p class="card-title dashboardCount" style="font-size: 20px; color: darkred;"><a href="/admin/comments/signals">{{ signals }} signalé</a></p>
                         {% else %}
-                            <h5 class="card-title dashboardCount text-white"><a href="/admin/comments/signals">{{ signals }} signalé(s)</a></h5>
+                            <p class="card-title dashboardCount" style="font-size: 20px; color: darkred;"><a href="/admin/comments/signals">{{ signals }} signalés</a></p>
                         {% endif %}
                     </div>
                 </div>

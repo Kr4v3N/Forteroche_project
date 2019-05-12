@@ -1,16 +1,17 @@
 <div class="container">
     <div class="card article">
         <div class="card-body">
+
             {% if errorFile %}
 
-                <div class="alert alert-danger" role="alert">
-                    {{ errorFile.errorExt }} {{ errorFile.errorSize }}</div>
+                <div class="alert alert-danger" role="alert"> {{ errorFile.errorExt }} {{ errorFile.errorSize }}</div>
 
             {% endif %}
+
             <form method="post" action="" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="titre">Titre</label>
-                    <label for="titre">Titre</label>
+{#                    <label for="titre">Titre</label>#}
                     <input type="text" class="form-control" id="text" name="title" value="">
                     {{ titleErr }}
 

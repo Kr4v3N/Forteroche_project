@@ -199,7 +199,7 @@ class AdminController extends AbstractController
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             var_dump($_POST);
-            if ($_POST["title"] == "") {
+            if ($_POST["title"] == '') {
                 $titleErr = "Le titre est requis !";
             } elseif ($_POST["content"] == "") {
                 $contentErr = "Le contenu est requis !";

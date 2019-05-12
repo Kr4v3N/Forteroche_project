@@ -30,7 +30,7 @@
                                     <div class="">
                                         <a class="link" href ="/article/{{ article.id }}">
                                             <h2 class="featurette-heading articleTitre">{{ article.title }}<span class="text-muted"></span></h2>
-                                            <p class="lead">{{ article.content|truncate(300) }}</p>
+                                            <p class="lead">{{ article.content|truncate(1000) }}</p>
                                         </a>
                                     </div>
                                 </div>
@@ -46,7 +46,7 @@
                                 <div class="col-md-7 order-md-2">
                                     <a class ="link" href ="/article/{{ article.id }}">
                                         <h2 class="featurette-heading articleTitre">{{ article.title }}<span class="text-muted"></span></h2>
-                                        <p class="lead">{{ article.content|truncate(200) }}</p>
+                                        <p class="lead">{{ article.content|truncate(1000) }}</p>
                                     </a>
                                 </div>
                                 <div class="col-md-5 order-md-1 d-flex">

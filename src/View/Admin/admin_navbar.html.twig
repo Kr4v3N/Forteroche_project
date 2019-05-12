@@ -21,10 +21,11 @@
 
                 {% if signals == 0 %}
 {#                    {{ dump(signals) }}#}
-
                     <a class="dropdown-item text-green" href="/admin/comments/signals"> aucun commentaire signalé</a>
-                {% else %}
-                    <a class="nav-link text-white" href="/admin/comments/signals">{{ signals }} commentaire(s) signalé(s)</a>
+                {% elseif signals == 1 %}
+                    <a class="nav-link text-white" href="/admin/comments/signals">{{ signals }} commentaire signalé</a>
+                {% else  %}
+                    <a class="nav-link text-white" href="/admin/comments/signals">{{ signals }} commentaires signalés</a>
 
                 {% endif %}
             </li>

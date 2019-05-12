@@ -8,6 +8,7 @@
     <title>{% block title %}Interface d'administration{% endblock %}</title>
     <link rel="shortcut icon" type="image/png" href="/assets/images/admin-favicon.png"/>
 
+    <script src="/assets/js/tinymce/tinymce.min.js" type="text/javascript"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
@@ -18,20 +19,21 @@
 </head>
 
 <body>
-    <header>
-        {% include 'Admin/admin_navbar.html.twig' %}
-    </header>
+<header>
+    {% include 'Admin/admin_navbar.html.twig' %}
+</header>
 
-    <nav class="">
+<nav class="">
 
-    </nav>
+</nav>
 
-    {% block content %}{% include 'Admin/admin_dashboard.html.twig' %}{% endblock %}
+{% block content %}{% include 'Admin/admin_dashboard.html.twig' %}{% endblock %}
 
-    {% block javascript %}{% endblock %}
+{% block javascript %}{% endblock %}
 
-    <script type="text/javascript" src="/assets/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="/assets/js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src='/assets/js/main.js'></script>
+    <script type="text/javascript" src='/assets/js/tinymce.js'></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
