@@ -2,21 +2,18 @@
 
 {% block content %}
 
-<div class="container" id="sessionAdmin">
+<div class="container-fluid" id="sessionAdmin">
     {% if connexionMessage %}
 
         <div id="alert" class="alert alert-success">
 
             <div>Bonjour {{ user.firstname | capitalize  }}</div>
-            <a class="close" >x</a>
             <p>{{ connexionMessage }}</p>
         </div>
 
     {% endif %}
 
-
     <div class="container">
-
 
         <!-- Ajout des 3 divs pour chacun des élements, totalComments, totalUser, totalArticles sont des éléments récupérés de l'adminController -->
         <div class="row mt-5">

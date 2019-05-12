@@ -498,7 +498,7 @@ h1.titleActualite {
 /*--------------------------------Session flash-----------------------------------------------*/
 /*---alert popup---*/
 #sessionAdmin {
-    margin-top: 50px;
+    margin-top: 0;
 
 }
 #alert{
