@@ -40,12 +40,13 @@ class ArticleManager extends AbstractManager
         return $this->pdo->query('SELECT * FROM article ORDER BY date DESC', \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
 
+    // show the last three articles
     public function selectArticlesForIndex(): array
     {
         return $this->pdo->query('SELECT * FROM article ORDER BY date DESC LIMIT 3', \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
 
-   // delete article by id
+    // delete article by id
     public function delete(int $id): int
     {
         $statement = $this->pdo->prepare("DELETE FROM article WHERE id=:id");
@@ -63,7 +64,6 @@ class ArticleManager extends AbstractManager
         $statement->bindValue('id', $article->getId(), \PDO::PARAM_INT);
         $statement->bindValue('picture', $article->getPicture(), \PDO::PARAM_STR);
         return $statement->execute();
-
     }
 
     public function count()
@@ -88,4 +88,5 @@ class ArticleManager extends AbstractManager
         FROM article INNER JOIN category ON category.id = article.category_id WHERE category_id= $id"
             , \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
+
 }
