@@ -59,14 +59,8 @@ class AdminCommentController extends AbstractController
     //To add a report to a specific comment, it is incremental
     public function addCommentSignal($id)
     {
-        if (isset($_SESSION['user']) && (!empty($_POST))) {
             $commentSignal = new AdminCommentManager($this->getPdo());
             $commentSignal->addSignal($id);
-        }else{
-            $errorConnexion = 'Vous devez être connecté pour signaler ce commentaire.';
-            $return = $_SERVER['HTTP_REFERER'];
-            return $this->twig->render('Article/logToSignal.html.twig', ['errorConnexion' => $errorConnexion, 'return' => $return]);
-        }
     }
 
    //delete reports if this is not justified

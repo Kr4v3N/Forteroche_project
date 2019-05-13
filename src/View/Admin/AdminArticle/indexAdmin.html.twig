@@ -20,7 +20,7 @@
 
                 <tr>
                     <th scope="row">{{ article.title }}</th>
-                    <td>{{ article.content|truncate(200) }}</td>
+                    <td>{{ article.content|truncate(200) | raw }}</td>
                     <td>
                         <a href="/article/{{ article.id }}" target="">
                             <button type="submit" class="btn btn-warning"><i class="far fa-eye"></i></button></a>

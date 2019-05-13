@@ -34,7 +34,7 @@ $routes = [
 
         ['suscribeUser', '/register', ['GET','POST']], //register page
         ['logUser', '/login', ['GET','POST']], //login page
-        ['addUser', '/admin/user/createUser', ['GET', 'POST']],
+        ['addUser', '/admin/user/createUser', ['GET', 'POST']], //add user by admin
         ['logoutUser', '/logout', 'GET'], //logout
     ],
 
