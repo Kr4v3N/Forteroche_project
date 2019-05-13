@@ -432,10 +432,7 @@ span {
     font-family: 'Dosis', sans-serif;
 }
 
-/*Espace entre cards*/
-.row.featurette {
-    height: 420px;
-}
+/*Espace between cards*/
 
 .categories {
     position: fixed;
@@ -573,6 +570,9 @@ h1.titleActualite {
     .btn-apropos_bas {
         margin-left: 120px;
         width: 200px;
+    }
+    .categoriesDisplay {
+        display: none;
     }
 }
 
