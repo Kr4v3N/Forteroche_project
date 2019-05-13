@@ -1,69 +1,91 @@
 {% extends "admin_layout.html.twig" %}
 
 {% block content %}
+    <div class="container-fluid" id="sessionAdmin">
+        {% if connexionMessage %}
 
-<div class="container-fluid" id="sessionAdmin">
-    {% if connexionMessage %}
+            <div id="alert" class="alert alert-success">
+                <div>Bonjour {{ user.firstname | capitalize  }}</div>
+                <p>{{ connexionMessage }}</p>
+            </div>
 
-        <div id="alert" class="alert alert-success">
+        {% endif %}
 
-            <div>Bonjour {{ user.firstname | capitalize  }}</div>
-            <p>{{ connexionMessage }}</p>
-        </div>
-
-    {% endif %}
-
-    <div class="container">
 
         <!-- Ajout des 3 divs pour chacun des élements, totalComments, totalUser, totalArticles sont des éléments récupérés de l'adminController -->
-        <div class="row mt-5">
 
-            <div class="col-sm-12 col-md-6 col-lg-4">
-                <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
-                    <div class="card-header"style="text-align: center">
-                        <a href="/admin/users">Nombre d'utilisateurs</a>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title" style="text-align: center">{{ totalUsers }}</h5>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-12 col-md-6 col-lg-4">
-                <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
-                    <div class="card-header" style="text-align: center">
-                        <a href="/admin/articles">Nombre d'articles</a>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title" style="text-align: center">{{ totalArticles }}</h5>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-12 col-md-6 col-lg-4">
-                <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
-                    <div class="card-header">
-                        <a href="/admin/comments" style="text-align: center">Nombre de commentaires</a>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title" style="text-align: center">{{ totalComments }}</h5>
-
-                        {% if signals == 0 %}
-                            <p class="card-title dashboardCount" style="font-size: 20px" ><a href="/admin/comments/signals"> Pas de signalement</a></p>
-                        {% elseif signals == 1 %}
-                            <p class="card-title dashboardCount" style="font-size: 20px; color: darkred;"><a href="/admin/comments/signals">{{ signals }} signalé</a></p>
-                        {% else %}
-                            <p class="card-title dashboardCount" style="font-size: 20px; color: darkred;"><a href="/admin/comments/signals">{{ signals }} signalés</a></p>
-                        {% endif %}
-                    </div>
-                </div>
+        {#--------------------BLOCK ARTICLES--------------------------#}
+        <div class="row mt-2">
+            <div class="col-12">
+                <h3 class="text-white" style="text-align:center;">Derniers articles publiés</h3>
             </div>
         </div>
+        <div class="row mt-2">
+
+            <div class="col-sm-12 col-md-5 col-lg-2">
+                <div class="card text-white bg-secondary mb-3" style="max-width: 18rem; min-height: 12rem;">
+                    <div class="card-header" style="text-align:center; font-size: 1.6rem;">
+                        <a class="title-admin" href="/admin/articles">Nombre total de billets</a>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title dashboardCount">{{ totalArticles }}</h5>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+        <hr style="border: solid 0.5px #50E3C2; width: 65%">
+
+        {#-----------------------------BLOCK COMMENTS--------------------------------------#}
+        <div class="row">
+            <div class="col-12">
+                <h3 class="text-white" style="text-align:center;">Derniers commentaires publiés</h3>
+            </div>
+        </div>
+        <div class="row mt-2">
+
+            <div class="col-sm-12 col-md-5 col-lg-2">
+                <div class="card text-white bg-warning mb-3" style="max-width: 18rem; min-height: 12rem;">
+                    <div class="card-header"style="text-align:center; font-size: 1.6rem;">
+                        <a class="title-admin" href="/admin/comments" >Nombre total de commentaires</a>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title dashboardCount">{{ totalComments }}</h5>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+        <hr style="border: solid 0.5px #50E3C2; width: 65%">
+
+        {#------------------BLOCK USERS--------------------#}
+
+        <div class="row">
+            <div class="col-12">
+                <h3 class="text-white" style="text-align:center;">Derniers utilisateurs inscrits</h3>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-sm-12 col-md-5 col-lg-2">
+                <div class="card text-white bg-info mb-3" style="max-width: 18rem; min-height: 12rem;">
+                    <div class="card-header" style="text-align:center; font-size: 1.6rem;">
+                        <a class="title-admin" href="/admin/users">Nombre total d'utilisateurs</a>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title dashboardCount" style="text-align: center">{{ totalUsers }}</h5>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
     </div>
 
-</div>
-
 {% endblock content %}
-
-
 

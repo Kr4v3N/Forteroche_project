@@ -684,7 +684,9 @@ h1.titleActualite {
 /*-----------------------------------------------Admin----------------------------------------------------------------*/
 
 /*------cards with 3 last items---------*/
-
+.title-admin {
+    color: lightgrey;
+}
 .dropdown-item {
     background: #defff4;
 }
