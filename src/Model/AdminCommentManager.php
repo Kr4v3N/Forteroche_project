@@ -33,8 +33,8 @@ class AdminCommentManager extends AbstractManager
         }
     }
 
-    public function ShowAllComments(int $id){
-
+    public function ShowAllComments(int $id)
+    {
         // prepared request
         $statement = $this->pdo->prepare("SELECT comment.id, comment.content, comment.date, user.lastname FROM $this->table 
         INNER JOIN user ON comment.user_id=user.id WHERE article_id=:id ORDER BY date DESC");
@@ -113,5 +113,15 @@ class AdminCommentManager extends AbstractManager
         $statement->execute();
         return header('Location: ' . $_SERVER['HTTP_REFERER']);
     }
+
+    public function selectCommentsForIndex(): array
+    {
+        $this->pdo->query("SET lc_time_names = 'fr_FR'");
+        return $this->pdo->query('SELECT comment.id, DATE_FORMAT(comment.date, "%e %M %Y à %Hh %i") AS date, comment.content, comment.user_id, 
+        comment.article_id, user.firstname AS userFirstname, user.lastname AS userLastname, article.title AS articleTitle FROM comment 
+        INNER JOIN user ON user.id=comment.user_id INNER JOIN article ON article.id=comment.article_id 
+        ORDER BY date DESC LIMIT 3', \PDO::FETCH_CLASS, $this->className)->fetchAll();
+    }
+
 }
 

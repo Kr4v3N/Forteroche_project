@@ -77,4 +77,9 @@ class UserManager extends AbstractManager
         return $res;
     }
 
+    public function selectUsersForIndex(): array
+    {
+        return $this->pdo->query('SELECT * FROM user ORDER BY registered DESC LIMIT 3', \PDO::FETCH_CLASS, $this->className)->fetchAll();
+    }
+
 }

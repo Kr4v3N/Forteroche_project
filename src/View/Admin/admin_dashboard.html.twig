@@ -12,12 +12,10 @@
         {% endif %}
 
 
-        <!-- Ajout des 3 divs pour chacun des élements, totalComments, totalUser, totalArticles sont des éléments récupérés de l'adminController -->
-
-        {#--------------------BLOCK ARTICLES--------------------------#}
+        {#--------------------BLOCK BILLETS--------------------------#}
         <div class="row mt-2">
             <div class="col-12">
-                <h3 class="text-white" style="text-align:center;">Derniers articles publiés</h3>
+                <h3 class="text-white" style="text-align:center;">Derniers billets publiés</h3>
             </div>
         </div>
         <div class="row mt-2">
@@ -33,10 +31,20 @@
                 </div>
             </div>
 
-
+            {% for lastarticle in lastarticles %}
+                <div class="col-sm-12 col-md-5 col-lg-3">
+                    <div class="card cardFondDashboard" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{  lastarticle.title|truncate(22)}} </h5>
+                            <h6 class="card-subtitle mb-2 text-muted">rédigé le : {{ lastarticle.date }}</h6>
+                            <p class="card-text">{{ lastarticle.content|truncate(70) }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
 
         </div>
-        <hr style="border: solid 0.5px #50E3C2; width: 65%">
+        <hr style="border: solid 1px #50E3C2; width: 65%">
 
         {#-----------------------------BLOCK COMMENTS--------------------------------------#}
         <div class="row">
@@ -57,10 +65,20 @@
                 </div>
             </div>
 
-
+                        {% for lastcomment in lastcomments %}
+                            <div class="col-sm-12 col-md-5 col-lg-3">
+                                <div class="card cardFondDashboard" style="width: 18rem;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{  lastcomment.user_id}}</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">{{ lastcomment.date}}</h6>
+                                        <p class="card-text">{{ lastcomment.content|truncate(70) }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
 
         </div>
-        <hr style="border: solid 0.5px #50E3C2; width: 65%">
+        <hr style="border: solid 1px #50E3C2; width: 65%">
 
         {#------------------BLOCK USERS--------------------#}
 
@@ -81,11 +99,20 @@
                 </div>
             </div>
 
-
+                        {% for lastuser in lastusers %}
+                            <div class="col-sm-12 col-md-5 col-lg-3">
+                                <div class="card cardFondDashboard" style="width: 18rem;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ lastuser.firstname }} {{ lastuser.lastname }}</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">{{ lastuser.email}}</h6>
+                                        <p class="card-text">enregistré le : {{ lastuser.registered }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
 
         </div>
 
     </div>
 
 {% endblock content %}
-
