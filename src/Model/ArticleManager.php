@@ -20,7 +20,7 @@ class ArticleManager extends AbstractManager
     public function insert(Article $article): int
     {
         $statement = $this->pdo->prepare("INSERT INTO $this->table (date, title, content, picture, user_id, category_id) 
-        VALUES (DATE(NOW()), :title, :content, :picture, :user_id, :category)");
+        VALUES (NOW(), :title, :content, :picture, :user_id, :category)");
 
         $statement->bindValue(':title', $article->getTitle(), \PDO::PARAM_STR);
         $statement->bindValue(':content', $article->getContent(),\PDO::PARAM_STR);
