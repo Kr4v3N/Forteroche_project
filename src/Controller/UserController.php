@@ -66,41 +66,32 @@ class UserController extends AbstractController
             // appeler le manager
             $userManager = new UserManager($this->getPdo());
 
-            if (!preg_match("/^[a-zA-Z ]*$/",$_POST['lastname']))
-            {
-                $errorRegister['lastname'] = "Seul les lettres et espaces sont autorisés." ;
+            if (!preg_match("/^[a-zA-Z ]*$/", $_POST['lastname'])) {
+                $errorRegister['lastname'] = "Seul les lettres et espaces sont autorisés.";
             }
-            if (strlen($_POST['lastname']) < 2 || strlen($_POST['lastname']) > 15)
-            {
+            if (strlen($_POST['lastname']) < 2 || strlen($_POST['lastname']) > 15) {
                 $errorRegister['lastname'] = "Le nom doit comporter entre 2 et 15 caractères";
             }
-            if (!preg_match("/^[a-zA-Z ]*$/",$_POST['firstname']))
-            {
+            if (!preg_match("/^[a-zA-Z ]*$/", $_POST['firstname'])) {
                 $errorRegister['firstname'] = "Le prénom doit comporter seulement des lettres et espaces.";
             }
-            if (strlen($_POST['firstname']) < 2 || strlen($_POST['firstname']) > 15)
-            {
+            if (strlen($_POST['firstname']) < 2 || strlen($_POST['firstname']) > 15) {
                 $errorRegister['firstname'] = "Le prénom doit comporter entre 2 et 15 caractères";
             }
-            if (!preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $_POST['email']))
-            {
+            if (!preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $_POST['email'])) {
                 $errorRegister['email'] = "Mauvais format de votre adresse email";
             }
             // Vérifie que l'email qu'on envoi n'est pas en base de donnée
-            if ($userManager->existUser($_POST['email']))
-            {
+            if ($userManager->existUser($_POST['email'])) {
                 $errorRegister['email'] = "L'adresse email est déja utilisé.";
             }
-            if (strlen($_POST['password']) < 8 )
-            {
+            if (strlen($_POST['password']) < 8) {
                 $errorRegister['password'] = "Le mot de passe doit comporter au minimum 8 caractères";
             }
-            if ($_POST['password'] !== ($_POST['password_control']))
-            {
+            if ($_POST['password'] !== ($_POST['password_control'])) {
                 $errorRegister['password'] = "Les mots de passe saisis ne sont pas identiques.";
             }
-            if (empty($errorRegister))
-            {
+            if (empty($errorRegister)) {
                 $newUser = new User;
                 $newUser->setLastname($_POST['lastname']);
                 $newUser->setFirstname($_POST['firstname']);
@@ -147,60 +138,16 @@ class UserController extends AbstractController
 
                     header('Location: /');
 
-                }else{
+                } else {
                     $errorLoginUser = 'Identifiants incorrects ';
 
                 }
-            }
-            else {
+            } else {
                 $errorLoginUser = 'Identifiants incorrects';
             }
         }
         return $this->twig->render('loginUser.html.twig', ['errorLoginUser' => $errorLoginUser]);
     }
 
-    public function addUser()
-    {
-        /*$fisrtnameErr = $lastnameErr = $emailErr = $pwdErr = $statusErr = "";
-        $fisrtname = $lastname = $email = $pwd = $status = "";*/
-
-        $errors = [];
-
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') // affiche si
-        {
-            if (empty($_POST['firstname'])) {
-                //$fisrtnameErr = "Le nom est requis !";
-                $errors['firstname'] = 'le nom est requis';
-            }
-            if (empty($_POST['lastname'])) {
-                $errors['lastname'] = 'Le prénom est requis !';
-            }
-            if (empty($_POST['email'])) {
-                $errors['email'] = "L'email est requis !";
-            }
-            if (empty($_POST['password'])) {
-                $errors['password'] = 'Le mot de passe est requis !';
-            }
-            if (empty($_POST['status'])) {
-                $errors['status'] = 'Le status est requis !';
-            }
-            if (empty($errors))
-            {
-                $newUserManager = new UserManager($this->getPdo());
-                $newUser = new User;
-
-                $newUser->setLastname($_POST['firstname']);
-                $newUser->setFirstname($_POST['lastname']);
-                $newUser->setEmail($_POST['email']);
-                $newUser->setPass($_POST['password']);
-                $newUser->setStatus($_POST['status']);
-                $id = $newUserManager->userAdd($newUser);
-                header('Location: /admin/users');
-            }
-        }
-
-        $active = 'add';
-        return $this->twig->render('Admin/AdminUser/addUser.html.twig', ['active' => $active, 'errors' => $errors, 'nameErr' =>$_POST]); // traitement
-    }
 }
 

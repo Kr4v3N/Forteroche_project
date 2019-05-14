@@ -6,11 +6,6 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-{#    <!-- Colonne dédiée a l'utilisateur connecté-->#}
-{#    <div class="col-lg-4 text-center">#}
-{#        <p>Bonjour {{ user.firstname | capitalize  }}</p>#}
-{#        <!-- Appel du nom utilisateur et capitalize pour avoir la première lettre en capitale-->#}
-{#    </div>#}
 
     <!-- Navbar sur le côté droit-->
 
@@ -21,7 +16,7 @@
 
                 {% if signals == 0 %}
 {#                    {{ dump(signals) }}#}
-                    <a class="dropdown-item text-green" href="/admin/comments/signals"> aucun commentaire signalé</a>
+                    <a class="dropdown-item text-green" style="display: none" href="/admin/comments/signals"> aucun commentaire signalé</a>
                 {% elseif signals == 1 %}
                     <a class="nav-link" style="color: red;" href="/admin/comments/signals"><strong>{{ signals }} commentaire signalé</strong></a>
                 {% else  %}

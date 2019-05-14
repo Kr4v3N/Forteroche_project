@@ -5,6 +5,7 @@ use http\Env\Request;
 use Model\ArticleManager;
 use Model\Article;
 use Model\AuthManager;
+use Model\User;
 use Model\UserManager;
 use Model\AdminCommentManager;
 
@@ -277,6 +278,50 @@ class AdminController extends AbstractController
 
         }
         return $this->twig->render('Admin/AdminArticle/edit.html.twig', ["article" => $article, 'titleErr' => $titleErr, 'contentErr' => $contentErr, 'errorFile' => $error, 'errorMin' => $errorMin, 'content' => $_POST]);
+    }
+
+    public function addUser()
+    {
+        /*$fisrtnameErr = $lastnameErr = $emailErr = $pwdErr = $statusErr = "";
+        $fisrtname = $lastname = $email = $pwd = $status = "";*/
+
+        $errors = [];
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') // affiche si
+        {
+            if (empty($_POST['firstname'])) {
+                //$fisrtnameErr = "Le nom est requis !";
+                $errors['firstname'] = 'le nom est requis';
+            }
+            if (empty($_POST['lastname'])) {
+                $errors['lastname'] = 'Le prénom est requis !';
+            }
+            if (empty($_POST['email'])) {
+                $errors['email'] = "L'email est requis !";
+            }
+            if (empty($_POST['password'])) {
+                $errors['password'] = 'Le mot de passe est requis !';
+            }
+            if (empty($_POST['status'])) {
+                $errors['status'] = 'Le status est requis !';
+            }
+            if (empty($errors))
+            {
+                $newUserManager = new UserManager($this->getPdo());
+                $newUser = new User;
+
+                $newUser->setLastname($_POST['firstname']);
+                $newUser->setFirstname($_POST['lastname']);
+                $newUser->setEmail($_POST['email']);
+                $newUser->setPass($_POST['password']);
+                $newUser->setStatus($_POST['status']);
+                $id = $newUserManager->userAdd($newUser);
+                header('Location: /admin/users');
+            }
+        }
+
+        $active = 'add';
+        return $this->twig->render('Admin/AdminUser/addUser.html.twig', ['active' => $active, 'errors' => $errors, 'nameErr' =>$_POST]); // traitement
     }
 
 

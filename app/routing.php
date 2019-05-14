@@ -15,6 +15,7 @@ $routes = [
         ['indexAdmin', '/admin/articles', 'GET'], //show index for admin
         ['logAdmin', '/admin/logAdmin', ['GET', 'POST']],
         ['logout', '/admin/logout', 'GET'], //logout
+        ['addUser', '/admin/user/createUser', ['GET', 'POST']], //add user by admin
 
         ['userShow', '/admin/user/{id:\d+}', 'GET'],
         ['usersIndex', '/admin/users', 'GET'],
@@ -34,7 +35,6 @@ $routes = [
 
         ['suscribeUser', '/register', ['GET','POST']], //register page
         ['logUser', '/login', ['GET','POST']], //login page
-        ['addUser', '/admin/user/createUser', ['GET', 'POST']], //add user by admin
         ['logoutUser', '/logout', 'GET'], //logout
     ],
 

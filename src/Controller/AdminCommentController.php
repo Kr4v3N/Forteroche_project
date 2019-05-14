@@ -74,7 +74,7 @@ class AdminCommentController extends AbstractController
         }else{
             $errorConnexion = 'Vous devez être connecté pour signaler ce billet.';
             $return = $_SERVER['HTTP_REFERER'];
-            return $this->twig->render('Article/logToComment.html.twig', ['errorConnexion' => $errorConnexion, 'return' => $return]);
+            return $this->twig->render('Article/logToSignal.html.twig', ['errorConnexion' => $errorConnexion, 'return' => $return]);
             // TODO redirection on last visited page after connexion
         }
     }
