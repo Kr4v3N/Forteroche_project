@@ -22,8 +22,8 @@ class AdminCommentManager extends AbstractManager
 //        var_dump(intval($_SESSION['user']['id']));
 //        var_dump($comment);
         //die();
-        $statement = $this->pdo->prepare("INSERT INTO $this->table (date, content, article_id, user_id)
-        VALUES (DATE(NOW()), :content, :article_id, :user_id)");
+        $statement = $this->pdo->prepare("INSERT INTO $this->table (date, content, article_id, user_id, signale)
+        VALUES (DATE(NOW()), :content, :article_id, :user_id, 0)");
         $statement->bindValue(':content', $comment->getContent(), \PDO::PARAM_STR);
         $statement->bindValue(':article_id', $comment->getArticleId(), \PDO::PARAM_INT);
         $statement->bindValue('user_id', $comment->getUserId(), \PDO::PARAM_STR);
