@@ -37,7 +37,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{  lastarticle.title|truncate(22)}} </h5>
                             <h6 class="card-subtitle mb-2 text-muted">rédigé le : {{ lastarticle.date }}</h6>
-                            <p class="card-text">{{ lastarticle.content|truncate(70)|raw }}</p>
+                            <p class="card-text">{{ lastarticle.content|truncate(65)|raw }}</p>
                         </div>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
             <div class="col-sm-12 col-md-5 col-lg-2">
                 <div class="card text-white bg-warning mb-3" style="max-width: 18rem; min-height: 12rem;">
                     <div class="card-header"style="text-align:center; font-size: 1.6rem;">
-                        <a class="title-admin" href="/admin/comments"><strong>Nombre total de commentaires</strong></a>
+                        <a class="title-admin" href="/admin/comments" ><strong>Nombre total de commentaires</strong></a>
                     </div>
                     <div class="card-body">
                         <h5 class="card-title dashboardCount">{{ totalComments }}</h5>
@@ -71,7 +71,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{  lastcomment.user_id}}</h5>
                             <h6 class="card-subtitle mb-2 text-muted">{{ lastcomment.date}}</h6>
-                            <p class="card-text">{{ lastcomment.content|truncate(70)|raw }}</p>
+{#                            <p class="card-text">{{ lastcomment.content|truncate(70)|raw }}</p>#}
                         </div>
                     </div>
                 </div>
@@ -88,7 +88,6 @@
             </div>
         </div>
         <div class="row mt-2">
-
             <div class="col-sm-12 col-md-5 col-lg-2">
                 <div class="card text-white bg-info mb-3" style="max-width: 18rem; min-height: 12rem;">
                     <div class="card-header" style="text-align:center; font-size: 1.6rem;">

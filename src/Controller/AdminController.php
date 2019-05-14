@@ -69,7 +69,7 @@ class AdminController extends AbstractController
         $usersManager = new UserManager($this->getPdo());
         $users = $usersManager->selectAllUsers();
         $active = "utilisateurs";
-        return $this->twig->render('Admin/AdminUser/indexUsers.html.twig', ['users' => $users, "active" => $active]);
+        return $this->twig->render('Admin/AdminUser/indexUsers.html.twig', ['users' => $users, 'active' => $active]);
     }
 
     // delete a user TODO add cascade to delete user and his comments
@@ -228,10 +228,10 @@ class AdminController extends AbstractController
         $article = $articleManager->selectOneById($id);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if ($_POST["title"] == "") {
-                $titleErr = "Le titre est requis !";
-            } elseif ($_POST["content"] == "") {
-                $contentErr = "Le contenu est requis !";
+            if ($_POST["title"] == '') {
+                $titleErr = 'Le titre est requis !';
+            } elseif ($_POST['content'] == "") {
+                $contentErr = 'Le contenu est requis !';
             } else {
                 $article->setTitle($_POST['title']);
                 $article->setContent($_POST['content']);
@@ -242,42 +242,26 @@ class AdminController extends AbstractController
                     $extension = strtolower(strrchr($_FILES['image']['name'], '.'));
                     $size = $_FILES['image']['size'];
 
-                    if (!in_array($extension, $allowExtension)) {
-                        $error['errorExt'] = 'Seuls les fichiers image .jpg, .jpeg, .gif et .png sont autorisés.';
-                    }
-                    if (($size > $maxSize) || ($size == 0)) {
-                        $error['errorSize'] = 'Votre fichier est trop volumineux. Taille maximale autorisée : 3Mo.';
-                    } else {
-                        $filename = 'image-' . $_FILES['image']['name'];
-                        move_uploaded_file($_FILES['image']['tmp_name'], '../public/assets/images/' . $filename);
-                        $article->setPicture($filename);
-                    }
+                if (!in_array($extension, $allowExtension)) {
+                    $error['errorExt'] = 'Seuls les fichiers image .jpg, .jpeg, .gif et .png sont autorisés.';
                 }
-                if (!empty($_FILES['imageMin'])) {
-                    $allowExtension = ['.jpg', '.jpeg', '.gif', '.png'];
-                    $maxSize = 3000000;
-                    $extensionMin = strtolower(strrchr($_FILES['imageMin']['name'], '.'));
-                    $sizeMin = $_FILES['imageMin']['size'];
-
-                    if (!in_array($extensionMin, $allowExtension)) {
-                        $errorMin['errorExt'] = 'Seuls les fichiers image .jpg, .jpeg, .gif et .png sont autorisés.';
-                    } elseif (($size > $maxSize) || ($size == 0)) {
-                        $errorMin['errorSize'] = 'Votre fichier est trop volumineux. Taille maximale autorisée : 3Mo.';
-                    } else {
-                        $filenameMin = 'image-' . $_FILES['imageMin']['name'];
-                        move_uploaded_file($_FILES['imageMin']['tmp_name'], '../public/assets/images/' . $filenameMin);
-                        $article->setMiniature($filenameMin);
-                    }
+                if (($size > $maxSize) || ($size == 0)) {
+                    $error['errorSize'] = 'Votre fichier est trop volumineux. Taille maximale autorisée : 3Mo.';
+                } else {
+                    $filename = 'image-' . $_FILES['image']['name'];
+                    move_uploaded_file($_FILES['image']['tmp_name'], '../public/assets/images/' . $filename);
+                    $article->setPicture($filename);
+                }
 
                 }
                 // TODO interrupt edit when wrong file uploaded
 
-                $id = $articleManager->update($article);
+                $articleManager->update($article);
                 header('Location: /admin/article/' . $id);
             }
 
         }
-        return $this->twig->render('Admin/AdminArticle/edit.html.twig', ["article" => $article, 'titleErr' => $titleErr, 'contentErr' => $contentErr, 'errorFile' => $error, 'errorMin' => $errorMin, 'content' => $_POST]);
+        return $this->twig->render('Admin/AdminArticle/edit.html.twig', ['article' => $article, 'titleErr' => $titleErr, 'contentErr' => $contentErr, 'errorFile' => $error, 'errorMin' => $errorMin, 'content' => $_POST]);
     }
 
     public function addUser()
@@ -321,9 +305,8 @@ class AdminController extends AbstractController
         }
 
         $active = 'add';
-        return $this->twig->render('Admin/AdminUser/addUser.html.twig', ['active' => $active, 'errors' => $errors, 'nameErr' =>$_POST]); // traitement
+        return $this->twig->render('Admin/AdminUser/addUser.html.twig', ['active' => $active, 'errors' => $errors, 'nameErr' => $_POST]); // traitement
     }
-
 
 
 }

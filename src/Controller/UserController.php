@@ -30,7 +30,6 @@ class UserController extends AbstractController
         header('Location: /');
     }
 
-
     public function userShow(int $id)
     {
 

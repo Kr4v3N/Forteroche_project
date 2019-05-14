@@ -68,14 +68,15 @@ class AdminCommentController extends AbstractController
     public function addCommentSignal($id)
     {
         $errorConnexion ='';
-        if (isset($_SESSION['user'])) {
+
+        if (isset($_SESSION['user']))
+        {
             $commentSignal = new AdminCommentManager($this->getPdo());
             $commentSignal->addSignal($id);
         }else{
             $errorConnexion = 'Vous devez être connecté pour signaler ce billet.';
             $return = $_SERVER['HTTP_REFERER'];
             return $this->twig->render('Article/logToSignal.html.twig', ['errorConnexion' => $errorConnexion, 'return' => $return]);
-            // TODO redirection on last visited page after connexion
         }
     }
 

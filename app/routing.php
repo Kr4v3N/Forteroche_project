@@ -16,14 +16,13 @@ $routes = [
         ['logAdmin', '/admin/logAdmin', ['GET', 'POST']],
         ['logout', '/admin/logout', 'GET'], //logout
         ['addUser', '/admin/user/createUser', ['GET', 'POST']], //add user by admin
-
         ['userShow', '/admin/user/{id:\d+}', 'GET'],
         ['usersIndex', '/admin/users', 'GET'],
         ['userDelete', '/admin/user/delete/{id:\d+}', 'GET'],
     ],
 
     'AdminComment' => [
-        ['delete', '/admin/comment/delete/{id:\d+}', 'GET'], //add comment by user
+        ['delete', '/admin/comment/delete/{id:\d+}', 'GET'], //remove comment
         ['add', '/article/{id:\d+}/comment', 'POST'],    //add comment by user
         ['indexAdminComments', '/admin/comments', 'GET'], //show index comment for admin
         ['addCommentSignal', '/article/comment/signal/{id:\d+}', 'GET'], //add comment signal by user

@@ -10,7 +10,7 @@
 
             <tr>
                 <th scope="col">Titre du billet</th>
-                {%  if content.signale == 0 %}
+                {%  if content.signale == 1 %}
                 <th scope="col">Commentaire</th>
                 {% else %}
                     <th scope="col">Commentaires</th>
@@ -47,7 +47,7 @@
                         </a>
                     </td>
                     <td>
-                        <a href="/admin/comment/delete/{{ content.id }}" target="" data-confirm="Etes-vous certain de vouloir supprimer?">
+                        <a href="/admin/comment/delete/{{ content.id }}" target="" data-confirm="Etes-vous certain de vouloir le supprimer?">
                             <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                         </a>
                     </td>
