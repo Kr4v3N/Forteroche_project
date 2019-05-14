@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <div class="container">
+    <div class="container-fluid">
         <h1 class="text-white titlePageAdmin">Commentaires signalés</h1>
 
         <table class="table table-striped text-white text-center">
@@ -10,15 +10,11 @@
 
             <tr>
                 <th scope="col">Titre du billet</th>
-                {%  if content.signale == 1 %}
-                <th scope="col">Commentaire</th>
-                {% else %}
-                    <th scope="col">Commentaires</th>
-                {% endif %}
+                <th scope="col">Commentaire(s)</th>
                 <th scope="col">Date</th>
                 <th scope="col">Utilisateur(s)</th>
                 <th scope="col">Nombre de signalement</th>
-                <th scope="col">Annuler</th>
+                <th scope="col">Valider</th>
                 <th scope="col">Supprimer</th>
             </tr>
 
