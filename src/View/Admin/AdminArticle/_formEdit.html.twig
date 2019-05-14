@@ -1,28 +1,27 @@
 <div class="container">
-    <div class="card article">
-        <div class="card-body">
-            {% if errorFile %}
 
-                <div class="alert alert-danger" role="alert">
-                    {{ errorFile.errorExt }} {{ errorFile.errorSize }}</div>
+        <div class="card article">
+            <div class="card-body">
 
-            {% endif %}
-            <form method="post" action="" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="titre">Titre</label>
-                    <input type="text" class="form-control" id="text" required name="title" value="{{ article.title }}">
-                    {{ titleErr }}
-                    <br/>
-                    <label for="contenu">Contenu</label>
-                    <textarea class="form-control" id="contenu" name="content" rows="20">{{ article.content }}
+                <form method="post" action="" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="titre">Titre</label>
+                        <input type="text" class="form-control" id="text" required name="title" value="{{ article.title }}">
+                        <span>{{ errors.title }}</span>
+                        <br/>
+                        <label for="contenu">Contenu</label>
+                        <textarea class="form-control" id="contenu" name="content" rows="6">{{ article.content|raw }}
                     </textarea>
-                    {{ contentErr }}
-                    <label for='image'>Cliquez pour modifier l'image : </label>
-                    <br/>
-                    <input id='image' name="image" type="file">
-                </div>
-                <button type="submit" class="btn btn-warning">Envoyer</button>
-            </form>
+                        <span>{{ errors.content }}</span>
+                        <br/>
+                        <label for='image'><strong>Cliquez pour modifier une image : </strong></label>
+                        <br/>
+                        <input id='image' name="image" type="file">
+                        <span>{{ errors.image }}</span>
+                        <br/>
+                    </div>
+                    <button type="submit" class="btnnn btn-warning">Envoyer</button>
+                </form>
+            </div>
         </div>
-    </div>
-
+</div>

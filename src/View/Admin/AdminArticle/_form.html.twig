@@ -2,17 +2,11 @@
     <div class="card article">
         <div class="card-body">
 
-            {% if errorFile %}
-
-                <div class="alert alert-danger" role="alert"> {{ errorFile.errorExt }} {{ errorFile.errorSize }}</div>
-
-            {% endif %}
-
             <form method="post" action="" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="titre">Titre</label>
-                    <input type="text" class="form-control" id="text" name="title" value="">
-                    {{ titleErr }}
+                    <input type="text" class="form-control" id="text" name="title" value="{{ content.title }}" style="background-color: white;">
+                    <span>{{ errors.title }}</span>
 
                     <label for="titre">Catégorie</label>
                     <select name="category" id="categorie">
@@ -24,19 +18,22 @@
                         <option value="6">Chapitre 6</option>
                         <option value="7">Chapitre 7</option>
                         <option value="8">Chapitre 8</option></select>
-
                 </div>
 
                 <div class="form-group">
                     <label for="contenu">Contenu</label>
-                    <textarea class="form-control" id="contenu" name="content" rows="12"></textarea>
-                    {{ contentErr }}
+                    <textarea class="form-control" id="contenu" name="content" rows="6" >{{ content.content }}</textarea>
+                    <span>{{ errors.content }}</span>
                 </div>
                 <div>
-                    <label for='image'>Cliquez pour ajouter une image : </label>
+                    <label for='image'><strong>Cliquez pour ajouter une image : </strong></label>
                     <br/>
                     <input id='image' name="image" type="file">
+                    <span>{{ errors.image }}</span>
                 </div>
+                <br/>
+                <br/>
+
                 <br/>
                 <br/>
                 <button type="submit" name="envoyer" class="btn btn-warning">Envoyer</button></a>
