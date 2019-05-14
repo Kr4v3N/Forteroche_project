@@ -23,7 +23,7 @@
             <div class="col-sm-12 col-md-5 col-lg-2">
                 <div class="card text-white bg-secondary mb-3" style="max-width: 18rem; min-height: 12rem;">
                     <div class="card-header" style="text-align:center; font-size: 1.6rem;">
-                        <a class="title-admin" href="/admin/articles">Nombre total de billets</a>
+                        <a class="title-admin" href="/admin/articles"><strong>Nombre total de billets</strong></a>
                     </div>
                     <div class="card-body">
                         <h5 class="card-title dashboardCount">{{ totalArticles }}</h5>
@@ -37,7 +37,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{  lastarticle.title|truncate(22)}} </h5>
                             <h6 class="card-subtitle mb-2 text-muted">rédigé le : {{ lastarticle.date }}</h6>
-                            <p class="card-text">{{ lastarticle.content|truncate(70) }}</p>
+                            <p class="card-text">{{ lastarticle.content|truncate(70)|raw }}</p>
                         </div>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
             <div class="col-sm-12 col-md-5 col-lg-2">
                 <div class="card text-white bg-warning mb-3" style="max-width: 18rem; min-height: 12rem;">
                     <div class="card-header"style="text-align:center; font-size: 1.6rem;">
-                        <a class="title-admin" href="/admin/comments" >Nombre total de commentaires</a>
+                        <a class="title-admin" href="/admin/comments"><strong>Nombre total de commentaires</strong></a>
                     </div>
                     <div class="card-body">
                         <h5 class="card-title dashboardCount">{{ totalComments }}</h5>
@@ -65,17 +65,17 @@
                 </div>
             </div>
 
-                        {% for lastcomment in lastcomments %}
-                            <div class="col-sm-12 col-md-5 col-lg-3">
-                                <div class="card cardFondDashboard" style="width: 18rem;">
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{  lastcomment.user_id}}</h5>
-                                        <h6 class="card-subtitle mb-2 text-muted">{{ lastcomment.date}}</h6>
-                                        <p class="card-text">{{ lastcomment.content|truncate(70) }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endfor %}
+            {% for lastcomment in lastcomments %}
+                <div class="col-sm-12 col-md-5 col-lg-3">
+                    <div class="card cardFondDashboard" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{  lastcomment.user_id}}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ lastcomment.date}}</h6>
+                            <p class="card-text">{{ lastcomment.content|truncate(70)|raw }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
 
         </div>
         <hr style="border: solid 1px #50E3C2; width: 65%">
@@ -88,10 +88,11 @@
             </div>
         </div>
         <div class="row mt-2">
+
             <div class="col-sm-12 col-md-5 col-lg-2">
                 <div class="card text-white bg-info mb-3" style="max-width: 18rem; min-height: 12rem;">
                     <div class="card-header" style="text-align:center; font-size: 1.6rem;">
-                        <a class="title-admin" href="/admin/users">Nombre total d'utilisateurs</a>
+                        <a class="title-admin" href="/admin/users"><strong>Nombre total d'utilisateurs</strong></a>
                     </div>
                     <div class="card-body">
                         <h5 class="card-title dashboardCount" style="text-align: center">{{ totalUsers }}</h5>
@@ -99,17 +100,17 @@
                 </div>
             </div>
 
-                        {% for lastuser in lastusers %}
-                            <div class="col-sm-12 col-md-5 col-lg-3">
-                                <div class="card cardFondDashboard" style="width: 18rem;">
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ lastuser.firstname }} {{ lastuser.lastname }}</h5>
-                                        <h6 class="card-subtitle mb-2 text-muted">{{ lastuser.email}}</h6>
-                                        <p class="card-text">enregistré le : {{ lastuser.registered }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endfor %}
+            {% for lastuser in lastusers %}
+                <div class="col-sm-12 col-md-5 col-lg-3">
+                    <div class="card cardFondDashboard" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ lastuser.firstname }} {{ lastuser.lastname }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ lastuser.email}}</h6>
+                            <p class="card-text">enregistré le : {{ lastuser.registered }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
 
         </div>
 
