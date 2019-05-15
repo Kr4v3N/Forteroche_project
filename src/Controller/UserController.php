@@ -38,7 +38,6 @@ class UserController extends AbstractController
         $commentManager = new AdminCommentManager($this->getPdo());
         $comment = $commentManager->selectCommentByUser($id);
         return $this->twig->render('Admin/AdminUser/adminShow.html.twig', ['user' => $user, 'comments' => $comment]);
-
     }
 
     public function usersIndex()
@@ -52,59 +51,63 @@ class UserController extends AbstractController
     {
         $newUserManager = new UserManager($this->getPdo());
         $newUserManager->userDelete($id);
-
     }
-
 
     public function suscribeUser()
     {
         $errorRegister = [];
 
-
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // appeler le manager
+
+            // call the manager
             $userManager = new UserManager($this->getPdo());
 
-            if (!preg_match("/^[a-zA-Z ]*$/", $_POST['lastname'])) {
-                $errorRegister['lastname'] = "Seul les lettres et espaces sont autorisés.";
+            if (!preg_match("/^[a-zA-Zéèêëïöôùçâû]*$/",$_POST['lastname']))
+            {
+                $errorRegister['lastname'] = 'Seul les lettres et espaces sont autorisés.' ;
             }
-            if (strlen($_POST['lastname']) < 2 || strlen($_POST['lastname']) > 15) {
-                $errorRegister['lastname'] = "Le nom doit comporter entre 2 et 15 caractères";
+            if (strlen($_POST['lastname']) < 2 || strlen($_POST['lastname']) > 15)
+            {
+                $errorRegister['lastname'] = 'Le nom doit comporter entre 2 et 15 caractères';
             }
-            if (!preg_match("/^[a-zA-Z ]*$/", $_POST['firstname'])) {
-                $errorRegister['firstname'] = "Le prénom doit comporter seulement des lettres et espaces.";
+            if (!preg_match("/^[a-zA-Zéèêëïöôùçâû]*$/",$_POST['firstname']))
+            {
+                $errorRegister['firstname'] = 'Le prénom doit comporter seulement des lettres et espaces.';
             }
-            if (strlen($_POST['firstname']) < 2 || strlen($_POST['firstname']) > 15) {
-                $errorRegister['firstname'] = "Le prénom doit comporter entre 2 et 15 caractères";
+            if (strlen($_POST['firstname']) < 2 || strlen($_POST['firstname']) > 15)
+            {
+                $errorRegister['firstname'] = 'Le prénom doit comporter entre 2 et 15 caractères';
             }
-            if (!preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $_POST['email'])) {
-                $errorRegister['email'] = "Mauvais format de votre adresse email";
+            if (!preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $_POST['email']))
+            {
+                $errorRegister['email'] = 'Mauvais format de votre adresse email';
             }
-            // Vérifie que l'email qu'on envoi n'est pas en base de donnée
-            if ($userManager->existUser($_POST['email'])) {
+            // Vérifies that the email we send is not in the database
+            if ($userManager->existUser($_POST['email']))
+            {
                 $errorRegister['email'] = "L'adresse email est déja utilisé.";
             }
-            if (strlen($_POST['password']) < 8) {
-                $errorRegister['password'] = "Le mot de passe doit comporter au minimum 8 caractères";
+            if (strlen($_POST['password']) < 8 )
+            {
+                $errorRegister['password'] = 'Le mot de passe doit comporter au minimum 8 caractères';
             }
-            if ($_POST['password'] !== ($_POST['password_control'])) {
-                $errorRegister['password'] = "Les mots de passe saisis ne sont pas identiques.";
+            if ($_POST['password'] !== ($_POST['password_control']))
+            {
+                $errorRegister['password'] = 'Les mots de passe saisis ne sont pas identiques.';
             }
-            if (empty($errorRegister)) {
+            if (empty($errorRegister))
+            {
                 $newUser = new User;
                 $newUser->setLastname($_POST['lastname']);
                 $newUser->setFirstname($_POST['firstname']);
                 $newUser->setEmail($_POST['email']);
                 $newUser->setPass($_POST['password']);
                 $id = $userManager->suscribe($newUser);
-                // TODO Renvoyer vers le bonne page
+                var_dump($newUser);
                 header('Location: /login');
-
             }
-
         }
-        return $this->twig->render('signUp.html.twig', ['errorRegister' => $errorRegister]);
-
+        return $this->twig->render('signUp.html.twig', ['errorRegister' => $errorRegister, 'post' =>$_POST]);
     }
 
     public function logUser()
