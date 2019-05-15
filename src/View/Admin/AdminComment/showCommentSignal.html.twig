@@ -9,7 +9,7 @@
             <thead class="thead-light">
 
             <tr>
-                <th scope="col">Titre du billet</th>
+                <th scope="col">Titre des billets</th>
                 <th scope="col">Commentaire(s)</th>
                 <th scope="col">Date</th>
                 <th scope="col">Utilisateur(s)</th>
@@ -25,7 +25,7 @@
 
                 <tr>
                     <td>{{ content.title }} </td>
-                    <td data-toggle="tooltip" data-placement="top" title="{{ content.content }}">
+                    <td data-toggle="tooltip" data-placement="top" title="{{ content.content|truncate(200) }}">
                         {{ content.content }}
                     </td>
                     <td>
@@ -38,7 +38,7 @@
                         {{ content.signale}}
                     </td>
                     <td>
-                        <a href="/admin/comment/reset/{{ content.id }}" target="" data-confirm="Etes-vous certain de vouloir réinitialiser le commentaire ?">
+                        <a href="/admin/comment/reset/{{ content.id }}" target="" data-confirm="Etes-vous certain de vouloir valider ce commentaire ?">
                             <button type="submit" class="btn btn-success"><i class="fas fa-check-square"></i></button>
                         </a>
                     </td>
