@@ -46,6 +46,7 @@ class AdminCommentManager extends AbstractManager
 
     public function selectAllComments(): array
     {
+        $this->pdo->query("SET lc_time_names = 'fr_FR'");
         return $this->pdo->query("SELECT comment.id, comment.content, DATE_FORMAT(comment.date, \"%e %M %Y à %Hh %i\") 
         AS date, article.title, user.lastname  FROM comment INNER JOIN article ON article.id = comment.article_id INNER JOIN user 
         ON user.id=comment.user_id ORDER BY date DESC;", \PDO::FETCH_CLASS, $this->className)->fetchAll();
@@ -91,6 +92,7 @@ class AdminCommentManager extends AbstractManager
     //Selection of all reported comments
     public function showSignal()
     {
+        $this->pdo->query("SET lc_time_names = 'fr_FR'");
         return $this->pdo->query('SELECT comment.id, comment.signale, DATE_FORMAT(comment.date, "%e %M %Y à %Hh %i") 
         AS date, comment.content, comment.user_id, comment.article_id, user.firstname AS userFirstname, user.lastname, article.title FROM comment 
         INNER JOIN user ON user.id=comment.user_id INNER JOIN article ON article.id=comment.article_id WHERE comment.signale != 0 

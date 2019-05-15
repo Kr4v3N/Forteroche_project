@@ -37,6 +37,7 @@ class ArticleManager extends AbstractManager
     // show all articles on index user
     public function selectAllArticles(): array
     {
+        $this->pdo->query("SET lc_time_names = 'fr_FR'");
         return $this->pdo->query('SELECT article.id AS id, DATE_FORMAT(article.date, "%e %M %Y à %Hh %i") 
         AS date , article.title, article.content, article.picture, user.firstname 
         AS userFirstname, user.lastname 

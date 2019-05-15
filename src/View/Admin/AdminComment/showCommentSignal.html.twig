@@ -3,7 +3,7 @@
 {% block content %}
 
     <div class="container-fluid">
-        <h1 class="text-white titlePageAdmin">Commentaires signalés</h1>
+        <h1 class="text-white titlePageAdmin">Commentaire(s) signalé(s)</h1>
 
         <table class="table table-striped text-white text-center">
             <thead class="thead-light">
@@ -26,7 +26,7 @@
                 <tr>
                     <td>{{ content.title }} </td>
                     <td data-toggle="tooltip" data-placement="top" title="{{ content.content }}">
-                        {{ content.content|truncate(80) }}
+                        {{ content.content }}
                     </td>
                     <td>
                         {{ content.date}}
