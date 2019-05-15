@@ -37,7 +37,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{  lastarticle.title|truncate(22)}} </h5>
                             <h6 class="card-subtitle mb-2 text-muted">rédigé le : {{ lastarticle.date }}</h6>
-                            <p class="card-text">{{ lastarticle.content|truncate(65)|raw }}</p>
+                            <p class="card-text">{{ lastarticle.content|truncate(70)|raw }}</p>
                         </div>
                     </div>
                 </div>
@@ -71,7 +71,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{  lastcomment.user_id}}</h5>
                             <h6 class="card-subtitle mb-2 text-muted">{{ lastcomment.date}}</h6>
-{#                            <p class="card-text">{{ lastcomment.content|truncate(70)|raw }}</p>#}
+                            <p class="card-text">{{ lastcomment.content|truncate(100)|raw }}</p>
                         </div>
                     </div>
                 </div>

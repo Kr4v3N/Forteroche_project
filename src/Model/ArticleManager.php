@@ -28,8 +28,8 @@ class ArticleManager extends AbstractManager
         $statement->bindValue(':user_id', $article->getUserId(), \PDO::PARAM_STR);
         $statement->bindValue(':category', $article->getCategoryId(), \PDO::PARAM_STR);
 
-
         if ($statement->execute()) {
+//            var_dump($statement);
             return $this->pdo->lastInsertId();
         }
     }
@@ -45,7 +45,7 @@ class ArticleManager extends AbstractManager
         INNER JOIN category ON article.category_id=category.id ORDER BY date DESC', \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
 
-    // show the last three articles
+    // show the last 3 articles
     public function selectArticlesForIndex(): array
     {
         return $this->pdo->query('SELECT * FROM article ORDER BY date DESC LIMIT 3', \PDO::FETCH_CLASS, $this->className)->fetchAll();
