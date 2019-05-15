@@ -66,7 +66,7 @@ h1{
     font-size: 25px;
 }
 
-/*---------------------------------------------Title Actualites-------------------------------------------------------*/
+/*---------------------------------------------Title Les derniers épisodes -------------------------------------------------------*/
 .btn-apropos_bas{
     border-bottom: 2px solid black;
     font-family: 'Dosis','Krub', sans-serif;
@@ -93,7 +93,7 @@ h1{
 /*modify title article size font-color */
 .articleTitre{
     color: black;
-    font-size: 2em;
+    font-size: 3em;
     text-align: center;
 }
 
@@ -104,9 +104,9 @@ h1{
 }
 
 /*image in article responsive*/
-.imgArticle{
-    max-width: 50%;
-}
+/*.imgArticle{*/
+/*    max-width: 50%;*/
+/*}*/
 
 /*background color connexion admin*/
 .bgAdminConnexion{
@@ -116,7 +116,7 @@ h1{
 
 /* border around picture in admin log*/
 .rounded-circle{
-    border: 2px solid #50E3C2;
+    border: 4px solid #50E3C2;
 }
 
 /* color bottun cards*/
@@ -214,10 +214,9 @@ footer {
 }
 
 .writer {
-    color:white;
+    color: white;
     padding: 1em;
 }
-/*--------------------------------------------------End Footer--------------------------------------------------------*/
 
 /*--------------------------------------------------SignUp page--------------------------------------------------------*/
 /*title register form*/
@@ -231,9 +230,6 @@ footer {
 }
 
 /*-- main --*/
-.main-w3layouts {
-}
-
 .main-agileinfo {
     width: 35%;
     margin: 1px auto;
@@ -317,13 +313,8 @@ span {
 .etc-login-form {
     font-size: 20px;
 }
-/*-------------------------------------------------- End SignUp page--------------------------------------------------------*/
 
 /*--------------------------------------------------loginUser page----------------------------------------------------------*/
-.etc-login-form.text-left {
-    font-size: 20px;
-    margin-top: -30px;
-}
 .panel h2{
     color:white;
     font-size:18px;
@@ -352,12 +343,8 @@ span {
 .login-form .form-group {
     margin-bottom:10px;
 }
-.login-form{ text-align:center;}
-.forgot a {
-    color: white;
-    font-size: 14px;
-    text-decoration: underline;
-}
+.login-form { text-align:center;}
+
 .btn-outline-Login {
     color: #50E3C2; !important
 }
@@ -408,13 +395,10 @@ span {
     -moz-border-radius: 10px;
     border-radius: 10px;
 }
-
-
 .btnhover:hover {
     transition: .5s all;
     background: #26A69A;
 }
-/*------------------------------------------------End LoginUser page--------------------------------------------------*/
 
 /* ---------------------------------------------Index Articles------------------------------------------------------- */
 .link {
@@ -429,14 +413,20 @@ span {
 .articleTitre {
     text-align: left;
     color: black;
-    font-family: 'Dosis', sans-serif;
+    font-family: 'Dosis', 'Roboto', sans-serif;
+    font-size: 30px;
+}
+.card-title {
+    font-size: 30px;
+}
+.card-text {
+    font-size: 20px;
 }
 
 /*Espace between cards*/
-
 .categories {
     position: fixed;
-    font-family: 'Dosis', 'Roboto',sans-serif;
+    font-family: 'Dosis', 'Roboto', sans-serif;
     font-weight: 100;
     list-style:none;
     padding-left: 0;
@@ -510,18 +500,88 @@ h1.titleActualite {
     z-index: 525;
 }
 
+/*CSS admin article*/
+.fontWhite{
+    color: white;
+}
 
-/* ------------------------------- */
-/* ----Barre d'accueil Admin------ */
-/* ------------------------------- */
-#alertinfo {
-    /*margin-top: 100px;*/
+/*show article & log to comment page*/
+.cardFond{
+    background-color: transparent !important;
+}
+
+.commentFond{
+    background-color: #b8bac1;
+}
+
+.btnFond{
+    background-color: #50E3C2;
+}
+
+.navbar-brand {
+    padding-left: 20px;
+}
+
+/*-----------------------------------------------Admin----------------------------------------------------------------*/
+
+/*------cards with 3 last items---------*/
+.title-admin {
+    color: lightgrey;
+}
+.dropdown-item {
+    background: #defff4;
+}
+
+.cardFondDashboard{
+    background: rgba(0, 0, 0, 0.2);
+    color: lightgrey;
+    min-height: 12rem;
+    margin-bottom: 2%;
+}
+
+.dashboardCount{
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+/*-------cards to create article (and user)------- */
+.cardFondCreate{
+    background: rgba(0, 0, 0, 0.1);
+    color: lightgrey;
+    min-height: 12rem;
+    margin-bottom: 2%;
+}
+
+.titlePageAdmin {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.btnSupp {
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.cardUser {
+    background-color: #808487;
+    border-radius: 1.25rem;
+}
+
+.btnModify {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.addNewUser {
+
+    margin-bottom: 10px;
 }
 
 
 /* ----------------------- */
 /* ----Media Queries------ */
 /* ----------------------- */
+
 @media screen and (min-width: 1215px){
     .dropdown-toggle1 {
         display: none;
@@ -546,6 +606,9 @@ h1.titleActualite {
 @media screen and (max-width: 768px){
     .categories {
         width: 880px;
+    }
+    .imgWriter {
+        display: none;
     }
 }
 @media screen and (max-width: 780px) {
@@ -659,79 +722,3 @@ h1.titleActualite {
 
 /*-----------------------------------------------End Media Queries----------------------------------------------------*/
 
-/*CSS admin article*/
-.fontWhite{
-    color: white;
-}
-
-/*show article & log to comment page*/
-.cardFond{
-    background-color: transparent !important;
-}
-
-.commentFond{
-    background-color: #b8bac1;
-}
-
-.btnFond{
-    background-color: #50E3C2;
-}
-
-.navbar-brand {
-    padding-left: 20px;
-}
-
-/*-----------------------------------------------Admin----------------------------------------------------------------*/
-
-/*------cards with 3 last items---------*/
-.title-admin {
-    color: lightgrey;
-}
-.dropdown-item {
-    background: #defff4;
-}
-
-.cardFondDashboard{
-    background: rgba(0, 0, 0, 0.2);
-    color: lightgrey;
-    min-height: 12rem;
-    margin-bottom: 2%;
-}
-
-.dashboardCount{
-    font-size: 2.5rem;
-    text-align: center;
-}
-
-/*-------cards to create article (and user)------- */
-.cardFondCreate{
-    background: rgba(0, 0, 0, 0.1);
-    color: lightgrey;
-    min-height: 12rem;
-    margin-bottom: 2%;
-}
-
-.titlePageAdmin {
-    margin-top: 50px;
-    margin-bottom: 50px;
-}
-
-.btnSupp {
-    margin-top: 20px;
-    margin-bottom: 50px;
-}
-
-.cardUser {
-    background-color: #808487;
-    border-radius: 1.25rem;
-}
-
-.btnModify {
-    margin-top: 50px;
-    margin-bottom: 50px;
-}
-
-.addNewUser {
-
-    margin-bottom: 10px;
-}

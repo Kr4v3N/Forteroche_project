@@ -18,7 +18,9 @@ class UserManager extends AbstractManager
 
     public function selectAllUsers(): array
     {
-        return $this->pdo->query('SELECT * FROM user ORDER BY lastname', \PDO::FETCH_CLASS, $this->className)->fetchAll();
+        $this->pdo->query("SET lc_time_names = 'fr_FR'");
+        return $this->pdo->query('SELECT id, firstname, lastname, email, DATE_FORMAT(registered, "%e %M %Y") AS registered, status 
+        FROM user ORDER BY lastname', \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
 
     public function userDelete(int $id): int

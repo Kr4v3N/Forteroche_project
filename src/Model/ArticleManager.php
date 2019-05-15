@@ -90,9 +90,11 @@ class ArticleManager extends AbstractManager
 
     public function selectArticlesByCategory(int $id): array
     {
-        return $this->pdo->query("SELECT article.id, article.title, category.name, article.content, article.picture 
-        FROM article INNER JOIN category ON category.id = article.category_id WHERE category_id= $id"
-            , \PDO::FETCH_CLASS, $this->className)->fetchAll();
+        $this->pdo->query("SET lc_time_names = 'fr_FR'");
+        return $this->pdo->query("SELECT article.id, DATE_FORMAT(article.date, \"%e %M %Y\") 
+        AS date, article.title, category.name, article.content, article.picture, user.firstname AS userFirstname, user.lastname AS userLastname 
+        FROM article INNER JOIN user ON article.user_id =user.id INNER JOIN category ON category.id = article.category_id 
+        WHERE category_id= $id;", \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
 
 }
