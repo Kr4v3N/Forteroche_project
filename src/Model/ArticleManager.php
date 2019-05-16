@@ -42,7 +42,7 @@ class ArticleManager extends AbstractManager
         AS date , article.title, article.content, article.picture, user.firstname 
         AS userFirstname, user.lastname 
         AS userLastname, category.name 
-        AS categoryName, article.modified FROM article INNER JOIN user ON article.user_id =user.id 
+        AS categoryName FROM article INNER JOIN user ON article.user_id =user.id 
         INNER JOIN category ON article.category_id=category.id ORDER BY date DESC', \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
 

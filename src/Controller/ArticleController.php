@@ -55,5 +55,9 @@ class  ArticleController extends AbstractController
             'category' => $category]);
     }
 
+    public function mentionsLegals()
+    {
+        return $this->twig->render('Users/mentionsLegals.html.twig');
+    }
 
 }
