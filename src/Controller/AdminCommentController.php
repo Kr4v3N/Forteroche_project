@@ -12,26 +12,38 @@ use Model\Comment;
  */
 class AdminCommentController extends AbstractController
 {
-    // TODO add construct for user's connection
 
     public function add(int $articleId)
     {
+
         $errorConnexion ='';
-        if (isset($_SESSION['user']) && (!empty($_POST))) {
+
+        if (isset($_SESSION['user'])) {
+
+            if (!empty($_POST['content'])) {
                 $CommentManager = new AdminCommentManager($this->getPdo());
                 $comment = new Comment();
                 $comment->setContent($_POST['content']);
                 $comment->setArticleId($articleId);
                 $comment->setUserId($_SESSION['user']['id']);
-                $id = $CommentManager->insert($comment);
+                $CommentManager->insert($comment);
                 header('Location: /article/' . $articleId);
-        }else{
+
+                }else {
+
+                    $errorConnexion = 'Vous devez ajouter un commentaire.';
+                    $return = $_SERVER['HTTP_REFERER'];
+
+                return $this->twig->render('Article/logToComment.html.twig', ['errorConnexion' => $errorConnexion, 'return' => $return, 'isLogged' => $this->isLogged()]);
+
+                }
+
+        }else {
+
             $errorConnexion = 'Vous devez être connecté pour commenter ce billet.';
             $return = $_SERVER['HTTP_REFERER'];
             return $this->twig->render('Article/logToComment.html.twig', ['errorConnexion' => $errorConnexion, 'return' => $return]);
-            // TODO redirection on last visited page after connexion
         }
-
     }
 
     public function indexAdminComments()
