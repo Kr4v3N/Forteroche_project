@@ -42,6 +42,7 @@ $routes = [
         ['show', '/article/{id:\d+}', 'GET'], //show article to users
         ['indexAccueil', '/', 'GET'], //show homepage to users
         ['showbycat', '/article/category/{id:\d+}', 'GET'], //show article to users by category
+        ['mentionsLegals', '/mentionsLegals', 'GET'], //mention légals
     ],
 ];
 

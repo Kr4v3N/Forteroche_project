@@ -151,5 +151,6 @@ class UserController extends AbstractController
         return $this->twig->render('loginUser.html.twig', ['errorLoginUser' => $errorLoginUser]);
     }
 
+
 }
 
