@@ -13,12 +13,12 @@
         <div class="row mt-5">
             <div class="col-10 offset-1 d-flex">
                 <img class="img-fluid mx-auto" src="/assets/images/{{ article.picture }}" alt="Generic placeholder image">
+
             </div>
             <div class="row d-flex mt-5">
                 <div class="col-10 offset-1">
 
-                    <p class="lead">Rédigé le {{ article.date }} par {{ article.userFirstname }} {{ article.userLastname }}</p>
-                    <p class="lead">{{ article.content | raw}}</p>
+                    <p class="lead">{{ article.content|raw}}</p>
                 </div>
             </div>
         </div>

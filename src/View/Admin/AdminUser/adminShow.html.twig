@@ -3,17 +3,17 @@
 {% block content %}
 
     <div class="container-fluid">
+
         <h1 class="text-white">Informations utilisateur</h1>
         <div class="card user">
             <div class="card-header bg-warning userFirstname">
                 {{ user.firstname }}
-
             </div>
             <div class="card-body">
                 <p class="card-title userFirstname">Nom :  {{ user.firstname}}</p>
                 <p class="card-text userLastname">Prénom :  {{ user.lastname }}</p>
                 <p class="card-text userEmail">Email :  {{ user.email }}</p>
-                <p class="card-text userRegistered">Date d'inscription :  {{ user.registered|date("j F Y") }}</p>
+                <p class="card-text userRegistered">Date d'inscription :  {{ user.registered }}</p>
                 <p class="card-text userStatus">Status :  {{ user.status }}</p>
 
             </div>
@@ -43,7 +43,7 @@
                 {% for comment in comments %}
                     <tr>
                         <td class="text-white">{{ comment.content }}</td>
-                        <td class="text-white">{{ comment.date|date("j F Y") }}</td>
+                        <td class="text-white">{{ comment.date("j F Y") }}</td>
                         <td>
                             <a href="/admin/comment/delete/{{ comment.id }}" target="" data-confirm="Etes-vous certain de vouloir supprimer ?">
                                 <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i></button></a>

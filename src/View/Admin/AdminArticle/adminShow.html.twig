@@ -3,21 +3,24 @@
 {% block content %}
 
 <div class="container mt-5">
+
     <h1 class="fontWhite">Voici le billet que vous venez de créer</h1>
-    <div class="row featurette">
-        <div class="col-md-7 d-flex">
-            <div class="">
-                <h2 class="featurette-heading articleTitre fontWhite">{{ article.title }}<span class="text-muted"></span></h2>
-                <p class="card-title articleDate fontWhite">Rédigé le : {{ article.date }}</p>
-                <p class="lead fontWhite">{{ article.content|raw}}</p>
-                </a>
+
+    <div class="row mt-5">
+        <div class="col-10 offset-1 d-flex">
+            <img class="img-fluid mx-auto" src="/assets/images/{{ article.picture }}" alt="Generic placeholder image">
+        </div>
+
+        <div class="row d-flex mt-5">
+            <div class="col-10 offset-1">
+
+                <p class="lead">{{ article.content|raw}}</p>
             </div>
         </div>
-        <div class="col-md-5 d-flex">
-            <img class="featurette-image img-fluid mx-auto" src="/assets/images/{{ article.picture }}" alt="Generic placeholder image">
-        </div>
     </div>
+
 </div>
+
 {% endblock content %}
 
 

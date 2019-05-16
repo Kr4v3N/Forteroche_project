@@ -54,7 +54,7 @@ class AdminController extends AbstractController
     public function userShow(int $id)
     {
         $userManager = new UserManager($this->getPdo());
-        $user = $userManager->selectOneById($id);
+        $user = $userManager->selectUserById($id);
         $commentManager = new AdminCommentManager($this->getPdo());
         $comment = $commentManager->selectCommentByUser($id);
         return $this->twig->render('Admin/AdminUser/adminShow.html.twig', ['user' => $user, 'comments' => $comment]);
@@ -249,8 +249,6 @@ class AdminController extends AbstractController
 
     public function addUser()
     {
-        /*$fisrtnameErr = $lastnameErr = $emailErr = $pwdErr = $statusErr = "";
-        $fisrtname = $lastname = $email = $pwd = $status = "";*/
 
         $errors = [];
 
@@ -290,6 +288,7 @@ class AdminController extends AbstractController
         $active = 'add';
         return $this->twig->render('Admin/AdminUser/addUser.html.twig', ['active' => $active, 'errors' => $errors, 'nameErr' => $_POST]); // traitement
     }
+
 
 
 }

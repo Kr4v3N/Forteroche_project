@@ -19,7 +19,8 @@ class UserManager extends AbstractManager
     public function selectAllUsers(): array
     {
         $this->pdo->query("SET lc_time_names = 'fr_FR'");
-        return $this->pdo->query('SELECT id, firstname, lastname, email, DATE_FORMAT(registered, "%e %M %Y") AS registered, status 
+        return $this->pdo->query('SELECT id, firstname, lastname, email, DATE_FORMAT(registered, "%e %M %Y") 
+        AS registered, status 
         FROM user ORDER BY lastname', \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
 
@@ -33,7 +34,8 @@ class UserManager extends AbstractManager
 
     public function suscribe(User $user)
     {
-        $addUser = $this->pdo->prepare("INSERT INTO $this->table (firstname, lastname, email, pass, registered, status) VALUES (:firstname,:lastname, :email, :password, NOW(),'user')");
+        $addUser = $this->pdo->prepare("INSERT INTO $this->table (firstname, lastname, email, pass, registered, status) 
+        VALUES (:firstname,:lastname, :email, :password, NOW(),'user')");
         $addUser->bindValue(':firstname', $user->getFirstname(), \PDO::PARAM_STR);
         $addUser->bindValue(':lastname', $user->getLastname(), \PDO::PARAM_STR);
         $addUser->bindValue(':email', $user->getEmail(), \PDO::PARAM_STR);
@@ -50,9 +52,6 @@ class UserManager extends AbstractManager
         $statement->bindValue(':email', $user->getEmail(), \PDO::PARAM_STR);
         $statement->bindValue(':pass', password_hash($user->getPass(), PASSWORD_DEFAULT), \PDO::PARAM_STR);
         $statement->bindValue(':status', $user->getStatus(), \PDO::PARAM_STR);
-
-        var_dump($user);
-
         return $statement->execute();
     }
 
@@ -82,6 +81,19 @@ class UserManager extends AbstractManager
     public function selectUsersForIndex(): array
     {
         return $this->pdo->query('SELECT * FROM user ORDER BY registered DESC LIMIT 3', \PDO::FETCH_CLASS, $this->className)->fetchAll();
+    }
+
+    public function selectUserById(int $id): array
+    {
+        $this->pdo->query("SET lc_time_names = 'fr_FR'");
+
+        // prepared request
+        $statement = $this->pdo->prepare("SELECT id, firstname, lastname, email, DATE_FORMAT(registered, \"%e %M %Y\") AS registered,  status 
+        FROM $this->table WHERE id=:id");
+        $statement->setFetchMode(\PDO::FETCH_CLASS, 'user');
+        $statement->bindValue('id', $id, \PDO::PARAM_INT);
+        $statement->execute();
+        return $statement->fetch();
     }
 
 }
