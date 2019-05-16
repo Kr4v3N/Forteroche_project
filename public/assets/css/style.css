@@ -63,11 +63,11 @@ h1{
     margin-top: 10px;
 }
 .presentation {
-    font-size: 25px;
+    font-size: 1.4em;
 }
 
 /*---------------------------------------------Title Les derniers épisodes -------------------------------------------------------*/
-.btn-apropos_bas{
+.btn_apropos_bas{
     border-bottom: 2px solid black;
     font-family: 'Dosis','Krub', sans-serif;
     height: 50px;
