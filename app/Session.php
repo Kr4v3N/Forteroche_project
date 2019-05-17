@@ -8,7 +8,7 @@ namespace App;
  * @package \App
  */
 class Session{
-    // Permet de démarrer session-start
+    //Allows you to start session-start
     public function __construct(){
         session_start();
     }

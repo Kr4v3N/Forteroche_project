@@ -2,12 +2,8 @@
 
 namespace Controller;
 
-use http\Env\Request;
 use Model\User;
 use Model\UserManager;
-use Model\Comment;
-use Model\AdminCommentManager;
-use App\Session;
 
 /**
  * Class UserController
@@ -24,42 +20,13 @@ class UserController extends AbstractController
         }
     }
 
-    public function logoutUser()
-    {
-        session_destroy();
-        header('Location: /');
-    }
-
-    public function userShow(int $id)
-    {
-
-        $userManager = new UserManager($this->getPdo());
-        $user = $userManager->selectOneById($id);
-        $commentManager = new AdminCommentManager($this->getPdo());
-        $comment = $commentManager->selectCommentByUser($id);
-        return $this->twig->render('Admin/AdminUser/adminShow.html.twig', ['user' => $user, 'comments' => $comment]);
-    }
-
-    public function usersIndex()
-    {
-        $newUsersManager = new UserManager($this->getPdo());
-        $newUsers = $newUsersManager->selectAllUsers();
-        return $this->twig->render('Admin/AdminUser/indexUsers.html.twig', ['users' => $newUsers]);
-    }
-
-    public function userDelete(int $id)
-    {
-        $newUserManager = new UserManager($this->getPdo());
-        $newUserManager->userDelete($id);
-    }
-
     public function suscribeUser()
     {
         $errorRegister = [];
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-            // call the manager
+            //call the manager
             $userManager = new UserManager($this->getPdo());
 
             if (!preg_match("/^[a-zA-Zéèêëïöôùçâû]*$/",$_POST['lastname']))
@@ -82,7 +49,7 @@ class UserController extends AbstractController
             {
                 $errorRegister['email'] = 'Mauvais format de votre adresse email';
             }
-            // Vérifies that the email we send is not in the database
+            //verifies that the email we send is not in the database
             if ($userManager->existUser($_POST['email']))
             {
                 $errorRegister['email'] = "L'adresse email est déja utilisé.";
@@ -103,7 +70,6 @@ class UserController extends AbstractController
                 $newUser->setEmail($_POST['email']);
                 $newUser->setPass($_POST['password']);
                 $id = $userManager->suscribe($newUser);
-                var_dump($newUser);
                 header('Location: /login');
             }
         }
@@ -113,23 +79,23 @@ class UserController extends AbstractController
     public function logUser()
     {
 
-        // Si user connecter
+        //if user is connected
         if (isset($_SESSION['user'])) {
             header('Location: /');
             exit();
         }
 
-        $errorLoginUser = '';
+        $errorLoginUser = null;
 
         if (!empty($_POST)) {
 
-            // appeler le manager
+            //call the manager
             $auth = new UserManager($this->getPdo());
             $user = $auth->loginUser($_POST['email']);
 
             if ($user) {
                 if (password_verify($_POST['password'], $user->getPass())) {
-                    // Si password ok, creation session user avec lastname, firstname, et email.
+                    //Si password ok, creation session user avec lastname, firstname, et email.
                     $_SESSION['user'] = [
                         'id' => $user->getId(),
                         'lastname' => $user->getlastname(),
@@ -151,6 +117,11 @@ class UserController extends AbstractController
         return $this->twig->render('loginUser.html.twig', ['errorLoginUser' => $errorLoginUser]);
     }
 
+    public function logoutUser()
+    {
+        session_destroy();
+        header('Location: /');
+    }
 
 }
 

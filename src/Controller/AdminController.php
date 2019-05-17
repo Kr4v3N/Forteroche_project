@@ -1,7 +1,7 @@
 <?php
+
 namespace Controller;
 
-use http\Env\Request;
 use Model\ArticleManager;
 use Model\Article;
 use Model\AuthManager;
@@ -9,7 +9,11 @@ use Model\User;
 use Model\UserManager;
 use Model\AdminCommentManager;
 
-
+/**
+ * Class AdminController
+ *
+ * @package \Controller
+ */
 class AdminController extends AbstractController
 {
 
@@ -50,41 +54,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-    //show user and his comments
-    public function userShow(int $id)
-    {
-        $userManager = new UserManager($this->getPdo());
-        $user = $userManager->selectUserById($id);
-        $commentManager = new AdminCommentManager($this->getPdo());
-        $comment = $commentManager->selectCommentByUser($id);
-        return $this->twig->render('Admin/AdminUser/adminShow.html.twig', ['user' => $user, 'comments' => $comment]);
-    }
-
-    // show all users to manage them
-    public function usersIndex()
-    {
-        $usersManager = new UserManager($this->getPdo());
-        $users = $usersManager->selectAllUsers();
-        $active = 'utilisateurs';
-        return $this->twig->render('Admin/AdminUser/indexUsers.html.twig', ['users' => $users, 'active' => $active]);
-    }
-
-    // delete a user TODO add cascade to delete user and his comments
-    public function userDelete(int $id)
-    {
-        $newUserManager = new UserManager($this->getPdo());
-        $newUserManager->userDelete($id);
-    }
-
-    // logout for admin
-    public function logout()
-    {
-        session_start();
-        session_destroy();
-        header('Location: /admin/logAdmin');
-    }
-
-    // show one article to admin in order to modify or not
+    //show one article to admin in order to modify or not
     public function adminShow(int $id)
     {
         $articleManager = new ArticleManager($this->getPdo());
@@ -93,23 +63,15 @@ class AdminController extends AbstractController
         return $this->twig->render('Admin/AdminArticle/adminShow.html.twig', ['article' => $article]);
     }
 
-    // show all articles for admin
-    public function indexAdmin()
-    {
-        $articlesManager = new ArticleManager($this->getPdo());
-        $articles = $articlesManager->selectAllArticles();
-        $active = "articles";
-        return $this->twig->render('Admin/AdminArticle/indexAdmin.html.twig', ['articles' => $articles, 'active' => $active]);
-    }
-
-
-    // add an article
+    //add an article
     public function add()
     {
         $errors = [];
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') // affiche si
-        {   $articleManager = new ArticleManager($this->getPdo());
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') // shows if
+
+        {
+            $articleManager = new ArticleManager($this->getPdo());
             $article = new Article();
             if (empty($_POST['title'])) {
                 $errors['title'] = 'Le titre est requis !';
@@ -127,7 +89,7 @@ class AdminController extends AbstractController
                 if (!in_array($extension, $allowExtension)) {
                     $errors['image'] = 'Seuls les fichiers image .jpg, .jpeg, .gif et .png sont autorisés.';
                 }
-                if (($size > $maxSize) || ($size == 0)) {
+                if (($size > $maxSize) || ($size === 0)) {
                     $errors['image'] = 'Votre fichier est trop volumineux. Taille maximale autorisée : 1Mo.';
                 }
             }
@@ -150,55 +112,7 @@ class AdminController extends AbstractController
         return $this->twig->render('Admin/AdminArticle/add.html.twig', ['active' => $active, 'errors' => $errors, 'content' => $_POST]); // traitement
     }
 
-    public function logAdmin()
-    {
-
-        // Si admin connecter
-        if (isset($_SESSION['admin'])) {
-            header('Location: /admin/dashboard');
-            exit();
-        }
-
-        $errorLogin = '';
-
-        if (!empty($_POST)) {
-            // Verifier si les données sont postées puis initialise le composant d'authentification.
-            $auth = new AuthManager($this->getPdo());
-            $admin = $auth->login($_POST['email']);
-
-            if ($admin) {
-
-                if (password_verify($_POST['password'], $admin->getPass())) {
-                    //Si password ok, creation session admin avec lastname, firstname, et email.
-                    $_SESSION['admin'] = [
-                        'id' => $admin->getId(),
-                        'lastname' => $admin->getlastname(),
-                        'firstname' => $admin->getFirstname(),
-                        'email' => $admin->getEmail(),
-                        'message' => 'Vous êtes connecté'
-                    ];
-
-                    header('Location: /admin/dashboard');
-                } else {
-                    $errorLogin = 'Identifiant incorrect';
-                }
-            } else {
-                $errorLogin = 'Identifiant incorrect';
-            }
-
-
-        }
-        return $this->twig->render('Admin/logAdmin.html.twig', ['errorLogin' => $errorLogin]);
-    }
-
-    //delete an article
-    public function delete(int $id)
-    {
-        $articleManager = new ArticleManager($this->getPdo());
-        $articleManager->delete($id);
-    }
-
-    // edit an article, change title, content, picture
+    //edit an article, change title, content, picture
     /**
      * @param int $id
      * @return string
@@ -228,7 +142,7 @@ class AdminController extends AbstractController
                 if (!in_array($extension, $allowExtension)) {
                     $errors['image'] = 'Seuls les fichiers image .jpg, .jpeg, .gif et .png sont autorisés.';
                 }
-                if (($size > $maxSize) || ($size == 0)) {
+                if (($size > $maxSize) || ($size === 0)) {
                     $errors['image'] = 'Votre fichier est trop volumineux. Taille maximale autorisée : 1Mo.';
                 }
                 if(!$errors){
@@ -244,7 +158,76 @@ class AdminController extends AbstractController
                 $id = $articleManager->update($article);
             }
         }
-        return $this->twig->render('Admin/AdminArticle/edit.html.twig', ['article' => $article, 'errors' => $errors, 'content' => $_POST]);
+        return $this->twig->render('Admin/AdminArticle/edit.html.twig', [
+            'article' => $article,
+            'errors' => $errors,
+            'content' => $_POST]);
+    }
+
+    //delete an article
+    public function delete(int $id)
+    {
+        $articleManager = new ArticleManager($this->getPdo());
+        $articleManager->delete($id);
+    }
+
+    //show all articles for admin
+    public function indexAdmin()
+    {
+        $articlesManager = new ArticleManager($this->getPdo());
+        $articles = $articlesManager->selectAllArticles();
+        $active = 'articles';
+        return $this->twig->render('Admin/AdminArticle/indexAdmin.html.twig', [
+            'articles' => $articles,
+            'active' => $active]);
+    }
+
+    //connexion administrator
+    public function logAdmin()
+    {
+
+        //if admin is connected
+        if (isset($_SESSION['admin'])) {
+            header('Location: /admin/dashboard');
+            exit();
+        }
+
+        $errorLogin = null;
+
+        if (!empty($_POST)) {
+            //Check if the data is posted and then initialize the authentication component.
+            $auth = new AuthManager($this->getPdo());
+            $admin = $auth->login($_POST['email']);
+
+            if ($admin) {
+
+                if (password_verify($_POST['password'], $admin->getPass())) {
+                    //If password ok, creation session admin with lastname, firstname, and email.
+                    $_SESSION['admin'] = [
+                        'id' => $admin->getId(),
+                        'lastname' => $admin->getlastname(),
+                        'firstname' => $admin->getFirstname(),
+                        'email' => $admin->getEmail(),
+                        'message' => 'Vous êtes connecté'
+                    ];
+
+                    header('Location: /admin/dashboard');
+                } else {
+                    $errorLogin = 'Identifiant incorrect';
+                }
+            } else {
+                $errorLogin = 'Identifiant incorrect';
+            }
+        }
+        return $this->twig->render('Admin/logAdmin.html.twig', ['errorLogin' => $errorLogin]);
+    }
+
+    //logout for admin
+    public function logout()
+    {
+        session_start();
+        session_destroy();
+        header('Location: /admin/logAdmin');
     }
 
     public function addUser()
@@ -252,10 +235,9 @@ class AdminController extends AbstractController
 
         $errors = [];
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') // affiche si
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') //displays if
         {
             if (empty($_POST['firstname'])) {
-                //$fisrtnameErr = "Le nom est requis !";
                 $errors['firstname'] = 'le nom est requis';
             }
             if (empty($_POST['lastname'])) {
@@ -286,10 +268,41 @@ class AdminController extends AbstractController
         }
 
         $active = 'add';
-        return $this->twig->render('Admin/AdminUser/addUser.html.twig', ['active' => $active, 'errors' => $errors, 'nameErr' => $_POST]); // traitement
+        return $this->twig->render('Admin/AdminUser/addUser.html.twig', [
+            'active' => $active,
+            'errors' => $errors,
+            'nameErr' => $_POST]); //treatment
     }
 
+    //show user and his comments
+    public function userShow(int $id)
+    {
+        $userManager = new UserManager($this->getPdo());
+        $user = $userManager->selectUserById($id);
+        $commentManager = new AdminCommentManager($this->getPdo());
+        $comment = $commentManager->selectCommentByUser($id);
+        return $this->twig->render('Admin/AdminUser/adminShow.html.twig', [
+            'user' => $user,
+            'comments' => $comment]);
+    }
 
+    //show all users to manage them
+    public function usersIndex()
+    {
+        $usersManager = new UserManager($this->getPdo());
+        $users = $usersManager->selectAllUsers();
+        $active = 'utilisateurs';
+        return $this->twig->render('Admin/AdminUser/indexUsers.html.twig', [
+            'users' => $users,
+            'active' => $active]);
+    }
+
+    //delete a user
+    public function userDelete(int $id)
+    {
+        $newUserManager = new UserManager($this->getPdo());
+        $newUserManager->userDelete($id);
+    }
 
 }
 

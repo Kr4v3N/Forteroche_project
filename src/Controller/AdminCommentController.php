@@ -13,10 +13,20 @@ use Model\Comment;
 class AdminCommentController extends AbstractController
 {
 
+    public function indexAdminComments()
+    {
+        $commentsManager = new AdminCommentManager($this->getPdo());
+        $comments = $commentsManager->selectAllComments();
+        $active = 'comments';
+        return $this->twig->render('Admin/AdminComment/indexAdminComment.html.twig', [
+            'comments' => $comments,
+            'active' => $active,
+        ] );
+    }
+
     public function add(int $articleId)
     {
-
-        $errorConnexion ='';
+        $errorConnexion = null;
 
         if (isset($_SESSION['user'])) {
 
@@ -46,15 +56,26 @@ class AdminCommentController extends AbstractController
         }
     }
 
-    public function indexAdminComments()
+    //To add a report to a specific comment, it is incremental
+    public function addCommentSignal($id)
     {
-        $commentsManager = new AdminCommentManager($this->getPdo());
-        $comments = $commentsManager->selectAllComments();
-        $active = "comments";
-        return $this->twig->render('Admin/AdminComment/indexAdminComment.html.twig', [
-            'comments' => $comments,
-            'active' => $active,
-        ] );
+        $errorConnexion = null;
+
+        if (isset($_SESSION['user']))
+        {
+            $commentSignal = new AdminCommentManager($this->getPdo());
+            $commentSignal->addSignal($id);
+        }else{
+            $errorConnexion = 'Vous devez être connecté pour signaler ce billet.';
+            $return = $_SERVER['HTTP_REFERER'];
+            return $this->twig->render('Article/logToSignal.html.twig', ['errorConnexion' => $errorConnexion, 'return' => $return]);
+        }
+    }
+
+    public function delete(int $id)
+    {
+        $commentManager = new AdminCommentManager($this->getPdo());
+        $commentManager->delete($id);
     }
 
     //Index of all reported comments
@@ -68,28 +89,6 @@ class AdminCommentController extends AbstractController
             'comments' => $shows,
             'signals' => $signals
         ]);
-    }
-
-    public function delete(int $id)
-    {
-        $commentManager = new AdminCommentManager($this->getPdo());
-        $commentManager->delete($id);
-    }
-
-    //To add a report to a specific comment, it is incremental
-    public function addCommentSignal($id)
-    {
-        $errorConnexion ='';
-
-        if (isset($_SESSION['user']))
-        {
-            $commentSignal = new AdminCommentManager($this->getPdo());
-            $commentSignal->addSignal($id);
-        }else{
-            $errorConnexion = 'Vous devez être connecté pour signaler ce billet.';
-            $return = $_SERVER['HTTP_REFERER'];
-            return $this->twig->render('Article/logToSignal.html.twig', ['errorConnexion' => $errorConnexion, 'return' => $return]);
-        }
     }
 
    //delete reports if this is not justified

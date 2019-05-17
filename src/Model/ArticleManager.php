@@ -19,8 +19,8 @@ class ArticleManager extends AbstractManager
     //create a new article
     public function insert(Article $article): int
     {
-        $statement = $this->pdo->prepare("INSERT INTO $this->table (date, title, content, picture, user_id, category_id) 
-        VALUES (NOW(), :title, :content, :picture, :user_id, :category)");
+        $statement = $this->pdo->prepare("INSERT INTO $this->table (date, title, content, picture, user_id, 
+        category_id) VALUES (NOW(), :title, :content, :picture, :user_id, :category)");
 
         $statement->bindValue(':title', $article->getTitle(), \PDO::PARAM_STR);
         $statement->bindValue(':content', $article->getContent(),\PDO::PARAM_STR);
@@ -29,12 +29,11 @@ class ArticleManager extends AbstractManager
         $statement->bindValue(':category', $article->getCategoryId(), \PDO::PARAM_STR);
 
         if ($statement->execute()) {
-//            var_dump($statement);
             return $this->pdo->lastInsertId();
         }
     }
 
-    // show all articles on index user
+    //show all articles on index user
     public function selectAllArticles(): array
     {
         $this->pdo->query("SET lc_time_names = 'fr_FR'");
@@ -43,16 +42,18 @@ class ArticleManager extends AbstractManager
         AS userFirstname, user.lastname 
         AS userLastname, category.name 
         AS categoryName FROM article INNER JOIN user ON article.user_id =user.id 
-        INNER JOIN category ON article.category_id=category.id ORDER BY date DESC', \PDO::FETCH_CLASS, $this->className)->fetchAll();
+        INNER JOIN category ON article.category_id=category.id ORDER BY date DESC',
+        \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
 
-    // show the last 3 articles
+    //show the last 3 articles
     public function selectArticlesForIndex(): array
     {
-        return $this->pdo->query('SELECT * FROM article ORDER BY date DESC LIMIT 3', \PDO::FETCH_CLASS, $this->className)->fetchAll();
+        return $this->pdo->query('SELECT * FROM article ORDER BY date DESC LIMIT 3',
+        \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
 
-    // delete article by id
+    //delete article by id
     public function delete(int $id): int
     {
         $statement = $this->pdo->prepare("DELETE FROM article WHERE id=:id");
@@ -61,10 +62,11 @@ class ArticleManager extends AbstractManager
         return header('Location: ' . $_SERVER['HTTP_REFERER']);
     }
 
-    // update article and picture
+    //update article and picture
     public function update(Article $article): int
     {
-        $statement = $this->pdo->prepare("UPDATE $this->table SET title = :title, content = :content, picture = :picture WHERE id=:id");
+        $statement = $this->pdo->prepare("UPDATE $this->table SET title = :title, content = :content, 
+        picture = :picture WHERE id=:id");
         $statement->bindValue('title', $article->getTitle(), \PDO::PARAM_STR);
         $statement->bindValue('content', $article->getContent(), \PDO::PARAM_STR);
         $statement->bindValue('id', $article->getId(), \PDO::PARAM_INT);
@@ -81,19 +83,22 @@ class ArticleManager extends AbstractManager
     public function selectAllArticlesAndCategory(): array
     {
         return $this->pdo->query('SELECT article.id, article.title, category.name, article.content, article.picture 
-        FROM article INNER JOIN category ON category.id = article.user_id;;', \PDO::FETCH_CLASS, $this->className)->fetchAll();
+        FROM article INNER JOIN category ON category.id = article.user_id;;',
+        \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
 
     public function selectCategory(){
-        return $this->pdo->query('SELECT id, name FROM category', \PDO::FETCH_CLASS, $this->className)->fetchAll();
+        return $this->pdo->query('SELECT id, name FROM category',
+        \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
 
     public function selectArticlesByCategory(int $id): array
     {
         $this->pdo->query("SET lc_time_names = 'fr_FR'");
         return $this->pdo->query("SELECT article.id, DATE_FORMAT(article.date, \"%e %M %Y\") 
-        AS date, article.title, category.name, article.content, article.picture, user.firstname AS userFirstname, user.lastname AS userLastname 
-        FROM article INNER JOIN user ON article.user_id =user.id INNER JOIN category ON category.id = article.category_id 
+        AS date, article.title, category.name, article.content, article.picture, user.firstname AS userFirstname, 
+        user.lastname AS userLastname FROM article INNER JOIN user ON article.user_id =user.id 
+        INNER JOIN category ON category.id = article.category_id 
         WHERE category_id= $id;", \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
 

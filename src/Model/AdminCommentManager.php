@@ -32,9 +32,9 @@ class AdminCommentManager extends AbstractManager
 
     public function ShowAllComments(int $id)
     {
-        // prepared request
-        $statement = $this->pdo->prepare("SELECT comment.id, comment.content, comment.date, user.lastname FROM $this->table 
-        INNER JOIN user ON comment.user_id=user.id WHERE article_id=:id ORDER BY date DESC");
+        //prepared request
+        $statement = $this->pdo->prepare("SELECT comment.id, comment.content, comment.date, user.lastname 
+        FROM $this->table INNER JOIN user ON comment.user_id=user.id WHERE article_id=:id ORDER BY date DESC");
         $statement->setFetchMode(\PDO::FETCH_CLASS, $this->className);
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();
@@ -44,9 +44,11 @@ class AdminCommentManager extends AbstractManager
     public function selectAllComments(): array
     {
         $this->pdo->query("SET lc_time_names = 'fr_FR'");
-        return $this->pdo->query("SELECT comment.id, comment.content, DATE_FORMAT(comment.date, \"%e %M %Y à %Hh %i\") 
-        AS date, article.title, user.lastname  FROM comment INNER JOIN article ON article.id = comment.article_id INNER JOIN user 
-        ON user.id=comment.user_id ORDER BY date DESC;", \PDO::FETCH_CLASS, $this->className)->fetchAll();
+        return $this->pdo->query("SELECT comment.id, comment.content, 
+        DATE_FORMAT(comment.date, \"%e %M %Y à %Hh %i\") 
+        AS date, article.title, user.lastname  FROM comment INNER JOIN article ON article.id = comment.article_id 
+        INNER JOIN user ON user.id=comment.user_id ORDER BY date DESC;",
+            \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
 
     public function delete(int $id): int
@@ -66,7 +68,8 @@ class AdminCommentManager extends AbstractManager
     public function selectCommentByUser($id)
     {
         $this->pdo->query("SET lc_time_names = 'fr_FR'");
-        $statement = $this->pdo->prepare("SELECT comment.id, comment.content, DATE_FORMAT(comment.date, \"%e %M %Y à %Hh %i\") 
+        $statement = $this->pdo->prepare("SELECT comment.id, comment.content, 
+        DATE_FORMAT(comment.date, \"%e %M %Y à %Hh %i\") 
         AS date FROM $this->table WHERE user_id=:id ORDER BY date DESC");
         $statement->setFetchMode(\PDO::FETCH_CLASS, $this->className);
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
@@ -85,7 +88,8 @@ class AdminCommentManager extends AbstractManager
     //Allows to take into account only the comments reported, taking into account a flag signal in the table commen
     public function countSignal()
     {
-        $signals = $this->pdo->query("SELECT COUNT(signale) AS Signals FROM $this->table  WHERE signale !=0 ")->fetchColumn();
+        $signals = $this->pdo->query("SELECT COUNT(signale) AS Signals FROM $this->table  
+        WHERE signale !=0 ")->fetchColumn();
         return $signals;
     }
 
@@ -93,10 +97,11 @@ class AdminCommentManager extends AbstractManager
     public function showSignal()
     {
         $this->pdo->query("SET lc_time_names = 'fr_FR'");
-        return $this->pdo->query('SELECT comment.id, comment.signale, DATE_FORMAT(comment.date, "%e %M %Y à %Hh %i") 
-        AS date, comment.content, comment.user_id, comment.article_id, user.firstname AS userFirstname, user.lastname, article.title FROM comment 
-        INNER JOIN user ON user.id=comment.user_id INNER JOIN article ON article.id=comment.article_id WHERE comment.signale != 0 
-        ORDER BY date DESC', \PDO::FETCH_CLASS, $this->className)->fetchAll();
+        return $this->pdo->query('SELECT comment.id, comment.signale, 
+        DATE_FORMAT(comment.date, "%e %M %Y à %Hh %i") AS date, comment.content, comment.user_id, comment.article_id, 
+        user.firstname AS userFirstname, user.lastname, article.title FROM comment 
+        INNER JOIN user ON user.id=comment.user_id INNER JOIN article ON article.id=comment.article_id 
+        WHERE comment.signale != 0 ORDER BY date DESC', \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
 
     //Adding a comment with increment if the comment has already been reported
@@ -120,9 +125,10 @@ class AdminCommentManager extends AbstractManager
     public function selectCommentsForIndex(): array
     {
         $this->pdo->query("SET lc_time_names = 'fr_FR'");
-        return $this->pdo->query('SELECT comment.id, DATE_FORMAT(comment.date, "%e %M %Y à %Hh %i") AS date, comment.content, comment.user_id, 
-        comment.article_id, user.firstname AS userFirstname, user.lastname AS userLastname, article.title AS articleTitle FROM comment 
-        INNER JOIN user ON user.id=comment.user_id INNER JOIN article ON article.id=comment.article_id 
+        return $this->pdo->query('SELECT comment.id, DATE_FORMAT(comment.date, "%e %M %Y à %Hh %i") 
+        AS date, comment.content, comment.user_id, 
+        comment.article_id, user.firstname AS userFirstname, user.lastname AS userLastname, article.title AS articleTitle 
+        FROM comment INNER JOIN user ON user.id=comment.user_id INNER JOIN article ON article.id=comment.article_id 
         ORDER BY date DESC LIMIT 3', \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
 

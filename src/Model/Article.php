@@ -11,7 +11,6 @@ class Article
 {
     private $id;
     private $date;
-    private $modified;
     private $title;
     private $content;
     private $picture;
@@ -48,22 +47,6 @@ class Article
     public function setDate($date)
     {
         $this->date = $date;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getModified()
-    {
-        return $this->modified;
-    }
-
-    /**
-     * @param mixed $modified
-     */
-    public function setModified($modified)
-    {
-        $this->modified = $modified;
     }
 
     /**

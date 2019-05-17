@@ -22,12 +22,12 @@ $routes = [
     ],
 
     'AdminComment' => [
-        ['delete', '/admin/comment/delete/{id:\d+}', 'GET'], //remove comment
-        ['add', '/article/{id:\d+}/comment', 'POST'],    //add comment by user
         ['indexAdminComments', '/admin/comments', 'GET'], //show index comment for admin
+        ['add', '/article/{id:\d+}/comment', 'POST'],    //add comment by user
         ['addCommentSignal', '/article/comment/signal/{id:\d+}', 'GET'], //add comment signal by user
-        ['resetSignal', '/admin/comment/reset/{id:\d+}', 'GET'], //reset signal by user
+        ['delete', '/admin/comment/delete/{id:\d+}', 'GET'], //remove comment
         ['indexAdminCommentsSignals', '/admin/comments/signals', 'GET'], //show index commentsSignal for admin
+        ['resetSignal', '/admin/comment/reset/{id:\d+}', 'GET'], //reset signal by user
     ],
 
     'User' => [
@@ -38,9 +38,9 @@ $routes = [
     ],
 
     'Article' => [
+        ['indexAccueil', '/', 'GET'], //show homepage to users
         ['index', '/articles', 'GET'], //show index to users
         ['show', '/article/{id:\d+}', 'GET'], //show article to users
-        ['indexAccueil', '/', 'GET'], //show homepage to users
         ['showbycat', '/article/category/{id:\d+}', 'GET'], //show article to users by category
         ['mentionsLegals', '/mentionsLegals', 'GET'], //mention légals
     ],
