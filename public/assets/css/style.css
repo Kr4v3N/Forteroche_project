@@ -64,6 +64,8 @@ h1{
 }
 .presentation {
     font-size: 1.4em;
+    margin-left: auto;
+    margin-right: 10px;
 }
 
 /*---------------------------------------------Title Les derniers épisodes -------------------------------------------------------*/
@@ -582,35 +584,25 @@ h1.titleActualite {
 /* ----Media Queries------ */
 /* ----------------------- */
 
-@media screen and (min-width: 1215px){
-    .dropdown-toggle1 {
-        display: none;
-    }
-}
-@media screen and (max-width: 1215px){
-    .categories {
-        display: none;
-    }
-}
 @media screen and (max-width: 1259px) {
     /* ----SignUp page-------- */
     .main-agileinfo {
         width: 55%;
     }
 }
-@media screen and (max-width: 1024px){
-    .categories {
-        width: 940px;
+
+@media screen and (min-width: 1215px) {
+    .dropdown-toggle1 {
+    display: none;
     }
 }
-@media screen and (max-width: 768px){
+
+@media screen and (max-width: 1215px){
     .categories {
-        width: 880px;
-    }
-    .imgWriter {
-        display: none;
+    display: none;
     }
 }
+
 @media screen and (max-width: 780px) {
     /* ----SignUp page-------- */
     .main-agileinfo {
@@ -651,7 +643,7 @@ h1.titleActualite {
 }
 
 @media screen and (max-width: 575px) {
-    /* ----SignUp page-------- */
+     /*----SignUp page--------*/
     .main-agileinfo {
         width: 95%;
     }
@@ -672,53 +664,11 @@ h1.titleActualite {
         margin-left: 120px;
         width: 200px;
     }
-    .article {
-        margin-top: 0;
-        min-height: 0;
-    }
-    .articleTitre {
-        text-align: center;
-    }
-    .row.featurette {
-        height: 600px;
-        margin-left: 50%;
-    }
-    .articleTitre {
-        text-align: left;
-        font-size: 1.3rem;
-    }
-    .lead {
-        font-size: 1rem;
-    }
-    .featurette-image {
-        width: 250px;
-        height: 250px;
+    .presentation {
+        font-size: 18px;
     }
 }
 
-@media screen and (max-width: 425px) {
-    .categories {
-        width: 0;
-    }
-    .categories {
-        width: 980px;
-    }
-}
 
-@media screen and (max-width: 400px) {
-    /* ----SignUp page-------- */
-    .main-agileinfo {
-        width: 100%;
-    }
-    /* ----SignUp page-------- */
-    .titre {
-        font-size: 1.4em;
-    }
-    .categories {
-        width: 0;
 
-    }
-}
-
-/*-----------------------------------------------End Media Queries----------------------------------------------------*/
 

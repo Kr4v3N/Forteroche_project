@@ -6,8 +6,7 @@
         {% if connexionMessage %}
 
             <div id="alert" class="alert alert-success">
-                <div>Bonjour {{ session.user.firstname | capitalize  }}</div>
-{#                <a class="close" >x</a>#}
+                <div>Bonjour {{ session.user.firstname|capitalize  }}</div>
                 <p>{{ connexionMessage }}</p>
             </div>
 
@@ -38,12 +37,14 @@
 
     {#-------------------------------------------Title About the author---------------------------------------------------#}
     <div class="container-fluid">
+
         <div class="row rowhaut "></div>
         <div class="row titleAPropos">
             <div class="col-3">
                 <h1 class="btn_apropos_haut"> À propos de moi </h1>
             </div>
         </div>
+
     </div>
     {#-------------------------------------------End Title About the author-----------------------------------------------#}
 
@@ -51,9 +52,9 @@
     {#-------------------------------------------About the author----------------------------------------------------------#}
     <div class="container-fluid">
 
-        <div class="row text-center ">
-            <div class="col-6">
-            <p class="presentation text-right">
+        <div class="row text-right presentation">
+
+            <p class="">
                 Je vis dans un beau village, Langast, situé au centre de la Bretagne. <br>
 
                 Enfant, je passais une partie de mon temps libre dans les jupons de ma grand-mère Yvette qui aimait confier ses souvenirs.
@@ -64,11 +65,6 @@
                 théâtre qui ont été toutes
                 jouées par des compagnies professionnelles. En décembre 2010, est sorti mon deuxième roman : "Le retour de la nuit".
                 En décembre 2013, j’ai édité mon premier album jeunesse, La puce à l’oreille, illustré par Julie Dupont.</p>
-            </div>
-
-            <div class="col-6 sm-12">
-                <img class="img-fluid" src="/assets/images/ecriture.jpg" alt="ecrivain">
-            </div>
         </div>
 
     </div>
@@ -81,28 +77,30 @@
     <div class="container-fluid">
         <div class="row rowhaut">
         </div>
-        <div class="row mb-5 titleActualite">
-            <div class="col-sm-3 offset-sm-9">
-                <h1 class="btn_apropos_bas">Les derniers billets </h1>
+            <div class="d-flex justify-content-end mt-5">
+                <h2 class="btn_apropos_bas">Les derniers billets </h2>
             </div>
-        </div>
     </div>
     {#-----------------------------------------------Les derniers billets -----------------------------------------------------------#}
 
     <div class="container-fluid">
         <div class="row card-deck text-center cardArticle">
+
             {% for article in articles %}
+
                 <div class="card" style="width: 18rem;">
                     <img class="card-img-top" src="/assets/images/{{ article.picture }}/" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">{{ article.title }}</h5>
-                        <p class="card-text ">{{ article.content|truncate(450)| raw }}</p>
+                        <p class="card-text ">{{ article.content|truncate(450)|raw }}</p>
                         <a href="/article/{{ article.id }}" target="">
                             <button type="submit" class="btn lasuite">Lire la suite</button>
                         </a>
                     </div>
                 </div>
+
             {% endfor %}
+
         </div>
     </div>
 
