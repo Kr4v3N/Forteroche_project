@@ -5,7 +5,6 @@
 <div class="container mt-5">
 
     <h1 class="fontWhite">Voici le billet que vous venez de créer</h1>
-
     <div class="row mt-5">
         <div class="col-10 offset-1 d-flex">
             <img class="img-fluid mx-auto" src="/assets/images/{{ article.picture }}" alt="Generic placeholder image">
@@ -13,6 +12,8 @@
 
         <div class="row d-flex mt-5">
             <div class="col-10 offset-1">
+                    <h2 class="fontWhite">{{ article.title }}<span class="text-muted"></span></h2>
+                    </a>
 
                 <p class="lead">{{ article.content|raw}}</p>
             </div>
@@ -22,6 +23,7 @@
 </div>
 
 {% endblock content %}
+
 
 
 
