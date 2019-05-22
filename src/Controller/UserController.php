@@ -123,5 +123,10 @@ class UserController extends AbstractController
         header('Location: /');
     }
 
+    public function error()
+    {
+        return $this->twig->render('Users/error.html.twig');
+    }
+
 }
 
