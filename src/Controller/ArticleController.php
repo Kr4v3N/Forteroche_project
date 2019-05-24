@@ -46,7 +46,7 @@ class  ArticleController extends AbstractController
     public function show(int $id)
     {
         $articleManager = new ArticleManager($this->getPdo());
-        $article = $articleManager->selectOneById($id);
+        $article = $articleManager->selectOneArticleById($id);
         $commentsManager = new AdminCommentManager($this->getPdo());
         $comments = $commentsManager->ShowAllComments($id);
         return $this->twig->render('Article/show.html.twig', [
