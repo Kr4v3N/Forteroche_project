@@ -14,7 +14,7 @@
 
         {#-----------------------------BLOCK COMMENTS--------------------------------------#}
 
-        <div class="row">
+        <div class="row mt-3">
             <div class="col-12 ">
                 <h3 class="text-white" style="text-align:center;">Derniers commentaires publiés</h3>
             </div>
@@ -34,18 +34,16 @@
 
             {% for lastcomment in lastcomments %}
                 <div class="col-sm-12 col-md-5 col-lg-3">
-                    <a href="/admin/comments">
                         <div class="card cardFondDashboard">
                             <div class="card-body">
                                 <p class="card-text"><strong>{{ lastcomment.userFirstname }} {{ lastcomment.userLastname }}</strong> a commenté le billet :
-                                    {{ lastcomment.articleTitle|truncate(25) }},
                                     <br>
-                                    le {{ lastcomment.date }}</p>
-
-                                <p class="card-text"><strong>Commentaire: </strong>{{ lastcomment.content|truncate(50) }}</p>
+                                    {{ lastcomment.articleTitle|truncate(25) }}
+                                    <br>
+                                    <br>
+                                    <strong>Le</strong> {{ lastcomment.date }}</p>
                             </div>
                         </div>
-                    </a>
                 </div>
 
             {% endfor %}
@@ -80,8 +78,10 @@
                         <div class="card cardFondDashboard" style="">
                             <div class="card-body">
                                 <h5 class="card-title">{{ lastuser.firstname }} {{ lastuser.lastname }}</h5>
-                                <h6 class="card-subtitle mb-2">{{ lastuser.email}}</h6>
-                                <p class="card-text">Enregistré le : {{ lastuser.registered }}</p>
+                                <br>
+                                <p class="card-text"><strong>Enregistré le :</strong> {{ lastuser.registered}}</p>
+                                <br>
+                                <h6 class="card-subtitle mb-2"><strong>Courriel : </strong>{{ lastuser.email}}</h6>
                             </div>
                         </div>
                     </a>
@@ -120,7 +120,7 @@
                         <div class="card cardFondDashboard" style="">
                             <div class="card-body">
                                 <br>
-                                <h6 class="card-subtitle mb-2">Rédigé le : {{ lastarticle.date }}</h6>
+                                <h6 class="card-subtitle mb-2"><strong>Rédigé le : </strong>{{ lastarticle.date }}</h6>
                                 <br>
                                 <h5 class="card-title">{{  lastarticle.title|truncate(22)}}</h5>
                             </div>

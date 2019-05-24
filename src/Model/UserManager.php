@@ -82,7 +82,9 @@ class UserManager extends AbstractManager
 
     public function selectUsersForIndex(): array
     {
-        return $this->pdo->query('SELECT * FROM user ORDER BY registered DESC LIMIT 3',
+        $this->pdo->query("SET lc_time_names = 'fr_FR'");
+        return $this->pdo->query('SELECT id, firstname, lastname, email, DATE_FORMAT(registered, "%e %M %Y") 
+        AS registered, status FROM user ORDER BY registered DESC LIMIT 3',
         \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
 

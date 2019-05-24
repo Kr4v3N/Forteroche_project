@@ -49,7 +49,13 @@ class ArticleManager extends AbstractManager
     //show the last 3 articles
     public function selectArticlesForIndex(): array
     {
-        return $this->pdo->query('SELECT * FROM article ORDER BY date DESC LIMIT 3',
+        $this->pdo->query("SET lc_time_names = 'fr_FR'");
+        return $this->pdo->query('SELECT article.id AS id, DATE_FORMAT(article.date, "%e %M %Y à %Hh %i") 
+        AS date , article.title, article.content, article.picture, user.firstname 
+        AS userFirstname, user.lastname 
+        AS userLastname, category.name 
+        AS categoryName FROM article INNER JOIN user ON article.user_id =user.id 
+        INNER JOIN category ON article.category_id=category.id ORDER BY date DESC LIMIT 3',
         \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
 
