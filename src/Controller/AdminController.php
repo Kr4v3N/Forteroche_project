@@ -93,22 +93,20 @@ class AdminController extends AbstractController
                 $errors['image'] = 'Ajoutez une image';
             } elseif (!empty($_POST) && !empty($_FILES['image'])){
                 $allowExtension = ['.jpg', '.jpeg', '.gif', '.png'];
-                $maxSize = 1000000;
+                $maxSize = 2000000;
                 $extension = strtolower(strrchr($_FILES['image']['name'], '.'));
                 $size = $_FILES['image']['size'];
                 if (!in_array($extension, $allowExtension)) {
                     $errors['image'] = 'Seuls les fichiers image .jpg, .jpeg, .gif et .png sont autorisés.';
                 }
                 if (($size > $maxSize) || ($size === 0)) {
-                    $errors['image'] = 'Votre fichier est trop volumineux. Taille maximale autorisée : 1Mo.';
+                    $errors['image'] = 'Votre fichier est trop volumineux. Taille maximale autorisée : 2Mo.';
                 }
             }
 
             if (empty($errors)) {
                 $filename = 'image-' . $_FILES['image']['name'];
                 move_uploaded_file($_FILES['image']['tmp_name'], '../public/assets/images/' . $filename);
-                $filenameMin = 'image-' . $_FILES['imageMin']['name'];
-                move_uploaded_file($_FILES['imageMin']['tmp_name'], '../public/assets/images/' . $filenameMin);
                 $article->setUserId($_SESSION['admin']['id']);
                 $article->setTitle($_POST['title']);
                 $article->setContent($_POST['content']);
@@ -119,7 +117,10 @@ class AdminController extends AbstractController
             }
         }
         $active = 'add';
-        return $this->twig->render('Admin/AdminArticle/add.html.twig', ['active' => $active, 'errors' => $errors, 'content' => $_POST]); // traitement
+        return $this->twig->render('Admin/AdminArticle/add.html.twig', [
+            'active' => $active,
+            'errors' => $errors,
+            'content' => $_POST]); // traitement
     }
 
     //edit an article, change title, content, picture
@@ -146,14 +147,14 @@ class AdminController extends AbstractController
             }
             if (!empty($_FILES['image']['name'])) {
                 $allowExtension = ['.jpg', '.jpeg', '.gif', '.png'];
-                $maxSize = 1000000;
+                $maxSize = 2000000;
                 $extension = strtolower(strrchr($_FILES['image']['name'], '.'));
                 $size = $_FILES['image']['size'];
                 if (!in_array($extension, $allowExtension)) {
                     $errors['image'] = 'Seuls les fichiers image .jpg, .jpeg, .gif et .png sont autorisés.';
                 }
                 if (($size > $maxSize) || ($size === 0)) {
-                    $errors['image'] = 'Votre fichier est trop volumineux. Taille maximale autorisée : 1Mo.';
+                    $errors['image'] = 'Votre fichier est trop volumineux. Taille maximale autorisée : 2Mo.';
                 }
                 if(!$errors){
                     $filename = 'image-' . $_FILES['image']['name'];

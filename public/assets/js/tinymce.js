@@ -2,7 +2,7 @@ tinymce.init({
     selector: 'textarea#contenu',
     themes: 'modern',
     height: 550,
-    languag : "fr_FR",
+    language : "fr_FR",
     image_advtab: true,
     plugins: [ 'print preview fullpage searchreplace autolink directionality visualblocks visualchars ' +
     'fullscreen link template codesample table charmap hr pagebreak nonbreaking ' +
@@ -13,5 +13,9 @@ tinymce.init({
     image_caption: true,
 
 });
+
+
+
+
 
 
