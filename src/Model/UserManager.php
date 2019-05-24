@@ -29,7 +29,7 @@ class UserManager extends AbstractManager
         $statement = $this->pdo->prepare("DELETE FROM user WHERE id=:id");
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();
-        return header('Location: ' . $_SERVER['HTTP_REFERER']);
+        return header('Location: /admin/users');
     }
 
     public function suscribe(User $user)
@@ -92,7 +92,7 @@ class UserManager extends AbstractManager
         // prepared request
         $statement = $this->pdo->prepare("SELECT id, firstname, lastname, email, 
         DATE_FORMAT(registered, \"%e %M %Y\") AS registered,  status FROM $this->table WHERE id=:id");
-        $statement->setFetchMode(\PDO::FETCH_CLASS, 'Model\User::class');
+        $statement->setFetchMode(\PDO::FETCH_CLASS, 'Model');
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();
         return $statement->fetch();

@@ -119,9 +119,10 @@
                     <a href="/admin/article/{{ lastarticle.id }}">
                         <div class="card cardFondDashboard" style="">
                             <div class="card-body">
+                                <br>
                                 <h6 class="card-subtitle mb-2">Rédigé le : {{ lastarticle.date }}</h6>
+                                <br>
                                 <h5 class="card-title">{{  lastarticle.title|truncate(22)}}</h5>
-                                <p class="card-text">{{ lastarticle.content|truncate(100)|raw }}</p>
                             </div>
                         </div>
                     </a>
