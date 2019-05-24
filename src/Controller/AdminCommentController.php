@@ -44,7 +44,10 @@ class AdminCommentController extends AbstractController
                     $errorConnexion = 'Vous devez ajouter un commentaire.';
                     $return = $_SERVER['HTTP_REFERER'];
 
-                return $this->twig->render('Article/logToComment.html.twig', ['errorConnexion' => $errorConnexion, 'return' => $return, 'isLogged' => $this->isLogged()]);
+                return $this->twig->render('Article/logToComment.html.twig', [
+                    'errorConnexion' => $errorConnexion,
+                    'return' => $return,
+                    'isLogged' => $this->isLogged()]);
 
                 }
 
@@ -52,7 +55,9 @@ class AdminCommentController extends AbstractController
 
             $errorConnexion = 'Vous devez être connecté pour commenter ce billet.';
             $return = $_SERVER['HTTP_REFERER'];
-            return $this->twig->render('Article/logToComment.html.twig', ['errorConnexion' => $errorConnexion, 'return' => $return]);
+            return $this->twig->render('Article/logToComment.html.twig', [
+                'errorConnexion' => $errorConnexion,
+                'return' => $return]);
         }
     }
 
@@ -68,7 +73,9 @@ class AdminCommentController extends AbstractController
         }else{
             $errorConnexion = 'Vous devez être connecté pour signaler ce billet.';
             $return = $_SERVER['HTTP_REFERER'];
-            return $this->twig->render('Article/logToSignal.html.twig', ['errorConnexion' => $errorConnexion, 'return' => $return]);
+            return $this->twig->render('Article/logToSignal.html.twig', [
+                'errorConnexion' => $errorConnexion,
+                'return' => $return]);
         }
     }
 

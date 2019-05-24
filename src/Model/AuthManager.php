@@ -9,7 +9,9 @@ namespace Model;
  */
 class AuthManager extends AbstractManager
 {
+
     const TABLE = 'user';
+
     public function __construct(\PDO $pdo)
     {
         parent::__construct(self::TABLE, $pdo);

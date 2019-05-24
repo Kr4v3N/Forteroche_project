@@ -19,11 +19,13 @@ class  ArticleController extends AbstractController
 
         $articlesManager = new ArticleManager($this->getPdo());
         $articles = $articlesManager->selectArticlesForIndex();
+
         if (isset($_SESSION['user']) && isset($_SESSION['user']['message'])){
             $connexionMessage = $_SESSION['user']['message'];
             unset($_SESSION['user']['message']);
         }
-        return $this->twig->render('Users/index.html.twig', ['articles' => $articles,
+        return $this->twig->render('Users/index.html.twig', [
+            'articles' => $articles,
             'session' => $_SESSION,
             'connexionMessage' => $connexionMessage,
             'isLogged' => $this->isLogged()]);

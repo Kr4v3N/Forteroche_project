@@ -3,7 +3,7 @@
 namespace App;
 
 /**
- * Class session
+ * Class Session
  *
  * @package \App
  */

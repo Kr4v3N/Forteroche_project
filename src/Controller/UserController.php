@@ -73,7 +73,9 @@ class UserController extends AbstractController
                 header('Location: /login');
             }
         }
-        return $this->twig->render('signUp.html.twig', ['errorRegister' => $errorRegister, 'post' =>$_POST]);
+        return $this->twig->render('signUp.html.twig', [
+            'errorRegister' => $errorRegister,
+            'post' =>$_POST]);
     }
 
     public function logUser()
@@ -114,7 +116,8 @@ class UserController extends AbstractController
                 $errorLoginUser = 'Identifiants incorrects';
             }
         }
-        return $this->twig->render('loginUser.html.twig', ['errorLoginUser' => $errorLoginUser]);
+        return $this->twig->render('loginUser.html.twig', [
+            'errorLoginUser' => $errorLoginUser]);
     }
 
     public function logoutUser()

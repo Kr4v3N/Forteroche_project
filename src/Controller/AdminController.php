@@ -47,10 +47,20 @@ class AdminController extends AbstractController
             $connexionMessage = $_SESSION['admin']['message'];
             unset($_SESSION['admin']['message']);
         }
-        return $this->twig->render('Admin/admin_dashboard.html.twig', ['active' => $article, 'user' => $_SESSION['admin'],
-            'totalArticles' => $numberArticles, 'totalUsers' => $numberUsers, 'totalComments' => $numberComments,
-            'session' => $_SESSION, 'connexionMessage' => $connexionMessage, 'isLogged' => $this->isLoggedAdmin(),
-            'signals' => $signals, 'lastArticles', 'lastarticles' => $lastArticles, 'lastusers' => $lastUsers, 'lastcomments' => $lastComments,
+        return $this->twig->render('Admin/admin_dashboard.html.twig', [
+            'active' => $article,
+            'user' => $_SESSION['admin'],
+            'totalArticles' => $numberArticles,
+            'totalUsers' => $numberUsers,
+            'totalComments' => $numberComments,
+            'session' => $_SESSION,
+            'connexionMessage' => $connexionMessage,
+            'isLogged' => $this->isLoggedAdmin(),
+            'signals' => $signals,
+            'lastArticles',
+            'lastarticles' => $lastArticles,
+            'lastusers' => $lastUsers,
+            'lastcomments' => $lastComments,
         ]);
     }
 
