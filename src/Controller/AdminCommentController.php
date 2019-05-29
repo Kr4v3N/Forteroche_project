@@ -31,6 +31,7 @@ class AdminCommentController extends AbstractController
         if (isset($_SESSION['user'])) {
 
             if (!empty($_POST['content'])) {
+
                 $CommentManager = new AdminCommentManager($this->getPdo());
                 $comment = new Comment();
                 $comment->setContent($_POST['content']);
@@ -48,7 +49,6 @@ class AdminCommentController extends AbstractController
                     'errorConnexion' => $errorConnexion,
                     'return' => $return,
                     'isLogged' => $this->isLogged()]);
-
                 }
 
         }else {

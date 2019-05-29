@@ -3,6 +3,7 @@
 {% block content %}
 
     <div class="container">
+
         {# show an article #}
         <div class="row mt-5">
             <div class="col-10 offset-1">
@@ -24,13 +25,12 @@
             </div>
         </div>
 
-{#    </div>#}
-
         <hr class="featurette-divider">
 
         {#Add table to show all comments#}
         <div class="row">
             <div class="col-10 offset-1">
+
                 <h5>Vos commentaires</h5>
                 {% for comment in comments %}
                     <div class="list-group list-group-item flex-column align-items-center cardFond rounded">
@@ -68,7 +68,7 @@
                 </form>
             </div>
         </div>
-    </div>
+
     </div>
 
 {% endblock content %}

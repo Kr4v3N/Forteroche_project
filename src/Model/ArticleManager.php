@@ -107,6 +107,7 @@ class ArticleManager extends AbstractManager
         INNER JOIN category ON category.id = article.category_id 
         WHERE category_id= $id;", \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
+
     public function selectOneArticleById(int $id)
     {
         // prepared request
