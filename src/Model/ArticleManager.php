@@ -112,7 +112,9 @@ class ArticleManager extends AbstractManager
     {
         // prepared request
         $this->pdo->query("SET lc_time_names = 'fr_FR'");
-        $statement = $this->pdo->prepare("SELECT article.id, DATE_FORMAT(article.date, \"%e %M %Y\") AS date, article.title, article.content, article.picture, user.firstname AS userFirstname, user.lastname AS userLastname FROM article INNER JOIN user ON article.user_id =user.id AND article.id=:id ORDER BY date DESC");
+        $statement = $this->pdo->prepare("SELECT article.id, DATE_FORMAT(article.date, \"%e %M %Y\") 
+        AS date, article.title, article.content, article.picture, user.firstname AS userFirstname, user.lastname AS userLastname FROM article 
+        INNER JOIN user ON article.user_id =user.id AND article.id=:id ORDER BY date DESC");
         $statement->setFetchMode(\PDO::FETCH_CLASS, $this->className);
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();

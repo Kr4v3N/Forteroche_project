@@ -33,12 +33,14 @@ class AdminCommentManager extends AbstractManager
     public function ShowAllComments(int $id)
     {
         $this->pdo->query("SET lc_time_names = 'fr_FR'");
-
         //prepared request
         $statement = $this->pdo->prepare("SELECT comment.id, comment.content, 
         DATE_FORMAT(comment.date, \"%e %M %Y à %Hh %i\") 
-        AS date, article.title, user.lastname  FROM comment INNER JOIN article ON article.id = comment.article_id 
-        INNER JOIN user ON user.id=comment.user_id ORDER BY date DESC;");
+        AS date, article.title, user.lastname  FROM comment 
+        INNER JOIN article ON article.id = comment.article_id 
+        INNER JOIN user ON comment.user_id = user.id
+        WHERE article_id = :id
+        ORDER BY date DESC;");
         $statement->setFetchMode(\PDO::FETCH_CLASS, $this->className);
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();
