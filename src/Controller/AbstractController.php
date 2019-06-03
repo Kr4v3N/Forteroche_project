@@ -26,6 +26,9 @@ abstract class AbstractController
      */
     protected $session;
 
+    /**
+     * AbstractController constructor.
+     */
     public function __construct()
     {
         $loader = new Twig_Loader_Filesystem(APP_VIEW_PATH);

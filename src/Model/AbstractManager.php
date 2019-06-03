@@ -36,7 +36,6 @@ abstract class AbstractManager
 
     /**
      * Get all row from database.
-     *
      * @return array
      */
     public function selectAll(): array
@@ -47,9 +46,7 @@ abstract class AbstractManager
 
     /**
      * Get one row from database by ID.
-     *
      * @param  int $id
-     *
      * @return array
      */
     public function selectOneById(int $id)

@@ -11,11 +11,19 @@ class UserManager extends AbstractManager
 {
     const TABLE = 'user';
 
+    /**
+     * UserManager constructor.
+     *
+     * @param \PDO $pdo
+     */
     public function __construct(\PDO $pdo)
     {
         parent::__construct(self::TABLE, $pdo);
     }
 
+    /**
+     * @return array
+     */
     public function selectAllUsers(): array
     {
         $this->pdo->query("SET lc_time_names = 'fr_FR'");
@@ -24,6 +32,11 @@ class UserManager extends AbstractManager
         FROM user ORDER BY lastname', \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
 
+    /**
+     * @param int $id
+     *
+     * @return int
+     */
     public function userDelete(int $id): int
     {
         $statement = $this->pdo->prepare("DELETE FROM user WHERE id=:id");
@@ -32,6 +45,11 @@ class UserManager extends AbstractManager
         return header('Location: /admin/users');
     }
 
+    /**
+     * @param \Model\User $user
+     *
+     * @return bool
+     */
     public function suscribe(User $user)
     {
         $addUser = $this->pdo->prepare("INSERT INTO $this->table (firstname, lastname, email, pass, 
@@ -44,6 +62,11 @@ class UserManager extends AbstractManager
         return $addUser->execute();
     }
 
+    /**
+     * @param \Model\User $user
+     *
+     * @return bool
+     */
     public function userAdd(User $user)
     {
         $statement = $this->pdo->prepare("INSERT INTO $this->table (firstname, lastname, email, pass, 
@@ -57,12 +80,20 @@ class UserManager extends AbstractManager
         return $statement->execute();
     }
 
+    /**
+     * @return mixed
+     */
     public function count()
     {
         $numbersUsers = $this->pdo->query("SELECT COUNT(id) AS Numbers FROM $this->table")->fetchColumn();
         return $numbersUsers;
     }
 
+    /**
+     * @param $email
+     *
+     * @return mixed
+     */
     public function existUser($email) {
         $query = $this->pdo->prepare("SELECT * FROM $this->table WHERE email = :email");
         $query->execute(array(':email' => $email));
@@ -71,6 +102,11 @@ class UserManager extends AbstractManager
         return $res;
     }
 
+    /**
+     * @param $email
+     *
+     * @return mixed
+     */
     public function loginUser($email)
     {
         $reqUser = $this->pdo->prepare("SELECT * FROM $this->table WHERE email = :email");
@@ -80,6 +116,9 @@ class UserManager extends AbstractManager
         return $res;
     }
 
+    /**
+     * @return array
+     */
     public function selectUsersForIndex(): array
     {
         $this->pdo->query("SET lc_time_names = 'fr_FR'");
@@ -88,6 +127,11 @@ class UserManager extends AbstractManager
         \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
 
+    /**
+     * @param int $id
+     *
+     * @return array
+     */
     public function selectUserById(int $id): array
     {
         $this->pdo->query("SET lc_time_names = 'fr_FR'");

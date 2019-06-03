@@ -11,12 +11,22 @@ class ArticleManager extends AbstractManager
 {
     const TABLE = 'article';
 
+    /**
+     * ArticleManager constructor.
+     *
+     * @param \PDO $pdo
+     */
     public function __construct(\PDO $pdo)
     {
         parent::__construct(self::TABLE, $pdo);
     }
 
-    //create a new article
+    /**
+     * create a new article
+     *
+     * @param \Model\Article $article
+     * @return int
+     */
     public function insert(Article $article): int
     {
         $statement = $this->pdo->prepare("INSERT INTO $this->table (date, title, content, picture, user_id, 
@@ -33,7 +43,11 @@ class ArticleManager extends AbstractManager
         }
     }
 
-    //show all articles on index user
+    /**
+     * show all articles on index user
+     *
+     * @return array
+     */
     public function selectAllArticles(): array
     {
         $this->pdo->query("SET lc_time_names = 'fr_FR'");
@@ -46,7 +60,11 @@ class ArticleManager extends AbstractManager
         \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
 
-    //show the last 3 articles
+    /**
+     * show the last 3 articles
+     *
+     * @return array
+     */
     public function selectArticlesForIndex(): array
     {
         $this->pdo->query("SET lc_time_names = 'fr_FR'");
@@ -59,7 +77,12 @@ class ArticleManager extends AbstractManager
         \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
 
-    //delete article by id
+    /**
+     * delete article by id
+     *
+     * @param int $id
+     * @return int
+     */
     public function delete(int $id): int
     {
         $statement = $this->pdo->prepare("DELETE FROM article WHERE id=:id");
@@ -68,7 +91,12 @@ class ArticleManager extends AbstractManager
         return header('Location: ' . $_SERVER['HTTP_REFERER']);
     }
 
-    //update article and picture
+    /**
+     * update article and picture
+     *
+     * @param \Model\Article $article
+     * @return int
+     */
     public function update(Article $article): int
     {
         $statement = $this->pdo->prepare("UPDATE $this->table SET title = :title, content = :content, 
@@ -80,12 +108,18 @@ class ArticleManager extends AbstractManager
         return $statement->execute();
     }
 
+    /**
+     * @return mixed
+     */
     public function count()
     {
         $numbers = $this->pdo->query('SELECT COUNT(title) AS Numbers FROM article ')->fetchColumn();
         return $numbers;
     }
 
+    /**
+     * @return array
+     */
     public function selectAllArticlesAndCategory(): array
     {
         return $this->pdo->query('SELECT article.id, article.title, category.name, article.content, article.picture 
@@ -93,11 +127,18 @@ class ArticleManager extends AbstractManager
         \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
 
+    /**
+     * @return array
+     */
     public function selectCategory(){
         return $this->pdo->query('SELECT id, name FROM category',
         \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
 
+    /**
+     * @param int $id
+     * @return array
+     */
     public function selectArticlesByCategory(int $id): array
     {
         $this->pdo->query("SET lc_time_names = 'fr_FR'");
@@ -108,6 +149,10 @@ class ArticleManager extends AbstractManager
         WHERE category_id= $id;", \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
 
+    /**
+     * @param int $id
+     * @return mixed
+     */
     public function selectOneArticleById(int $id)
     {
         // prepared request

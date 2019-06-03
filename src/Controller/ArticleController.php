@@ -13,6 +13,12 @@ use Model\AdminCommentManager;
 class  ArticleController extends AbstractController
 {
 
+    /**
+     * @return string
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function indexAccueil()
     {
         $connexionMessage = null;
@@ -31,6 +37,12 @@ class  ArticleController extends AbstractController
             'isLogged' => $this->isLogged()]);
     }
 
+    /**
+     * @return string
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function index()
     {
         $articlesManager = new ArticleManager($this->getPdo());
@@ -42,7 +54,15 @@ class  ArticleController extends AbstractController
             'category' => $category]);
     }
 
-    // show an article and its comments on show view
+    /**
+     * show an article and its comments on show view
+     * @param int $id
+     * @return string
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     *
+     */
     public function show(int $id)
     {
         $articleManager = new ArticleManager($this->getPdo());
@@ -56,6 +76,13 @@ class  ArticleController extends AbstractController
         header("Location: /article/' . $articleId");
     }
 
+    /**
+     * @param int $id
+     * @return string
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function showbycat(int $id)
     {
         $articlesManager = new ArticleManager($this->getPdo());
@@ -67,6 +94,12 @@ class  ArticleController extends AbstractController
             'category' => $category]);
     }
 
+    /**
+     * @return string
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function mentionsLegals()
     {
         return $this->twig->render('Users/mentionsLegals.html.twig');

@@ -13,6 +13,12 @@ use Model\Comment;
 class AdminCommentController extends AbstractController
 {
 
+    /**
+     * @return string
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function indexAdminComments()
     {
         $commentsManager = new AdminCommentManager($this->getPdo());
@@ -24,6 +30,13 @@ class AdminCommentController extends AbstractController
         ] );
     }
 
+    /**
+     * @param int $articleId
+     * @return string
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function add(int $articleId)
     {
         $errorConnexion = null;
@@ -61,7 +74,14 @@ class AdminCommentController extends AbstractController
         }
     }
 
-    //To add a report to a specific comment, it is incremental
+    /**
+     * To add a report to a specific comment, it is incremental
+     * @param $id
+     * @return string
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax*
+     */
     public function addCommentSignal($id)
     {
         $errorConnexion = null;
@@ -79,13 +99,22 @@ class AdminCommentController extends AbstractController
         }
     }
 
+    /**
+     * @param int $id
+     */
     public function delete(int $id)
     {
         $commentManager = new AdminCommentManager($this->getPdo());
         $commentManager->delete($id);
     }
 
-    //Index of all reported comments
+    /**
+     * Index of all reported comments
+     * @return string
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function indexAdminCommentsSignals()
     {
         $commentsSignals = new AdminCommentManager($this->getPdo());
@@ -98,7 +127,10 @@ class AdminCommentController extends AbstractController
         ]);
     }
 
-   //delete reports if this is not justified
+    /**
+     * delete reports if this is not justified
+     * @param $id
+     */
     public function resetSignal($id)
     {
         $commentSignal = new AdminCommentManager($this->getPdo());

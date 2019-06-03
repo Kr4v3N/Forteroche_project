@@ -12,11 +12,21 @@ class AuthManager extends AbstractManager
 
     const TABLE = 'user';
 
+    /**
+     * AuthManager constructor.
+     *
+     * @param \PDO $pdo
+     */
     public function __construct(\PDO $pdo)
     {
         parent::__construct(self::TABLE, $pdo);
     }
 
+    /**
+     * @param $email
+     *
+     * @return mixed
+     */
     public function login($email)
     {
         // select where name = $username and password = $password and droit =

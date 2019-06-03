@@ -12,6 +12,9 @@ use Model\UserManager;
  */
 class UserController extends AbstractController
 {
+    /**
+     * UserController constructor.
+     */
     public function __construct()
     {
         parent:: __construct();
@@ -20,6 +23,12 @@ class UserController extends AbstractController
         }
     }
 
+    /**
+     * @return string
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function suscribeUser()
     {
         $errorRegister = [];
@@ -78,6 +87,12 @@ class UserController extends AbstractController
             'post' =>$_POST]);
     }
 
+    /**
+     * @return string
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function logUser()
     {
 
@@ -120,12 +135,21 @@ class UserController extends AbstractController
             'errorLoginUser' => $errorLoginUser]);
     }
 
+    /**
+     * logout user
+     */
     public function logoutUser()
     {
         session_destroy();
         header('Location: /');
     }
 
+    /**
+     * @return string
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function error()
     {
         return $this->twig->render('Users/error.html.twig');

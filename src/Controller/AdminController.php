@@ -16,7 +16,9 @@ use Model\AdminCommentManager;
  */
 class AdminController extends AbstractController
 {
-
+    /**
+     * AdminController constructor.
+     */
     public function __construct()
     {
         parent:: __construct();
@@ -25,6 +27,12 @@ class AdminController extends AbstractController
         }
     }
 
+    /**
+     * @return string
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function showDashboard()
     {
         $connexionMessage = null;
@@ -64,7 +72,14 @@ class AdminController extends AbstractController
         ]);
     }
 
-    //show one article to admin in order to modify or not
+    /**
+     * show one article to admin in order to modify or not
+     * @param int $id
+     * @return string
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function adminShow(int $id)
     {
         $articleManager = new ArticleManager($this->getPdo());
@@ -73,7 +88,13 @@ class AdminController extends AbstractController
         return $this->twig->render('Admin/AdminArticle/adminShow.html.twig', ['article' => $article]);
     }
 
-    //add an article
+    /**
+     * add an article
+     * @return string
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function add()
     {
         $errors = [];
@@ -123,8 +144,8 @@ class AdminController extends AbstractController
             'content' => $_POST]); // traitement
     }
 
-    //edit an article, change title, content, picture
     /**
+     * edit an article, change title, content, picture
      * @param int $id
      * @return string
      * @throws \Twig_Error_Loader
@@ -175,14 +196,23 @@ class AdminController extends AbstractController
             'content' => $_POST]);
     }
 
-    //delete an article
+    /**
+     * delete an article
+     * @param int $id
+     */
     public function delete(int $id)
     {
         $articleManager = new ArticleManager($this->getPdo());
         $articleManager->delete($id);
     }
 
-    //show all articles for admin
+    /**
+     * show all articles for admin
+     * @return string
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function indexAdmin()
     {
         $articlesManager = new ArticleManager($this->getPdo());
@@ -193,7 +223,13 @@ class AdminController extends AbstractController
             'active' => $active]);
     }
 
-    //connexion administrator
+    /**
+     * connexion administrator
+     * @return string
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function logAdmin()
     {
 
@@ -233,7 +269,9 @@ class AdminController extends AbstractController
         return $this->twig->render('Admin/logAdmin.html.twig', ['errorLogin' => $errorLogin]);
     }
 
-    //logout for admin
+    /**
+     * logout for admin
+     */
     public function logout()
     {
         session_start();
@@ -241,6 +279,12 @@ class AdminController extends AbstractController
         header('Location: /admin/logAdmin');
     }
 
+    /**
+     * @return string
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function addUser()
     {
 
@@ -285,7 +329,14 @@ class AdminController extends AbstractController
             'nameErr' => $_POST]); //treatment
     }
 
-    //show user and his comments
+    /**
+     * show user and his comments
+     * @param int $id
+     * @return string
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function userShow(int $id)
     {
         $userManager = new UserManager($this->getPdo());
@@ -297,7 +348,13 @@ class AdminController extends AbstractController
             'comments' => $comment]);
     }
 
-    //show all users to manage them
+    /**
+     * show all users to manage them
+     * @return string
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function usersIndex()
     {
         $usersManager = new UserManager($this->getPdo());
@@ -308,7 +365,10 @@ class AdminController extends AbstractController
             'active' => $active]);
     }
 
-    //delete a user
+    /**
+     * delete a user
+     * @param int $id
+     */
     public function userDelete(int $id)
     {
         $newUserManager = new UserManager($this->getPdo());
