@@ -29,7 +29,7 @@ class UserManager extends AbstractManager
         $this->pdo->query("SET lc_time_names = 'fr_FR'");
         return $this->pdo->query('SELECT id, firstname, lastname, email, DATE_FORMAT(registered, "%e %M %Y") 
         AS registered, status 
-        FROM user ORDER BY lastname', \PDO::FETCH_CLASS, $this->className)->fetchAll();
+        FROM user ORDER BY registered ASC', \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
 
     /**
@@ -123,7 +123,7 @@ class UserManager extends AbstractManager
     {
         $this->pdo->query("SET lc_time_names = 'fr_FR'");
         return $this->pdo->query('SELECT id, firstname, lastname, email, DATE_FORMAT(registered, "%e %M %Y") 
-        AS registered, status FROM user ORDER BY registered DESC LIMIT 3',
+        AS registered, status FROM user ORDER BY registered ASC LIMIT 3',
         \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
 

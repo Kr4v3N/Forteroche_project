@@ -24,6 +24,20 @@ class AdminCommentManager extends AbstractManager
     }
 
     /**
+     * @return array*
+     */
+    public function selectAllComments(): array
+    {
+        $this->pdo->query("SET lc_time_names = 'fr_FR'");
+        return $this->pdo->query("SELECT comment.id, comment.content, 
+        DATE_FORMAT(comment.date, \"%e %M %Y à %Hh %i\") 
+        AS date, article.title, user.lastname  FROM comment 
+        INNER JOIN article ON article.id = comment.article_id 
+        INNER JOIN user ON user.id=comment.user_id ORDER BY date DESC;",
+            \PDO::FETCH_CLASS, $this->className)->fetchAll();
+    }
+
+    /**
      * @param \Model\Comment $comment
      *
      * @return int
@@ -42,38 +56,16 @@ class AdminCommentManager extends AbstractManager
     }
 
     /**
-     * @param int $id
+     * Adding a comment with increment if the comment has already been reported
      *
-     * @return array
+     * @param int $id
      */
-    public function ShowAllComments(int $id)
+    public function addSignal(int $id)
     {
-        $this->pdo->query("SET lc_time_names = 'fr_FR'");
-        //prepared request
-        $statement = $this->pdo->prepare("SELECT comment.id, comment.content, 
-        DATE_FORMAT(comment.date, \"%e %M %Y à %Hh %i\") 
-        AS date, article.title, user.lastname  FROM comment 
-        INNER JOIN article ON article.id = comment.article_id 
-        INNER JOIN user ON comment.user_id = user.id
-        WHERE article_id = :id
-        ORDER BY date DESC;");
-        $statement->setFetchMode(\PDO::FETCH_CLASS, $this->className);
+        $statement = $this->pdo->prepare("UPDATE $this->table SET signale = signale+1 WHERE id=:id");
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();
-        return $statement->fetchAll();
-    }
-
-    /**
-     * @return array*
-     */
-    public function selectAllComments(): array
-    {
-        $this->pdo->query("SET lc_time_names = 'fr_FR'");
-        return $this->pdo->query("SELECT comment.id, comment.content, 
-        DATE_FORMAT(comment.date, \"%e %M %Y à %Hh %i\") 
-        AS date, article.title, user.lastname  FROM comment INNER JOIN article ON article.id = comment.article_id 
-        INNER JOIN user ON user.id=comment.user_id ORDER BY date DESC;",
-            \PDO::FETCH_CLASS, $this->className)->fetchAll();
+        return header('Location: ' . $_SERVER['HTTP_REFERER']);
     }
 
     /**
@@ -87,6 +79,67 @@ class AdminCommentManager extends AbstractManager
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();
         return header('Location: ' . $_SERVER['HTTP_REFERER']);
+    }
+
+    /**
+     * Allows to take into account only the comments reported, taking into account a flag signal in the table comments
+     *
+     * @return mixed
+     */
+    public function countSignal()
+    {
+        $signals = $this->pdo->query("SELECT COUNT(signale) AS Signals FROM $this->table  
+        WHERE signale !=0 ")->fetchColumn();
+        return $signals;
+    }
+
+    /**
+     * Selection of all reported comments
+     *
+     * @return array
+     */
+    public function showSignal()
+    {
+        $this->pdo->query("SET lc_time_names = 'fr_FR'");
+        return $this->pdo->query('SELECT comment.id, comment.signale, 
+        DATE_FORMAT(comment.date, "%e %M %Y à %Hh %i") AS date, comment.content, comment.user_id, comment.article_id, 
+        user.firstname AS userFirstname, user.lastname, article.title FROM comment 
+        INNER JOIN user ON user.id=comment.user_id 
+        INNER JOIN article ON article.id=comment.article_id 
+        WHERE comment.signale != 0 ORDER BY date DESC', \PDO::FETCH_CLASS, $this->className)->fetchAll();
+    }
+
+    /**
+     * delete a report
+     *
+     * @param int $id
+     */
+    public function resetSignal(int $id)
+    {
+        $statement = $this->pdo->prepare("UPDATE $this->table SET signale = 0 WHERE id=:id");
+        $statement->bindValue('id', $id, \PDO::PARAM_INT);
+        $statement->execute();
+        return header('Location: ' . $_SERVER['HTTP_REFERER']);
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return array
+     */
+    public function ShowAllComments(int $id)
+    {
+        $this->pdo->query("SET lc_time_names = 'fr_FR'");
+        //prepared request
+        $statement = $this->pdo->prepare("SELECT comment.id, comment.content, 
+        DATE_FORMAT(comment.date, \"%e %M %Y à %Hh %i\") 
+        AS date, article.title, user.lastname  FROM comment 
+        INNER JOIN article ON article.id = comment.article_id 
+        INNER JOIN user ON comment.user_id = user.id WHERE article_id = :id ORDER BY date DESC;");
+        $statement->setFetchMode(\PDO::FETCH_CLASS, $this->className);
+        $statement->bindValue('id', $id, \PDO::PARAM_INT);
+        $statement->execute();
+        return $statement->fetchAll();
     }
 
     /**
@@ -129,55 +182,6 @@ class AdminCommentManager extends AbstractManager
     }
 
     /**
-     * Allows to take into account only the comments reported, taking into account a flag signal in the table comments
-     * @return mixed
-     */
-    public function countSignal()
-    {
-        $signals = $this->pdo->query("SELECT COUNT(signale) AS Signals FROM $this->table  
-        WHERE signale !=0 ")->fetchColumn();
-        return $signals;
-    }
-
-    /**
-     * Selection of all reported comments
-     * @return array
-     */
-    public function showSignal()
-    {
-        $this->pdo->query("SET lc_time_names = 'fr_FR'");
-        return $this->pdo->query('SELECT comment.id, comment.signale, 
-        DATE_FORMAT(comment.date, "%e %M %Y à %Hh %i") AS date, comment.content, comment.user_id, comment.article_id, 
-        user.firstname AS userFirstname, user.lastname, article.title FROM comment 
-        INNER JOIN user ON user.id=comment.user_id INNER JOIN article ON article.id=comment.article_id 
-        WHERE comment.signale != 0 ORDER BY date DESC', \PDO::FETCH_CLASS, $this->className)->fetchAll();
-    }
-
-    /**
-     * Adding a comment with increment if the comment has already been reported
-     * @param int $id
-     */
-    public function addSignal(int $id)
-    {
-        $statement = $this->pdo->prepare("UPDATE $this->table SET signale = signale+1 WHERE id=:id");
-        $statement->bindValue('id', $id, \PDO::PARAM_INT);
-        $statement->execute();
-        return header('Location: ' . $_SERVER['HTTP_REFERER']);
-    }
-
-    /**
-     * delete a report
-     * @param int $id
-     */
-    public function resetSignal(int $id)
-    {
-        $statement = $this->pdo->prepare("UPDATE $this->table SET signale = 0 WHERE id=:id");
-        $statement->bindValue('id', $id, \PDO::PARAM_INT);
-        $statement->execute();
-        return header('Location: ' . $_SERVER['HTTP_REFERER']);
-    }
-
-    /**
      * @return array
      */
     public function selectCommentsForIndex(): array
@@ -189,7 +193,8 @@ class AdminCommentManager extends AbstractManager
         user.firstname AS userFirstname, 
         user.lastname AS userLastname, 
         article.title AS articleTitle 
-        FROM comment INNER JOIN user ON user.id=comment.user_id INNER JOIN article ON article.id=comment.article_id 
+        FROM comment INNER JOIN user ON user.id=comment.user_id 
+        INNER JOIN article ON article.id=comment.article_id 
         ORDER BY date DESC LIMIT 3', \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }
 
