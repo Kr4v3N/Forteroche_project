@@ -54,7 +54,7 @@ class UserController extends AbstractController
             {
                 $errorRegister['firstname'] = 'Le prénom doit comporter entre 2 et 15 caractères';
             }
-            if (!preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $_POST['email']))
+            if (!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i", $_POST['email']))
             {
                 $errorRegister['email'] = 'Mauvais format de votre adresse email';
             }
