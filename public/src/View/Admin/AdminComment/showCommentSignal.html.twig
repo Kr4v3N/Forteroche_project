@@ -1,0 +1,53 @@
+{% extends "admin_layout.html.twig" %}
+
+{% block content %}
+
+    <div class="container-fluid">
+        <h1 class="text-white titlePageAdmin">Commentaire(s) signalé(s)</h1>
+
+        <table class="table table-striped text-white text-center">
+            <thead class="thead-light">
+
+            <tr>
+                <th scope="col">Titre des billets</th>
+                <th scope="col">Commentaire(s)</th>
+                <th scope="col">Date</th>
+                <th scope="col">Auteur</th>
+                <th scope="col">Valider</th>
+                <th scope="col">Supprimer</th>
+            </tr>
+
+            </thead>
+
+            <tbody>
+            {% for content in comments %}
+
+                <tr>
+                    <td>{{ content.title }} </td>
+                    <td data-toggle="tooltip" data-placement="top" title="{{ content.content|truncate(200) }}">
+                        {{ content.content }}
+                    </td>
+                    <td>
+                        {{ content.date}}
+                    </td>
+                    <td>
+                        {{ content.lastname}}
+                    </td>
+                    <td>
+                        <a href="/admin/comment/reset/{{ content.id }}" target="" data-confirm="Etes-vous certain de vouloir valider ce commentaire ?">
+                            <button type="submit" class="btn btn-success"><i class="fas fa-check-square"></i></button>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="/admin/comment/delete/{{ content.id }}" target="" data-confirm="Etes-vous certain de vouloir le supprimer?">
+                            <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                        </a>
+                    </td>
+                </tr>
+
+            {% endfor %}
+
+        </table>
+    </div>
+
+{% endblock content %}

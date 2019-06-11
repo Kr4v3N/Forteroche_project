@@ -1,0 +1,74 @@
+{% extends "layout.html.twig" %}
+
+{% block content %}
+
+    <div class="container">
+
+        {# show an article #}
+        <div class="row mt-5">
+            <div class="col-10 offset-1">
+                <h1 class="articleTitre">{{ article.title }}</h1>
+                <p class="lead">Redigé le {{ article.date }}</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-10 offset-1 d-flex">
+                <img class="img-fluid mx-auto" src="/assets/images/{{ article.picture }}" alt="Generic placeholder image">
+
+            </div>
+            <div class="row d-flex mt-5">
+                <div class="col-10 offset-1">
+
+                    <p class="lead">{{ article.content|raw}}</p>
+                </div>
+            </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        {#Add table to show all comments#}
+        <div class="row">
+            <div class="col-10 offset-1">
+
+                <h5>Vos commentaires</h5>
+                {% for comment in comments %}
+                    <div class="list-group list-group-item flex-column align-items-center cardFond rounded">
+                        <div class="d-flex w-100 justify-content-between">
+                            <small class="text-muted">commenté par : {{ comment.lastname }}</small>
+                            <small class="text-muted">{{ comment.date }}</small>
+                        </div>
+                        <p class="mb-1">{{ comment.content }}</p>
+                        <p style="text-align: right">
+
+                        <a href="/article/comment/signal/{{ comment.id }}" target="" data-confirm="Etes-vous certain de vouloir signaler ce commentaire ?">
+
+                        <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i>Signaler</button></a>
+                    </div>
+                    <br/>
+                {% endfor %}
+
+            </div>
+        </div>
+
+        {#create a form to add a comment#}
+        <div class="row">
+            <div class="col-10 offset-1">
+
+                <form method="post" action="/article/{{ article.id }}/comment">
+                    <div class="form-group">
+                        <label for="content"><h5>Ajoutez un commentaire</h5></label>
+                        <textarea class="form-control commentFond" id="content" name="content" rows="6"></textarea>
+                    </div>
+                    <button type="submit" class="btn lasuite">Envoyer</button>
+                    {% if errorConnexion %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ errorConnexion }}</div>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock content %}

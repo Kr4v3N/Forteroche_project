@@ -1,0 +1,40 @@
+{% extends 'layout.html.twig' %}
+
+{% block loginUser %}
+
+    <div class="container">
+        <div class="login-form">
+            <div class="main-div">
+                <div class="panel">
+
+                    <h2 style="font-size: 40px">Connectez-vous</h2>
+                    {% if errorLoginUser %}
+
+                        <div class="alert alert-danger" role="alert">
+                            {{ errorLoginUser }}</div>
+
+                    {% endif %}
+                    <p style="font-size: 25px">Veuillez entrer votre email et votre mot de passe</p>
+                </div>
+                <form action="#" method="post" id="Login">
+
+                    <div class="form-group">
+                        <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Adresse email">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Mot de passe">
+                    </div>
+
+                    <div class="etc-login-form text-left">
+                        <br>
+                        <p>Vous n'êtes pas inscris ? &nbsp; <a href="register"> Inscrivez-vous ici</a></p>
+                    </div>
+                    <button type="submit" name="connection" value="" class="btn btn-primary" style="font-size: larger">Se connecter</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

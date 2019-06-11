@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="card article">
+        <div class="card-body">
+
+            <form method="post" action="" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="titre">Titre</label>
+                    <input type="text" class="form-control" id="text" name="title" value="{{ content.title }}" style="background-color: white;">
+                    <span>{{ errors.title }}</span>
+
+                    <label for="titre">Catégorie</label>
+                    <select name="category" id="categorie">
+                        <option value="1">Chapitre 1</option>
+                        <option value="2">Chapitre 2</option>
+                        <option value="3">Chapitre 3</option>
+                        <option value="4">Chapitre 4</option>
+                        <option value="5">Chapitre 5</option>
+                        <option value="6">Chapitre 6</option>
+                        <option value="7">Chapitre 7</option>
+                        <option value="8">Chapitre 8</option></select>
+                </div>
+
+                <div class="form-group">
+                    <label for="contenu">Contenu</label>
+                    <textarea class="form-control" id="contenu" name="content" rows="6" >{{ content.content }}</textarea>
+                    <span>{{ errors.content }}</span>
+                </div>
+                <div>
+                    <label for='image'><strong>Cliquez pour ajouter une image : </strong></label>
+                    <br/>
+                    <input id='image' name="image" type="file">
+                    <span>{{ errors.image }}</span>
+                </div>
+                <br/>
+                <br/>
+
+                <br/>
+                <br/>
+                <button type="submit" name="envoyer" class="btn btn-warning">Envoyer</button></a>
+
+            </form>
+
+        </div>
+    </div>
+</div>
