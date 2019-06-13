@@ -55,6 +55,7 @@ class AdminController extends AbstractController
             $connexionMessage = $_SESSION['admin']['message'];
             unset($_SESSION['admin']['message']);
         }
+
         return $this->twig->render('Admin/admin_dashboard.html.twig', [
             'active' => $article,
             'user' => $_SESSION['admin'],
@@ -138,6 +139,7 @@ class AdminController extends AbstractController
             }
         }
         $active = 'add';
+
         return $this->twig->render('Admin/AdminArticle/add.html.twig', [
             'active' => $active,
             'errors' => $errors,
@@ -190,6 +192,7 @@ class AdminController extends AbstractController
                 $id = $articleManager->update($article);
             }
         }
+
         return $this->twig->render('Admin/AdminArticle/edit.html.twig', [
             'article' => $article,
             'errors' => $errors,
@@ -218,6 +221,7 @@ class AdminController extends AbstractController
         $articlesManager = new ArticleManager($this->getPdo());
         $articles = $articlesManager->selectAllArticles();
         $active = 'articles';
+
         return $this->twig->render('Admin/AdminArticle/indexAdmin.html.twig', [
             'articles' => $articles,
             'active' => $active]);
@@ -266,6 +270,7 @@ class AdminController extends AbstractController
                 $errorLogin = 'Identifiant incorrect';
             }
         }
+
         return $this->twig->render('Admin/logAdmin.html.twig', ['errorLogin' => $errorLogin]);
     }
 
@@ -323,6 +328,7 @@ class AdminController extends AbstractController
         }
 
         $active = 'add';
+
         return $this->twig->render('Admin/AdminUser/addUser.html.twig', [
             'active' => $active,
             'errors' => $errors,
@@ -343,6 +349,7 @@ class AdminController extends AbstractController
         $user = $userManager->selectUserById($id);
         $commentManager = new AdminCommentManager($this->getPdo());
         $comment = $commentManager->selectCommentByUser($id);
+
         return $this->twig->render('Admin/AdminUser/adminShow.html.twig', [
             'user' => $user,
             'comments' => $comment]);
@@ -360,6 +367,7 @@ class AdminController extends AbstractController
         $usersManager = new UserManager($this->getPdo());
         $users = $usersManager->selectAllUsers();
         $active = 'utilisateurs';
+
         return $this->twig->render('Admin/AdminUser/indexUsers.html.twig', [
             'users' => $users,
             'active' => $active]);

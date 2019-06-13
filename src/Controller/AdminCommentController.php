@@ -24,6 +24,7 @@ class AdminCommentController extends AbstractController
         $commentsManager = new AdminCommentManager($this->getPdo());
         $comments = $commentsManager->selectAllComments();
         $active = 'comments';
+
         return $this->twig->render('Admin/AdminComment/indexAdminComment.html.twig', [
             'comments' => $comments,
             'active' => $active,
@@ -68,6 +69,7 @@ class AdminCommentController extends AbstractController
 
             $errorConnexion = 'Vous devez être connecté pour commenter ce billet.';
             $return = $_SERVER['HTTP_REFERER'];
+
             return $this->twig->render('Article/logToComment.html.twig', [
                 'errorConnexion' => $errorConnexion,
                 'return' => $return]);
@@ -93,6 +95,7 @@ class AdminCommentController extends AbstractController
         }else{
             $errorConnexion = 'Vous devez être connecté pour signaler ce billet.';
             $return = $_SERVER['HTTP_REFERER'];
+
             return $this->twig->render('Article/logToSignal.html.twig', [
                 'errorConnexion' => $errorConnexion,
                 'return' => $return]);

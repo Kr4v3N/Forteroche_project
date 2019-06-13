@@ -43,7 +43,7 @@ abstract class AbstractController
         $this->twig->addExtension(new \Twig_Extensions_Extension_Text());
         $connection = new Connection();
         $this->pdo = $connection->getPdoConnection();
-        //Initialise l'objet et dans la class Session.php fait un session-start dans la fonction construct
+        // Initializes the object,  and in the Session.php class does a session-start in the construct function
         $this->session = new Session();
     }
 

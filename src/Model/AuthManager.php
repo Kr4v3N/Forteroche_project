@@ -35,6 +35,7 @@ class AuthManager extends AbstractManager
         $statement->execute();
         // fetch
         $statement->setFetchMode(\PDO::FETCH_CLASS, 'Model\User');
+
         return $statement->fetch();
     }
 }

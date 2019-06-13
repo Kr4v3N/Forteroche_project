@@ -42,6 +42,7 @@ class UserManager extends AbstractManager
         $statement = $this->pdo->prepare("DELETE FROM user WHERE id=:id");
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();
+
         return header('Location: /admin/users');
     }
 
@@ -57,8 +58,8 @@ class UserManager extends AbstractManager
         $addUser->bindValue(':firstname', $user->getFirstname(), \PDO::PARAM_STR);
         $addUser->bindValue(':lastname', $user->getLastname(), \PDO::PARAM_STR);
         $addUser->bindValue(':email', $user->getEmail(), \PDO::PARAM_STR);
-        $addUser->bindValue(':password', password_hash($user->getPass(), PASSWORD_DEFAULT),
-        \PDO::PARAM_STR);
+        $addUser->bindValue(':password', password_hash($user->getPass(), PASSWORD_DEFAULT),\PDO::PARAM_STR);
+
         return $addUser->execute();
     }
 
@@ -77,6 +78,7 @@ class UserManager extends AbstractManager
         $statement->bindValue(':pass', password_hash($user->getPass(), PASSWORD_DEFAULT),
         \PDO::PARAM_STR);
         $statement->bindValue(':status', $user->getStatus(), \PDO::PARAM_STR);
+
         return $statement->execute();
     }
 
@@ -86,6 +88,7 @@ class UserManager extends AbstractManager
     public function count()
     {
         $numbersUsers = $this->pdo->query("SELECT COUNT(id) AS Numbers FROM $this->table")->fetchColumn();
+
         return $numbersUsers;
     }
 
@@ -99,6 +102,7 @@ class UserManager extends AbstractManager
         $query->execute(array(':email' => $email));
         $query->setFetchMode(\PDO::FETCH_CLASS, 'Model\User');
         $res =  $query->fetch();
+
         return $res;
     }
 
@@ -113,6 +117,7 @@ class UserManager extends AbstractManager
         $reqUser->execute(array(':email' => $email));
         $reqUser->setFetchMode(\PDO::FETCH_CLASS, 'Model\User');
         $res =  $reqUser->fetch();
+
         return $res;
     }
 
@@ -141,6 +146,7 @@ class UserManager extends AbstractManager
         $statement->setFetchMode(\PDO::FETCH_CLASS, 'Model');
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();
+
         return $statement->fetch();
     }
 

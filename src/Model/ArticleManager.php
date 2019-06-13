@@ -39,6 +39,7 @@ class ArticleManager extends AbstractManager
         $statement->bindValue(':category', $article->getCategoryId(), \PDO::PARAM_STR);
 
         if ($statement->execute()) {
+
             return $this->pdo->lastInsertId();
         }
     }
@@ -90,6 +91,7 @@ class ArticleManager extends AbstractManager
         $statement = $this->pdo->prepare("DELETE FROM article WHERE id=:id");
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();
+
         return header('Location: ' . $_SERVER['HTTP_REFERER']);
     }
 
@@ -107,6 +109,7 @@ class ArticleManager extends AbstractManager
         $statement->bindValue('content', $article->getContent(), \PDO::PARAM_STR);
         $statement->bindValue('id', $article->getId(), \PDO::PARAM_INT);
         $statement->bindValue('picture', $article->getPicture(), \PDO::PARAM_STR);
+
         return $statement->execute();
     }
 
@@ -116,6 +119,7 @@ class ArticleManager extends AbstractManager
     public function count()
     {
         $numbers = $this->pdo->query('SELECT COUNT(title) AS Numbers FROM article ')->fetchColumn();
+
         return $numbers;
     }
 
@@ -133,6 +137,7 @@ class ArticleManager extends AbstractManager
      * @return array
      */
     public function selectCategory(){
+
         return $this->pdo->query('SELECT id, name FROM category',
         \PDO::FETCH_CLASS, $this->className)->fetchAll();
     }

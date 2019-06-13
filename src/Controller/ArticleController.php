@@ -30,6 +30,7 @@ class  ArticleController extends AbstractController
             $connexionMessage = $_SESSION['user']['message'];
             unset($_SESSION['user']['message']);
         }
+
         return $this->twig->render('Users/index.html.twig', [
             'articles' => $articles,
             'session' => $_SESSION,
@@ -48,6 +49,7 @@ class  ArticleController extends AbstractController
         $articlesManager = new ArticleManager($this->getPdo());
         $articles = $articlesManager->selectAllArticles();
         $category = $articlesManager->selectCategory();
+
         return $this->twig->render('Article/indexUser.html.twig', [
             'articles' => $articles,
             'isLogged' => $this->isLogged(),
@@ -69,6 +71,7 @@ class  ArticleController extends AbstractController
         $article = $articleManager->selectOneArticleById($id);
         $commentsManager = new AdminCommentManager($this->getPdo());
         $comments = $commentsManager->ShowAllComments($id);
+
         return $this->twig->render('Article/show.html.twig', [
             'article' => $article,
             'comments'=> $comments,
@@ -88,6 +91,7 @@ class  ArticleController extends AbstractController
         $articlesManager = new ArticleManager($this->getPdo());
         $articles = $articlesManager->selectArticlesByCategory($id);
         $category = $articlesManager->selectCategory();
+
         return $this->twig->render('Article/tri.html.twig', [
             'articles' => $articles,
             'session' => $_SESSION,
