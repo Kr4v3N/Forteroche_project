@@ -35,7 +35,7 @@ class UserController extends AbstractController
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-            //call the manager
+            // call the manager
             $userManager = new UserManager($this->getPdo());
 
             if (!preg_match("/^[a-zA-Zéèêëïöôùçâû]*$/",$_POST['lastname']))
@@ -58,7 +58,7 @@ class UserController extends AbstractController
             {
                 $errorRegister['email'] = 'Mauvais format de votre adresse email';
             }
-            //verifies that the email we send is not in the database
+            // verifies that the email we send is not in the database
             if ($userManager->existUser($_POST['email']))
             {
                 $errorRegister['email'] = "L'adresse email est déja utilisé.";
@@ -78,6 +78,7 @@ class UserController extends AbstractController
                 $newUser->setFirstname($_POST['firstname']);
                 $newUser->setEmail($_POST['email']);
                 $newUser->setPass($_POST['password']);
+
                 $id = $userManager->suscribe($newUser);
                 header('Location: /login');
             }
@@ -97,7 +98,7 @@ class UserController extends AbstractController
     public function logUser()
     {
 
-        //if user is connected
+        // if user is connected
         if (isset($_SESSION['user'])) {
             header('Location: /');
             exit();
@@ -107,13 +108,13 @@ class UserController extends AbstractController
 
         if (!empty($_POST)) {
 
-            //call the manager
+            // call the manager
             $auth = new UserManager($this->getPdo());
             $user = $auth->loginUser($_POST['email']);
 
             if ($user) {
                 if (password_verify($_POST['password'], $user->getPass())) {
-                    //Si password ok, creation session user avec lastname, firstname, et email.
+                    // if password ok, creation session user with lastname, firstname, and email.
                     $_SESSION['user'] = [
                         'id' => $user->getId(),
                         'lastname' => $user->getlastname(),

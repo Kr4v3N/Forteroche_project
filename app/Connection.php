@@ -4,7 +4,6 @@
  * Database connection
  *
  */
-
 namespace App;
 
 use \PDO;
@@ -46,7 +45,6 @@ class Connection
             die('<div class="error">Error !: '.$e->getMessage().'</div>');
         }
     }
-
 
     /**
      * @return $pdo

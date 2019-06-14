@@ -39,10 +39,13 @@ abstract class AbstractController
                 'debug' => APP_DEV,
             ]
         );
+
         $this->twig->addExtension(new \Twig_Extension_Debug());
         $this->twig->addExtension(new \Twig_Extensions_Extension_Text());
+
         $connection = new Connection();
         $this->pdo = $connection->getPdoConnection();
+
         // Initializes the object,  and in the Session.php class does a session-start in the construct function
         $this->session = new Session();
     }

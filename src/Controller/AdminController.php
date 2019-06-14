@@ -36,20 +36,29 @@ class AdminController extends AbstractController
     public function showDashboard()
     {
         $connexionMessage = null;
+
         $article = 'home';
-        $countArticle = new ArticleManager($this->getPdo());            // connexion au pdo de l'article manager
-        $numberArticles = $countArticle->count();                       // comptage du nombre d'article
-        $countUsers = new UserManager($this->getPdo());                 // idem mais pour les utilisateurs
+
+        $countArticle = new ArticleManager($this->getPdo());            // connexion pdo ArticleManager
+        $numberArticles = $countArticle->count();                       // counting the number of tickets
+
+        $countUsers = new UserManager($this->getPdo());
+        $numberUsers = $countUsers->count();
+
+        $countComment = new AdminCommentManager($this->getPdo());
+        $numberComments = $countComment->count();
+
+        $countSignals = new AdminCommentManager($this->getPdo());
+        $numberSignals = $countSignals->countSignal();
+
         $lastArticles = new ArticleManager($this->getPdo());
         $lastArticles = $lastArticles->selectArticlesForIndex();
-        $numberUsers = $countUsers->count();
-        $countComment = new AdminCommentManager($this->getPdo());       // idem pour les commentaires
-        $numberComments = $countComment->count();
-        $lastUsers = new UserManager($this->getPdo());                 // idem mais pour les utilisateurs
+
+        $lastUsers = new UserManager($this->getPdo());
         $lastUsers = $lastUsers->selectUsersForIndex();
-        $lastComments = new AdminCommentManager($this->getPdo());       // idem pour les commentaires
+
+        $lastComments = new AdminCommentManager($this->getPdo());
         $lastComments = $lastComments->selectCommentsForIndex();
-        $signals = $countComment->countSignal();
 
         if (isset($_SESSION['admin']) && isset($_SESSION['admin']['message'])) {
             $connexionMessage = $_SESSION['admin']['message'];
@@ -65,8 +74,7 @@ class AdminController extends AbstractController
             'session' => $_SESSION,
             'connexionMessage' => $connexionMessage,
             'isLogged' => $this->isLoggedAdmin(),
-            'signals' => $signals,
-            'lastArticles',
+            'signals' => $numberSignals,
             'lastarticles' => $lastArticles,
             'lastusers' => $lastUsers,
             'lastcomments' => $lastComments,
@@ -100,7 +108,7 @@ class AdminController extends AbstractController
     {
         $errors = [];
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') // shows if
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') // displays if
 
         {
             $articleManager = new ArticleManager($this->getPdo());
@@ -127,6 +135,7 @@ class AdminController extends AbstractController
             }
 
             if (empty($errors)) {
+
                 $filename = 'image-' . $_FILES['image']['name'];
                 move_uploaded_file($_FILES['image']['tmp_name'], '../public/assets/images/' . $filename);
                 $article->setUserId($_SESSION['admin']['id']);
@@ -134,6 +143,7 @@ class AdminController extends AbstractController
                 $article->setContent($_POST['content']);
                 $article->setCategoryId($_POST['category']);
                 $article->setPicture($filename);
+
                 $id = $articleManager->insert($article);
                 header('Location:/admin/article/' . $id);
             }
@@ -228,7 +238,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * connexion administrator
+     * administrator connexion
      * @return string
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
@@ -237,7 +247,7 @@ class AdminController extends AbstractController
     public function logAdmin()
     {
 
-        //if admin is connected
+        // if admin is connected
         if (isset($_SESSION['admin'])) {
             header('Location: /admin/dashboard');
             exit();
@@ -246,14 +256,14 @@ class AdminController extends AbstractController
         $errorLogin = null;
 
         if (!empty($_POST)) {
-            //Check if the data is posted and then initialize the authentication component.
+            // check if the data is posted and then initialize the authentication component.
             $auth = new AuthManager($this->getPdo());
             $admin = $auth->login($_POST['email']);
 
             if ($admin) {
 
                 if (password_verify($_POST['password'], $admin->getPass())) {
-                    //If password ok, creation session admin with lastname, firstname, and email.
+                    // if password ok, creation session admin with lastname, firstname, and email.
                     $_SESSION['admin'] = [
                         'id' => $admin->getId(),
                         'lastname' => $admin->getlastname(),
@@ -295,7 +305,7 @@ class AdminController extends AbstractController
 
         $errors = [];
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') //displays if
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') // displays if
         {
             if (empty($_POST['firstname'])) {
                 $errors['firstname'] = 'le nom est requis';
@@ -322,6 +332,7 @@ class AdminController extends AbstractController
                 $newUser->setEmail($_POST['email']);
                 $newUser->setPass($_POST['password']);
                 $newUser->setStatus($_POST['status']);
+
                 $id = $newUserManager->userAdd($newUser);
                 header('Location: /admin/users');
             }
@@ -332,7 +343,7 @@ class AdminController extends AbstractController
         return $this->twig->render('Admin/AdminUser/addUser.html.twig', [
             'active' => $active,
             'errors' => $errors,
-            'nameErr' => $_POST]); //treatment
+            'nameErr' => $_POST]); // treatment
     }
 
     /**

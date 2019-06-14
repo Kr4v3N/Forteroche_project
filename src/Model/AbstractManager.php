@@ -10,7 +10,7 @@ abstract class AbstractManager
     /**
      * @var \PDO
      */
-    protected $pdo; //variable de connexion
+    protected $pdo; // connexion variable
 
     /**
      * @var string
