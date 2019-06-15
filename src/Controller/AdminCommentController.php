@@ -48,7 +48,7 @@ class AdminCommentController extends AbstractController
 
                 $CommentManager = new AdminCommentManager($this->getPdo());
                 $comment = new Comment();
-                $comment->setContent($_POST['content']);
+                $comment->setContent($this->verifyInput($_POST['content']));
                 $comment->setArticleId($articleId);
                 $comment->setUserId($_SESSION['user']['id']);
                 $CommentManager->insert($comment);

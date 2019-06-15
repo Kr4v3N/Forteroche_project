@@ -32,54 +32,57 @@ class UserController extends AbstractController
     public function suscribeUser()
     {
         $errorRegister = [];
+        $regexName = "#^([a-zàáâäçèéêëìíîïñòóôöùúûü]+(( |')[a-z]+)*)+([-]([a-z]+(( |')[a-z]+)*)+)*$#iu";
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // call the manager
             $userManager = new UserManager($this->getPdo());
 
-            if (!preg_match("/^[a-zA-Zéèêëïöôùçâû]*$/",$_POST['lastname']))
+            if (!preg_match($regexName, $_POST['lastname']))
             {
-                $errorRegister['lastname'] = 'Seul les lettres et espaces sont autorisés.' ;
+                $errorRegister['lastname'] = "Le nom n'est pas au bon format." ;
             }
-            if (strlen($_POST['lastname']) < 2 || strlen($_POST['lastname']) > 15)
+            if (strlen($_POST['lastname']) < 2 || strlen($_POST['lastname']) > 20)
             {
-                $errorRegister['lastname'] = 'Le nom doit comporter entre 2 et 15 caractères';
+                $errorRegister['lastname'] = 'Le nom doit comporter entre 2 et 20 caractères.';
             }
-            if (!preg_match("/^[a-zA-Zéèêëïöôùçâû]*$/",$_POST['firstname']))
+            if (!preg_match($regexName, $_POST['firstname']))
             {
-                $errorRegister['firstname'] = 'Le prénom doit comporter seulement des lettres et espaces.';
+                $errorRegister['firstname'] = "Le prénom n'est pas au bon format.";
             }
-            if (strlen($_POST['firstname']) < 2 || strlen($_POST['firstname']) > 15)
+            if (strlen($_POST['firstname']) < 2 || strlen($_POST['firstname']) > 20)
             {
-                $errorRegister['firstname'] = 'Le prénom doit comporter entre 2 et 15 caractères';
+                $errorRegister['firstname'] = 'Le prénom doit comporter entre 2 et 20 caractères.';
             }
-            if (!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i", $_POST['email']))
+            if (!preg_match("#^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\.[a-z]{2,4}$#", $_POST['email']))
             {
-                $errorRegister['email'] = 'Mauvais format de votre adresse email';
+                $errorRegister['email'] = 'Mauvais format de votre adresse email.';
             }
             // verifies that the email we send is not in the database
             if ($userManager->existUser($_POST['email']))
             {
-                $errorRegister['email'] = "L'adresse email est déja utilisé.";
+                $errorRegister['email'] = 'Cette adresse email est déjà utilisée.';
             }
             if (strlen($_POST['password']) < 8 )
             {
-                $errorRegister['password'] = 'Le mot de passe doit comporter au minimum 8 caractères';
+                $errorRegister['password'] = 'Le mot de passe doit comporter au minimum 8 caractères.';
             }
-            if ($_POST['password'] !== ($_POST['password_control']))
+            if ($_POST['password'] !== $_POST['password_control'])
             {
                 $errorRegister['password'] = 'Les mots de passe saisis ne sont pas identiques.';
             }
             if (empty($errorRegister))
             {
                 $newUser = new User;
-                $newUser->setLastname($_POST['lastname']);
-                $newUser->setFirstname($_POST['firstname']);
-                $newUser->setEmail($_POST['email']);
-                $newUser->setPass($_POST['password']);
+                $newUser->setLastname($this->verifyInput($_POST['lastname']));
+                $newUser->setFirstname($this->verifyInput($_POST['firstname']));
+                $newUser->setEmail($this->verifyInput($_POST['email']));
+                $newUser->setPass($this->verifyInput($_POST['password']));
 
                 $id = $userManager->suscribe($newUser);
+//                var_dump($newUser);
+//                die;
                 header('Location: /login');
             }
         }
@@ -123,6 +126,8 @@ class UserController extends AbstractController
                         'message' => 'Vous êtes connecté'
                     ];
 
+                    var_dump($user);
+                    die;
                     header('Location: /');
 
                 } else {

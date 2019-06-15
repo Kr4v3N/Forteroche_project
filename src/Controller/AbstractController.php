@@ -84,4 +84,17 @@ abstract class AbstractController
         return (isset($_SESSION['admin']));
     }
 
+    /**
+     * @param $data
+     *
+     * @return string
+     */
+    public function verifyInput($data)
+    {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
+
 }
