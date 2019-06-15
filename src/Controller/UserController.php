@@ -79,10 +79,7 @@ class UserController extends AbstractController
                 $newUser->setFirstname($this->verifyInput($_POST['firstname']));
                 $newUser->setEmail($this->verifyInput($_POST['email']));
                 $newUser->setPass($this->verifyInput($_POST['password']));
-
                 $id = $userManager->suscribe($newUser);
-//                var_dump($newUser);
-//                die;
                 header('Location: /login');
             }
         }
@@ -158,9 +155,20 @@ class UserController extends AbstractController
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function error()
+    public function errorNotFound()
     {
-        return $this->twig->render('Users/error.html.twig');
+        return $this->twig->render('Users/errorNotFound.html.twig');
+    }
+
+    /**
+     * @return string
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
+    public function errorNotAllowed()
+    {
+        return $this->twig->render('Users/errorNotAllowed.html.twig');
     }
 
 }
