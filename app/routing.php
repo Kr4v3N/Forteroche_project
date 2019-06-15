@@ -43,7 +43,8 @@ $routes = [
         ['suscribeUser', '/register', ['GET','POST']], // register page
         ['logUser', '/login', ['GET','POST']], // login page
         ['logoutUser', '/logout', 'GET'], // logout
-        ['error', '/error/404', 'GET'], // action, url, method
+        ['errorNotFound', '/error/404', 'GET'], // action, url, method
+        ['errorNotAllowed', '/error/405', 'GET'], // action, url, method
     ],
 
 ];
