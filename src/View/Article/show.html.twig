@@ -31,7 +31,7 @@
         <div class="row">
             <div class="col-10 offset-1">
 
-                    <h5>Vos commentaires</h5>
+                    <h5>Vos commentaires :</h5>
 
 
                 {% for comment in comments %}
@@ -47,15 +47,15 @@
 
                         <p style="text-align: right">
 
-                        <a href="/article/comment/signal/{{ comment.id }}" target="" data-confirm="Etes-vous certain de vouloir signaler ce commentaire ?">
-
                         {% if isLogged %}
 
-                        <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i>Signaler</button></a>
+                            <a href="/article/comment/signal/{{ comment.id }}" target="" data-confirm="Etes-vous certain de vouloir signaler ce commentaire ?">
+
+                            <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i>Signaler</button></a>
 
                         {% else %}
 
-                        <button class=" d-none btn btn-danger"></button>
+                            <button class=" d-none btn btn-danger"></button>
 
                         {% endif %}
 
