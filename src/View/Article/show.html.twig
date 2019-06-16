@@ -31,27 +31,45 @@
         <div class="row">
             <div class="col-10 offset-1">
 
-                <h5>Vos commentaires</h5>
+                    <h5>Vos commentaires</h5>
+
+
                 {% for comment in comments %}
+
                     <div class="list-group list-group-item flex-column align-items-center cardFond rounded">
+
                         <div class="d-flex w-100 justify-content-between">
                             <small class="text-muted">commenté par : {{ comment.lastname }}</small>
                             <small class="text-muted">{{ comment.date }}</small>
                         </div>
+
                         <p class="mb-1">{{ comment.content }}</p>
+
                         <p style="text-align: right">
 
                         <a href="/article/comment/signal/{{ comment.id }}" target="" data-confirm="Etes-vous certain de vouloir signaler ce commentaire ?">
 
+                        {% if isLogged %}
+
                         <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i>Signaler</button></a>
+
+                        {% else %}
+
+                        <button class=" d-none btn btn-danger"></button>
+
+                        {% endif %}
+
                     </div>
+
                     <br/>
+
                 {% endfor %}
 
             </div>
         </div>
 
         {#create a form to add a comment#}
+        {% if isLogged %}
         <div class="row">
             <div class="col-10 offset-1">
 
@@ -68,6 +86,9 @@
                 </form>
             </div>
         </div>
+        {% else %}
+        <div class="row d-none"></div>
+        {% endif %}
 
     </div>
 

@@ -110,10 +110,10 @@ class UserController extends AbstractController
 
             // call the manager
             $auth = new UserManager($this->getPdo());
-            $user = $auth->loginUser($_POST['email']);
+            $user = $auth->loginUser($this->verifyInput($_POST['email']));
 
             if ($user) {
-                if (password_verify($_POST['password'], $user->getPass())) {
+                if (password_verify($this->verifyInput($_POST['password']), $user->getPass())) {
                     // if password ok, creation session user with lastname, firstname, and email.
                     $_SESSION['user'] = [
                         'id' => $user->getId(),
@@ -122,14 +122,10 @@ class UserController extends AbstractController
                         'email' => $user->getEmail(),
                         'message' => 'Vous êtes connecté'
                     ];
-
-                    var_dump($user);
-                    die;
                     header('Location: /');
 
                 } else {
                     $errorLoginUser = 'Identifiants incorrects ';
-
                 }
             } else {
                 $errorLoginUser = 'Identifiants incorrects';

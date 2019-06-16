@@ -258,11 +258,11 @@ class AdminController extends AbstractController
         if (!empty($_POST)) {
             // check if the data is posted and then initialize the authentication component.
             $auth = new AuthManager($this->getPdo());
-            $admin = $auth->login($_POST['email']);
+            $admin = $auth->login($this->verifyInput($_POST['email']));
 
             if ($admin) {
 
-                if (password_verify($_POST['password'], $admin->getPass())) {
+                if (password_verify($this->verifyInput($_POST['password']), $admin->getPass())) {
                     // if password ok, creation session admin with lastname, firstname, and email.
                     $_SESSION['admin'] = [
                         'id' => $admin->getId(),
@@ -271,7 +271,6 @@ class AdminController extends AbstractController
                         'email' => $admin->getEmail(),
                         'message' => 'Vous êtes connecté'
                     ];
-
                     header('Location: /admin/dashboard');
                 } else {
                     $errorLogin = 'Identifiant incorrect';
