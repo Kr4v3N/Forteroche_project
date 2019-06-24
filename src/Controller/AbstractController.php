@@ -89,7 +89,7 @@ abstract class AbstractController
      *
      * @return string
      */
-    public function verifyInput($data)
+    protected function verifyInput($data)
     {
         $data = trim($data);
         $data = stripslashes($data);

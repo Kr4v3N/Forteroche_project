@@ -18,7 +18,7 @@ class UserController extends AbstractController
     public function __construct()
     {
         parent:: __construct();
-        if ($_SERVER['REQUEST_URI'] != '/login' && ($_SERVER['REQUEST_URI'] != '/logout')) {
+        if ($_SERVER['REQUEST_URI'] !== '/login' && ($_SERVER['REQUEST_URI'] !== '/logout')) {
             $this->verifyUser();
         }
     }
@@ -80,6 +80,8 @@ class UserController extends AbstractController
                 $newUser->setEmail($this->verifyInput($_POST['email']));
                 $newUser->setPass($this->verifyInput($_POST['password']));
                 $id = $userManager->suscribe($newUser);
+//                var_dump($newUser);
+//                die();
                 header('Location: /login');
             }
         }

@@ -13,6 +13,28 @@ body {
     font-family: 'Dosis','Roboto', sans-serif;
 }
 
+/* RESET OUTLINE*/
+
+*:focus,
+*:active {
+
+    outline: none;
+}
+
+.nav-item {
+    outline: none;
+}
+
+*::-moz-focus-inner {
+    border: none;
+}
+
+button.btn.btn-primary,
+button.btn.btn-success,
+button.btn.btn-warning {
+    outline: none !important;
+}
+
 h1{
     text-align: center;
 
@@ -68,7 +90,6 @@ h1{
     margin-right: 10px;
 }
 
-/*---------------------------------------------Title Les derniers épisodes -------------------------------------------------------*/
 .btn_apropos_bas{
     border-bottom: 2px solid black;
     font-family: 'Dosis','Krub', sans-serif;
@@ -359,10 +380,8 @@ span {
     text-align: left; margin-bottom:30px;
 }
 .botto-text {
-    color: #ffffff;
     font-size: 14px;
     margin: auto;
-    font-size: 3em;
     text-align: center;
     color: white;
     font-weight: 100;
