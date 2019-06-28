@@ -262,8 +262,6 @@ class AdminController extends AbstractController
 
             if ($admin) {
 
-//                var_dump($admin);
-//                die();
                 if (password_verify($this->verifyInput($_POST['password']), $admin->getPass())) {
                     // if password ok, creation session admin with lastname, firstname, and email.
                     $_SESSION['admin'] = [
